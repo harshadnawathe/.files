@@ -1,0 +1,235 @@
+[include]
+  path = ~/.config/delta/themes/gitconfig.inc 
+
+[color]
+	status = always
+
+[push]
+	default = upstream
+
+[alias]
+	#co = checkout
+	#st = status
+	pr = pull --rebase
+	#cam = commit --amend -m
+	s = status -sb
+        #pom = pull origin master
+        #prom = pull --rebase origin master
+
+  # Run git commands in all immediate sub-folders that are git repos (TODO: Not working since it ALWAYS selects from the user's home directory)
+  # all = "!f() { find \"${FOLDER:-.}\" -mindepth ${MINDEPTH:-1} -maxdepth ${MAXDEPTH:-2} -name .git -type d | xargs -I{} bash -c \"echo {} && git -C {}/../ $1\"; }; echo `pwd`; f"
+
+  # find dangling commits
+  dangling = fsck --no-reflog
+
+  # edit global git configuration
+  ec = config --global -e
+
+  # find files/folders with the parameter as part of the name
+  f = "!git ls-files | grep -i"
+
+  # if a local commit exists, then amend it, else create a new commit with the specified message. Aborts if diverged or nothing to commit
+  sci = "!sh -c '\
+    if $(git st | grep -q \"have diverged\"); then \
+      echo \"Diverged branches: aborting\"; \
+      exit 1; \
+    elif ! $(git st | grep -q \"to unstage\"); then \
+      echo \"Nothing to commit: aborting\"; \
+      exit 1; \
+    else \
+      if $(git st | grep -q \"is ahead of\"); then \
+        echo \"Amending existing commit\"; \
+        git amq; \
+      else \
+        echo \"Creating new commit\"; \
+        echo $0; \
+        git ci \"$0\"; \
+      fi \
+    fi'"
+
+  what = show -s --pretty='tformat:%h (%s, %ad)' --date=short
+
+  chng = "!changes() {\
+    if [[ $# -eq 0 ]]; then \
+      echo \"No pattern arguments provided\"; \
+      exit 1; \
+    fi; \
+    GREPS=\"\"; \
+    for pattern in $@ ;\
+    do \
+      GREPS+=\" --grep $pattern\" ; \
+    done; \
+    git log --reverse --stat $GREPS ;\
+    }; changes"
+
+  chngs = "!changes() {\
+    if [[ $# -eq 0 ]]; then \
+      echo \"No pattern arguments provided\"; \
+      exit 1; \
+    fi; \
+    GREPS=\"\"; \
+    for pattern in $@ ;\
+    do \
+      GREPS+=\" --grep $pattern\" ; \
+    done; \
+    git log --reverse --oneline $GREPS ;\
+    }; changes"
+
+  chngp = "!changes() {\
+    if [[ $# -eq 0 ]]; then \
+      echo \"No pattern arguments provided\"; \
+      exit 1; \
+    fi; \
+    GREPS=\"\"; \
+    for pattern in $@ ;\
+    do \
+      GREPS+=\" --grep $pattern\" ; \
+    done; \
+    git log --reverse -p $GREPS ;\
+    }; changes"
+
+  # show commit info summary (count and name)
+  who = shortlog -s --
+
+  # show username/email of the specified author
+  whois = log -i -1 --pretty=format:'%an <%ae>' --author
+
+  # show all commits in the past week done by the specified author
+  standup = log --since 1.week.ago --author
+
+  # show git log in colorful graph mode
+  lg = log --color --graph --pretty=format:'%C(yellow)%h%Creset -%C(bold blue)%d%Creset %s %C(green) %an, %cr%Creset' --abbrev-commit
+  ll = log --decorate --graph --oneline --abbrev-commit
+  mn = merge --no-commit
+  cn = cherry-pick --no-commit
+  cr = cherry-pick
+
+  # commit with the following message
+  ci = commit -m
+
+  co = checkout
+  cl = clone
+  st = !git status --ahead-behind && git submodule summary
+  sts = status -sb
+  b = branch
+  d = diff
+  dc = diff --staged
+  # dw = diff --word-diff=color           # Note: Commented out since we use 'diff-so-fancy
+  # dcw = diff --word-diff=color --staged # Note: Commented out since we use 'diff-so-fancy
+
+  # undo the last commit
+  undo = reset --soft HEAD^
+
+  wipe = !git add -A && git commit -qm 'WIPE SAVEPOINT if needed later, can be resurrected using reflog' && git reset HEAD~1 --hard
+
+  # amend last commit and update the commit date to now
+  amend = commit --amend --date="now"
+
+  # amend last commit keeping the same commit comment, but updating the commit date to now
+  amq = amend --no-edit --quiet
+
+  # unstage all staged changes without losing the changed content
+  unstage = restore --staged
+
+  # list all large files
+  large = !git ls-tree -r -t -l --full-name HEAD | sort -n -k 4 | tail -n 10
+
+  # untrack a file
+  untrack = rm -rf --cached --
+  grep = grep -Ii
+
+  # As a shortcut for a 'normal' diff to save as a patch for emailing or later application (without diff-so-fancy)
+  patch = !git --no-pager diff --no-color
+
+  # show tracking upstream string in the format `<remote>/<branch>`
+  track = rev-parse --abbrev-ref --symbolic-full-name @{u}
+
+  # fetch all branches (fetch tags only from the upstream remote) - (without merging into the local copy of remote)
+  fo = fetch --all --tags
+
+  # print the current branch name
+  br = branch --show-current
+
+  # rebase from corresponding upstream branch
+  upreb = !git branch -u origin/`git br` && git fo && ( git remote | grep upstream 2>&1 >/dev/null ) && git rebase upstream/`git br` --no-verify && git fetch upstream --tags && git push --no-verify && git push --tags --no-verify
+
+  # prune local copy-of-remote to remove deleted branches
+  rpo = remote prune origin
+
+  # show incoming change commits without per-file content changes
+  in = log --reverse ..@{u} --stat --no-merges
+
+  # show incoming change commits with per-file content changes
+  inp = log -p --reverse ..@{u} --no-merges
+
+  # show incoming changes as a single diff (without breakup of commits)
+  inc = !git diff ..@{u}
+
+  # if you prefer to do "git pull" instead of "git fetch", this can be an equivalent of the "in" alias
+  new = !sh -c 'git log $1@{1}..$1@{0} "$@"'
+
+  # show outgoing change commits
+  out = log --reverse @{u}..
+
+  # show outgoing change commits with content changes
+  outp = log -p --reverse @{u}..
+  g = grep --break --heading --line-number
+  sf = submodule foreach
+
+  # compress disk-space-usage by deleting dangling commits
+  # Note: Do not use '--all' switch for reflog expire - since that also destroys stashes
+  cc = "!echo \"Size before: $(du -sh .git | cut -f1)\"; git remote prune origin; git repack; git prune-packed; git reflog expire --all --expire=1.week.ago; git maintenance run --task=gc; echo \"Size after: $(du -sh .git | cut -f1)\";"
+
+  # run the maintenance task for all repos
+  # TODO: Not working yet
+  # maintain_all = "!git for-each-repo --config=maintenance.repo maintenance run --task=gc"
+
+  # show the biggest files in the disk (this is not technically specific to git-tracked files)
+  big = "!git rev-list --objects --all | grep \"$(git verify-pack -v .git/objects/pack/*.idx | sort -k 3 -n | tail -100 | awk '{print $1}')\""
+
+  # delete all local branches which are not present on remote
+  dlb = "!git branch -vv | GREP_OPTIONS= grep ': gone]' | awk '{print $1}' | xargs -I {} git branch -D {}"
+
+  # check if the specified branch has had a commit in the past 10 days and if so, report
+  # old = "!sh -c '[[ \"`git log $0/$1 --since 10.days -1 | wc -l`\" -eq 0 ]] && echo \"Will need to delete $0/$1\" && git push $0 --delete $1'"
+  old = "!sh -c '[[ \"`git log $0/$1 --since 10.days -1 | wc -l`\" -eq 0 ]] && echo \"Will need to delete $0/$1\"'"
+
+  # Show most recent and oldest remote branches by committerdate
+  # Takes arguments of refbranch (defaults to master) and count (for number of branches to show)
+  recentb = "!r() { refbranch=$1 count=$2; git for-each-ref --sort=-committerdate refs/remotes --format='%(refname:short)|%(HEAD)%(color:yellow)%(refname:short)|%(color:bold green)%(committerdate:relative)|%(color:blue)%(subject)|%(color:magenta)%(authorname)%(color:reset)' --color=always --count=${count:-20} | while read line; do branch=$(echo \"$line\" | awk 'BEGIN { FS = \"|\" }; { print $1 }' | tr -d '*'); ahead=$(git rev-list --count \"${refbranch:-origin/master}..${branch}\"); behind=$(git rev-list --count \"${branch}..${refbranch:-origin/master}\"); colorline=$(echo \"$line\" | sed 's/^[^|]*|//'); echo \"$ahead|$behind|$colorline\" | awk -F'|' -vOFS='|' '{$5=substr($5,1,70)}1' ; done | ( echo \"ahead|behind||branch|lastcommit|message|author\\n\" && cat) | column -ts'|';}; r"
+  oldestb = "!r() { refbranch=$1 count=$2; git for-each-ref --sort=committerdate refs/remotes --format='%(refname:short)|%(HEAD)%(color:yellow)%(refname:short)|%(color:bold green)%(committerdate:relative)|%(color:blue)%(subject)|%(color:magenta)%(authorname)%(color:reset)' --color=always --count=${count:-20} | while read line; do branch=$(echo \"$line\" | awk 'BEGIN { FS = \"|\" }; { print $1 }' | tr -d '*'); ahead=$(git rev-list --count \"${refbranch:-origin/master}..${branch}\"); behind=$(git rev-list --count \"${branch}..${refbranch:-origin/master}\"); colorline=$(echo \"$line\" | sed 's/^[^|]*|//'); echo \"$ahead|$behind|$colorline\" | awk -F'|' -vOFS='|' '{$5=substr($5,1,70)}1' ; done | ( echo \"ahead|behind||branch|lastcommit|message|author\\n\" && cat) | column -ts'|';}; r"
+
+  # list all branches along with the committer and when the last commit was done
+  lc = "!git branch -r --sort=-committerdate --format=\"%(color:magenta)%(committerdate:relative)%(color:reset) %(color:bold cyan)%(refname:short)%(color:reset) %(contents:subject) %(color:bold blue) <%(authorname)> %(color:reset)\""
+
+  # [DUPLICATE - WIP] list all branches using the 'log' command which allows to set a particular start date
+  lc2 = "!git branch -r --sort=-committerdate | egrep -v 'HEAD|master|main' | while read b; do git log --since 4.days --color --format=\"%ci _%C(magenta)%cr %C(bold cyan)$b%Creset %s %C(bold blue)<%an>%Creset\" $b | head -n 1; done | sort -r | cut -d_ -f2-"
+
+  # search for specific strings in your commits
+  se = "!git rev-list --all | xargs git grep -F"
+
+  # [siu = submodule init update] Runs submodule-initialisation and update after a fresh checkout RECURSIVE!
+  siu = "!git submodule update --init --recursive; git sf \"git siu\""
+
+  # push all submodules
+  pushsub = sf "git push"
+
+  # pull all submodules
+  pullsub = sf "git pull"
+
+  # show diffs with colored words (red word is deleted, green word is added)
+  dcolor = diff --color-words	
+[http]
+	sslVerify = false
+
+[core]
+	autocrlf = input
+	editor = nvim
+	pager = delta
+
+[delta]
+  features = "mellow-barbet" "catppuccin"
+ 
+[delta "catppuccin"]
+  syntax-theme = Catppuccin-mocha
+

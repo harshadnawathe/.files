@@ -1,0 +1,12 @@
+{
+  "Package": {
+    "prefix": "pkg",
+    "body": "package $1;$0",
+    "description": "Package declaration statement"
+  },
+  "Import": {
+    "prefix": "imp",
+    "body": "import $1;$0",
+    "description": "Import statement"
+  }
+}

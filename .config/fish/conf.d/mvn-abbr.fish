@@ -1,0 +1,8 @@
+abbr -a mvnc 'mvn clean'
+abbr -a mvncp 'mvn clean package'
+abbr -a mvncpst 'mvn clean package -Dmaven.test.skip=true'
+abbr -a mvnct 'mvn clean test'
+abbr -a mvncsr 'mvn clean spring-boot:run'
+abbr -a mvnp 'mvn package'
+abbr -a mvnpst 'mvn package -Dmaven.test.skip=true'
+abbr -a mvnsr 'mvn spring-boot:run'

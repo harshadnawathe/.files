@@ -1,0 +1,73 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+[╭─](fg:fill_fg)\
+$directory\
+$git_branch\
+$git_status\
+$fill\
+$golang\
+$java\
+$kotlin\
+$lua\
+$nodejs\
+$python\
+$rust\
+$aws\
+$docker_context\
+[─╮](fg:fill_fg)\
+$line_break\
+[╰─╴](fg:fill_fg)\
+$shlvl\
+$character
+"""
+
+right_format = """$status\
+$cmd_duration\
+[╶─╯](fg:fill_fg)\
+"""
+
+palette = "default"
+
+[palettes.default]
+fill_fg = '#4C566A'
+
+[fill]
+symbol = '─'
+style = 'fg:fill_fg'
+
+[java]
+symbol = "󰬷 "
+
+[golang]
+symbol = " "
+
+[kotlin]
+symbol = "󱈙 "
+
+[nodejs]
+symbol = "󰎙 "
+
+[python]
+symbol = "󰌠 "
+disabled = true
+
+[rust]
+symbol = "󱘗 "
+disabled = true
+
+[lua]
+symbol = "󰢱 "
+
+[docker_context]
+symbol = " "
+
+[aws]
+symbol = "󰸏 "
+disabled = false
+
+[shlvl]
+symbol = " "
+disabled = false
+

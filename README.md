@@ -4,7 +4,7 @@ This repository contains the configuration files
 for various applications I use on my MacBook.
 
 > [!NOTE]
-> Clone this reposiotry in your home directory.
+> Clone this repository in your home directory.
 
 ## Install applications using [Homebrew](https://brew.sh/)
 

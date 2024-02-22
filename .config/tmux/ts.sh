@@ -29,7 +29,7 @@ FZF_ZOXIDE_BIND="ctrl-x:reload($FZF_ZOXIDE_COMMNAD)\
 
 FZF_PROJECT_DIRS_HEADER=" ^s sessions ^x zoxide"
 FZF_PROJECT_DIRS_BORDER_LABEL=" Project Directories "
-FZF_PROJECT_COMMAND="fd -H --maxdepth=$PROJECT_SEARCH_DEPTH --prune -x echo {//} \; \"$PROJECT_FILES_PATTERN\" $PROJECT_DIRS_PATHS | sort | uniq | sed -e \"$HOME_REPLACER\""
+FZF_PROJECT_COMMAND="fd -H --maxdepth=$PROJECT_SEARCH_DEPTH --prune -x echo {//} \; \"$PROJECT_FILES_PATTERN\" ${PROJECT_DIRS_PATHS[*]} | sort | uniq | sed -e \"$HOME_REPLACER\""
 FZF_PROJECT_DIRS_BIND="ctrl-f:reload($FZF_PROJECT_COMMAND)\
 +change-border-label($FZF_PROJECT_DIRS_BORDER_LABEL)\
 +change-header($FZF_PROJECT_DIRS_HEADER)\
@@ -80,7 +80,7 @@ if [ $HOME_SED_SAFE -eq 0 ]; then
 	SESSION_DIR=$(echo "$SESSION_DIR" | sed -e "s|^~/|$HOME/|") # get real home path back
 fi
 
-SESSION_NAME=$(basename $SESSION_DIR | tr ' :.' '_')
+SESSION_NAME=$(basename "$SESSION_DIR" | tr ' :.' '_')
 
 if ! tmux has -t "$SESSION_NAME" &>/dev/null;  then
   tmux new-session -d -s "$SESSION_NAME" -c "$SESSION_DIR"

@@ -1,0 +1,98 @@
+""" Configuration
+let mapleader = " "
+
+""" Plugins
+set which-key
+set notimeout
+set timeoutlen=5000
+
+""" Mappings
+
+" Better escape
+inoremap jk <esc>
+inoremap jj <esc>
+
+" Save
+inoremap <C-S> <esc>:w<cr>
+nnoremap <C-S> :w<cr>
+
+" Code
+let g:WhichKeyDesc_code = "<Space>c Code+"
+
+nmap <leader>ca <Action>(ShowIntentionActions)
+let g:WhichKeyDesc_code_action = "<Space>ca code actions"
+
+nmap <leader>cs <Action>(FileStructurePopup)
+let g:WhichKeyDesc_code_structure = "<Space>cs code structure"
+
+nmap <leader>cf <Action>(ReformatCode)
+let g:WhichKeyDesc_code_format = "<Space>cf code format"
+
+nmap <leader>cS <Action>(ActivateStructureToolWindow)
+let g:WhichKeyDesc_code_structureSidebar = "<Space>cS code structure sidebar"
+
+nmap <leader>cr <Action>(RenameElement)
+let g:WhichKeyDesc_code_rename = "<Space>cr rename symbol"
+
+nmap <leader>cd <Action>(ShowErrorDescription)
+let g:WhichKeyDesc_code_diagnosticsAtLine = "<Space>cd show diagnostics"
+
+nmap <leader>cS <Action>(ActivateStructureToolWindow)
+
+nmap <leader>cxv <Action>(IntroduceVariable)
+nmap <leader>cxm <Action>(ExtractFunction)
+vmap <leader>cxm <Action>(ExtractFunction)
+
+" Comment
+nmap <leader>/ <Action>(CommentByLineComment)
+vmap <leader>/ <Action>(CommentByLineComment)
+
+" Navigation
+nmap ]b gt
+nmap [b gT
+
+nmap ]d <Action>(GotoNextError)
+nmap [d <Action>(GotoPreviousError)
+
+nmap ]f <Action>(MethodDown)
+nmap [f <Action>(MethodUp)
+
+nmap ]h <Action>(VcsShowNextChangeMarker)
+nmap [h <Action>(VcsShowPrevChangeMarker)
+
+" Find
+nmap <leader>ff <Action>(GotoFile)
+nmap <leader>fc <Action>(GotoClass)
+nmap <leader>fs <Action>(GotoSymbol)
+nmap <leader>fb <Action>(RecentFiles)
+
+" Git
+nmap <leader>ghr <Action>(Vcs.RollbackChangedLines)
+nmap <leader>ghR <Action>(ChangesView.Revert)
+nmap <leader>gb <Action>(Annotate)
+nmap <leader>gg <Action>(CheckinProject)
+
+" Explorer
+nmap <leader>e <Action>(ActivateProjectToolWindow)
+
+" Test
+nmap <leader>ts <Action>(GotoTest)
+nmap <leader>tt <Action>(RunClass)
+nmap <leader>tg <Action>(Generate)
+nmap <leader>tr <Action>(Run)
+
+" Goto
+nmap gd <Action>(GotoDeclaration)
+nmap gr <Action>(GotoDeclaration)
+nmap gI <Action>(GotoImplementation)
+
+" Search
+nmap <leader>sg <Action>(TextSearchAction)
+nmap <leader>sf <Action>(FindInPath)
+nmap <leader>s/ <Action>(Find)
+nmap <leader>sa <Action>(GotoAction)
+nmap <leader>se <Action>(SearchEverywhere)
+
+" UI
+nmap <leader>uC <Action>(ChangeLaf)
+nmap <leader>uH <Action>(HideAllWindows)

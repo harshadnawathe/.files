@@ -44,6 +44,8 @@ return {
         "eslint",
         -- kotlin
         "kotlin_language_server",
+        -- shell
+        "bashls",
       },
     },
   },

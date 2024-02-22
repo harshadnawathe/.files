@@ -43,6 +43,8 @@ return {
         "clang_format",
         -- kotlin
         "ktlint",
+        -- shell
+        "shellcheck",
       },
       automatic_installation = false,
       handlers = {
@@ -52,9 +54,9 @@ return {
           nls.register(nls.builtins.diagnostics.ktlint.with({
             args = { "--log-level=none", "--relative", "--reporter=json", "**/*.kt", "**/*.kts" },
           }))
-          nls.register(nls.builtins.formatting.ktlint.with{
-            args = { "--log-level=none", "--format", "--stdin", "**/*.kt", "**/*.kts"}
-          })
+          nls.register(nls.builtins.formatting.ktlint.with({
+            args = { "--log-level=none", "--format", "--stdin", "**/*.kt", "**/*.kts" },
+          }))
         end,
       },
     },

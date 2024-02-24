@@ -1,8 +1,13 @@
 """ Configuration
 let mapleader = " "
+set relativenumber
 
 """ Plugins
 set which-key
+set highlightedyank
+set matchit
+set surround
+
 set notimeout
 set timeoutlen=5000
 

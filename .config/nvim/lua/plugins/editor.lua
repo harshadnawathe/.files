@@ -126,11 +126,6 @@ return {
         desc = "Find in buffer",
       },
       {
-        "<leader>fg",
-        "<cmd>Telescope git_files<cr>",
-        desc = "Find in git files",
-      },
-      {
         "<leader>cs",
         "<cmd>Telescope aerial<cr>",
         desc = "Search code symbols",

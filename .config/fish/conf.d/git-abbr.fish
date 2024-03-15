@@ -1,3 +1,4 @@
+abbr -a gal git_all
 abbr -a g git
 abbr -a ga 'git add'
 abbr -a gaa 'git add --all'

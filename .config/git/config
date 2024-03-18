@@ -16,8 +16,43 @@
         #pom = pull origin master
         #prom = pull --rebase origin master
 
-  # Run git commands in all immediate sub-folders that are git repos (TODO: Not working since it ALWAYS selects from the user's home directory)
-  # all = "!f() { find \"${FOLDER:-.}\" -mindepth ${MINDEPTH:-1} -maxdepth ${MAXDEPTH:-2} -name .git -type d | xargs -I{} bash -c \"echo {} && git -C {}/../ $1\"; }; echo `pwd`; f"
+  # all runs given git command recursively in all repositories found in current directory
+  #
+  # all is composed of following 3 functions
+  # p => parallel
+  # s => sequential
+  # ps => decides whether to use p or s
+  #
+  # dependencies: fd & find commands 
+  all = "!\
+    p() { fd \
+      -H --no-ignore-vcs \
+      -t d \
+      --min-depth 1 --max-depth 3 \
+      -x sh -c 'cd {//}; \
+        printf -v title -- \"=> Running \\033[1;33mgit $1\\033[0m in \\033[1;36m`basename $(pwd)`\\033[0m\"; \
+        echo $title; \
+        git $@; \
+        echo \"\"' -- $@ \\; \
+      '^.git$';\
+    };\
+    s() { find . \
+      -type d -name .git \
+      -mindepth 1 -maxdepth 3 \
+      -execdir sh -c '\
+        printf -v title -- \"=> Running \\033[1;33mgit $1\\033[0m in \\033[1;36m`basename $(pwd)`\\033[0m\"; \
+        echo $title; \
+        git $@; \
+        echo \"\"' -- $@ \\; ; \
+    };\
+    ps() {\
+      case $1 in \
+        inp | inc | diff | chngp) s $@ \
+        ;; \
+        *) p $@ \
+        ;; \
+      esac;\
+    }; ps"
 
   # find dangling commits
   dangling = fsck --no-reflog

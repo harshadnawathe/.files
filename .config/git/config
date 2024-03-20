@@ -30,8 +30,7 @@
       -t d \
       --min-depth 1 --max-depth 3 \
       -x sh -c 'cd {//}; \
-        printf -v title -- \"=> Running \\033[1;33mgit $1\\033[0m in \\033[1;36m`basename $(pwd)`\\033[0m\"; \
-        echo $title; \
+        echo \"=> Running \\033[1;33mgit $1\\033[0m in \\033[1;36m`basename $(pwd)`\\033[0m\"; \
         git $@; \
         echo \"\"' -- $@ \\; \
       '^.git$';\
@@ -40,8 +39,7 @@
       -type d -name .git \
       -mindepth 1 -maxdepth 3 \
       -execdir sh -c '\
-        printf -v title -- \"=> Running \\033[1;33mgit $1\\033[0m in \\033[1;36m`basename $(pwd)`\\033[0m\"; \
-        echo $title; \
+        echo \"=> Running \\033[1;33mgit $1\\033[0m in \\033[1;36m`basename $(pwd)`\\033[0m\"; \
         git $@; \
         echo \"\"' -- $@ \\; ; \
     };\

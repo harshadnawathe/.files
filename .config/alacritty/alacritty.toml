@@ -128,22 +128,22 @@ key = "P"
 mods = "Control|Command"
 
 [[keyboard.bindings]]
-chars = "\u0001\u001B[A"
+chars = "\u0001k"
 key = "Up"
 mods = "Command"
 
 [[keyboard.bindings]]
-chars = "\u0001\u001B[B"
+chars = "\u0001j"
 key = "Down"
 mods = "Command"
 
 [[keyboard.bindings]]
-chars = "\u0001\u001B[C"
+chars = "\u0001l"
 key = "Right"
 mods = "Command"
 
 [[keyboard.bindings]]
-chars = "\u0001\u001B[D"
+chars = "\u0001h"
 key = "Left"
 mods = "Command"
 

@@ -40,7 +40,7 @@ return {
         -- typescript and javascript linting
         "eslint",
         -- c++
-        "clang_format",
+        -- "clang_format",
         -- kotlin
         "ktlint",
         -- shell

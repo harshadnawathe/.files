@@ -1,12 +1,4 @@
 return {
-  "mellow-theme/mellow.nvim",
-  "EdenEast/nightfox.nvim",
-  {
-    "craftzdog/solarized-osaka.nvim",
-    opts = {
-      transparent = false,
-    },
-  },
   {
     "catppuccin/nvim",
     name = "catppuccin",

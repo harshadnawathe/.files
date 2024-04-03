@@ -167,8 +167,8 @@ return {
         end,
       },
       keymaps = {
-        ["<ESC>"] = "actions.close"
-      }
+        ["<ESC>"] = "actions.close",
+      },
     },
     dependencies = { "nvim-tree/nvim-web-devicons" },
     keys = {
@@ -200,15 +200,6 @@ return {
         browse = "<leader>go",
       },
     },
-  },
-  {
-    "NeogitOrg/neogit",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "sindrets/diffview.nvim",
-      "nvim-telescope/telescope.nvim",
-    },
-    config = true,
   },
   {
     "NvChad/nvim-colorizer.lua",

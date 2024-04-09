@@ -138,6 +138,7 @@ return {
       local actions = require("telescope.actions")
       return vim.tbl_deep_extend("force", opts, {
         defaults = {
+          path_display = { "smart" },
           mappings = {
             i = {
               ["<C-n>"] = actions.cycle_history_next,

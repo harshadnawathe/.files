@@ -137,6 +137,11 @@ return {
         "<cmd>Telescope aerial<cr>",
         desc = "Search code symbols",
       },
+      {
+        "<leader>;",
+        "<cmd>Telescope resume<cr>",
+        desc = "Resume last Telescope search",
+      },
     },
     opts = function(_, opts)
       require("telescope").load_extension("file_browser")

@@ -160,6 +160,23 @@ return {
             },
           },
         },
+        pickers = {
+          find_files = {
+            theme = "dropdown",
+            previewer = false,
+          },
+          git_files = {
+            theme = "dropdown",
+            previewer = false,
+          },
+          diagnostics = {
+            theme = "ivy",
+            initial_mode = "normal",
+            layout_config = {
+              height = 0.3,
+            },
+          },
+        },
       })
     end,
   },

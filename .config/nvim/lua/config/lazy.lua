@@ -42,7 +42,7 @@ require("lazy").setup({
   install = { colorscheme = { "catppuccin", "tokyonight" } },
   checker = {
     enabled = true,
-    frequency = 7 * 24 * 3600, -- check every week
+    frequency = 30 * 24 * 3600, -- check every 30 days
   }, -- automatically check for plugin updates
   performance = {
     rtp = {

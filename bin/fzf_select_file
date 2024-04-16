@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# vi: ft=sh
+
+if [[ -z "$FZF_SEARCH_TEXT" ]]; then
+	FZF_DEFAULT_COMMAND='fd --ignore --hidden --type=f --color=always' fzf --ansi --query="$1" \
+		--margin=1 --height=~50% --padding=1 --reverse --border \
+		--header " ^t text " \
+		--border-label " Search files " \
+		--bind "ctrl-t:become(FZF_SEARCH_TEXT=1 ~/bin/fzf_select_file '{q}')"
+else
+	FZF_SEARCH_TEXT_COMMAND_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
+	FZF_SEARCH_TEXT_INITIAL_QUERY="${*:-}"
+	: | fzf --ansi --disabled --query="$FZF_SEARCH_TEXT_INITIAL_QUERY" \
+		--margin=1 --padding=1 --reverse --border \
+		--bind "start:reload:$FZF_SEARCH_TEXT_COMMAND_PREFIX {q}" \
+		--border-label "Search files with text" \
+		--delimiter : \
+		--preview 'bat --style=plain --color=always {1} --highlight-line {2}' \
+		--preview-window 'up,60%,+{2}+3/3,~3' \
+		--bind ctrl-y:preview-up \
+		--bind ctrl-e:preview-down \
+		--bind ctrl-u:preview-page-up \
+		--bind ctrl-d:preview-page-down \
+		--header "^f files" \
+		--bind "ctrl-f:become(FZF_SEARCH_TEXT= ~/bin/fzf_select_file '{q}')" \
+		--bind "change:reload:sleep 0.1; $FZF_SEARCH_TEXT_COMMAND_PREFIX {q} || true" 
+fi

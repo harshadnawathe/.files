@@ -18,7 +18,7 @@ if [ $HOME_SED_SAFE -eq 0 ]; then # $HOME should be safe to use in sed
 fi
 
 FZF_SESSIONS_HEADER=" ^x zoxide ^f projects"
-FZF_SESSIONS_BORDER_LABEL=" Tmux Sessions "
+FZF_SESSIONS_BORDER_LABEL="[ Tmux Sessions ]"
 FZF_SESSION_COMMAND="tmux ls -F '#S'"
 FZF_SESSIONS_BIND="ctrl-s:reload($FZF_SESSION_COMMAND)\
 +change-border-label($FZF_SESSIONS_BORDER_LABEL)\
@@ -26,7 +26,7 @@ FZF_SESSIONS_BIND="ctrl-s:reload($FZF_SESSION_COMMAND)\
 +change-prompt( )"
 
 FZF_ZOXIDE_HEADER=" ^s sessions ^f projects"
-FZF_ZOXIDE_BORDER_LABEL=" Recent Directories "
+FZF_ZOXIDE_BORDER_LABEL="[ Recent Directories ]"
 FZF_ZOXIDE_COMMNAD="zoxide query -l | sed -e \"$HOME_REPLACER\""
 FZF_ZOXIDE_BIND="ctrl-x:reload($FZF_ZOXIDE_COMMNAD)\
 +change-border-label($FZF_ZOXIDE_BORDER_LABEL)\
@@ -34,7 +34,7 @@ FZF_ZOXIDE_BIND="ctrl-x:reload($FZF_ZOXIDE_COMMNAD)\
 +change-prompt( )"
 
 FZF_PROJECT_DIRS_HEADER=" ^s sessions ^x zoxide"
-FZF_PROJECT_DIRS_BORDER_LABEL=" Project Directories "
+FZF_PROJECT_DIRS_BORDER_LABEL="[ Project Directories ]"
 FZF_PROJECT_COMMAND="fd -H --maxdepth=$PROJECT_SEARCH_DEPTH --prune -x echo {//} \; \"$PROJECT_FILES_PATTERN\" ${PROJECT_DIRS_PATHS[*]} | sort | uniq | sed -e \"$HOME_REPLACER\""
 FZF_PROJECT_DIRS_BIND="ctrl-f:reload($FZF_PROJECT_COMMAND)\
 +change-border-label($FZF_PROJECT_DIRS_BORDER_LABEL)\

@@ -1,27 +1,84 @@
 #!/usr/bin/env bash
 # vi: ft=sh
 
-if [[ -z "$FZF_SEARCH_TEXT" ]]; then
-	FZF_DEFAULT_COMMAND='fd --ignore --hidden --type=f --color=always' fzf --ansi --query="$1" \
-		--margin=1 --height=~50% --padding=1 --reverse --border \
-		--header " ^t text " \
-		--border-label " Search files " \
-		--bind "ctrl-t:become(FZF_SEARCH_TEXT=1 ~/bin/fzf_select_file '{q}')"
-else
-	FZF_SEARCH_TEXT_COMMAND_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
-	FZF_SEARCH_TEXT_INITIAL_QUERY="${*:-}"
-	: | fzf --ansi --disabled --query="$FZF_SEARCH_TEXT_INITIAL_QUERY" \
-		--margin=1 --padding=1 --reverse --border \
-		--bind "start:reload:$FZF_SEARCH_TEXT_COMMAND_PREFIX {q}" \
-		--border-label "Search files with text" \
-		--delimiter : \
-		--preview 'bat --style=plain --color=always {1} --highlight-line {2}' \
-		--preview-window 'up,60%,+{2}+3/3,~3' \
-		--bind ctrl-y:preview-up \
-		--bind ctrl-e:preview-down \
-		--bind ctrl-u:preview-page-up \
-		--bind ctrl-d:preview-page-down \
-		--header "^f files" \
-		--bind "ctrl-f:become(FZF_SEARCH_TEXT= ~/bin/fzf_select_file '{q}')" \
-		--bind "change:reload:sleep 0.1; $FZF_SEARCH_TEXT_COMMAND_PREFIX {q} || true" 
-fi
+INITIAL_QUERY="${*:-}"
+
+FZF_DEFAULT_COMMAND='fd --ignore --hidden --type=f --color=always'
+
+SEARCH_FILE_PROMPT="󰱽 󰁕 "
+SEARCH_FILE_BORDER_LABEL="[ Search files by name ]"
+SEARCH_FILE_HEADER="(ctrl-w: Search files by text)"
+
+SEARCH_TEXT_PROMPT="󱎸 󰁕 "
+SEARCH_TEXT_COMMAND_PREFIX="rg --hidden -g '!.git/' --column --line-number --no-heading --color=always --smart-case "
+SEARCH_TEXT_HEADER="(ctrl-f: Search files by name)   (alt-w: Toggle filter)"
+SEARCH_TEXT_BORDER_LABEL="[ Search files by text ]"
+
+SEARCH_TEXT_FILTER_PROMPT="󱎸  "
+
+SEARCH_BY_NAME_BIND="ctrl-f:\
+unbind(ctrl-f,change,alt-w)\
++change-prompt($SEARCH_FILE_PROMPT)\
++change-header($SEARCH_FILE_HEADER)\
++change-border-label($SEARCH_FILE_BORDER_LABEL)\
++enable-search\
++reload($FZF_DEFAULT_COMMAND)\
++transform-query(echo {q})\
++hide-preview\
++rebind(ctrl-w)\
+"
+
+SERACH_BY_TEXT_BIND="ctrl-w:\
+unbind(ctrl-w)\
++change-prompt($SEARCH_TEXT_PROMPT)\
++change-header($SEARCH_TEXT_HEADER)\
++change-border-label($SEARCH_TEXT_BORDER_LABEL)\
++disable-search\
++reload($SEARCH_TEXT_COMMAND_PREFIX {q})\
++change-preview(bat --style=plain --color=always {1} --highlight-line {2})\
++change-preview-window(down,75%,+{2}+3/3,~3)\
++rebind(ctrl-f,change,alt-w)\
+"
+
+SEARCH_BY_TEXT_CHANGE_BIND="change:\
+reload(sleep 0.1; $SEARCH_TEXT_COMMAND_PREFIX {q} || true)\
+"
+
+SEARCH_BY_TEST_TURN_FILTER_OFF="rebind(change)\
++change-prompt($SEARCH_TEXT_PROMPT)\
++disable-search\
++transform-query:echo \{q} > /tmp/rg-fzf-f; cat /tmp/rg-fzf-r\
+"
+
+SEARCH_BY_TEST_TURN_FILTER_ON="unbind(change)\
++change-prompt($SEARCH_TEXT_FILTER_PROMPT)\
++enable-search\
++transform-query:echo \{q} > /tmp/rg-fzf-r; cat /tmp/rg-fzf-f\
+"
+
+SEARCH_BY_TEXT_TOGGLE_FILTER_BIND="alt-w:\
+transform:sh -c '[[ \"\$FZF_PROMPT\" != \"$SEARCH_TEXT_PROMPT\" ]] && \
+echo \"$SEARCH_BY_TEST_TURN_FILTER_OFF\" || \
+echo \"$SEARCH_BY_TEST_TURN_FILTER_ON\"'"
+
+fzf \
+	--ansi \
+	--delimiter=":" \
+	--no-multi \
+	--query="$INITIAL_QUERY" \
+	--margin=1 --min-height=40 --height=~50% --padding=1 --reverse --border \
+	--prompt "$SEARCH_FILE_PROMPT" \
+	--header="$SEARCH_FILE_HEADER" \
+	--border-label "$SEARCH_FILE_BORDER_LABEL" \
+	--bind "$SERACH_BY_TEXT_BIND" \
+	--bind "$SEARCH_BY_NAME_BIND" \
+	--bind "$SEARCH_BY_TEXT_CHANGE_BIND" \
+	--bind "$SEARCH_BY_TEXT_TOGGLE_FILTER_BIND" \
+	--bind ctrl-y:preview-up \
+	--bind ctrl-e:preview-down \
+	--bind ctrl-u:preview-page-up \
+	--bind ctrl-d:preview-page-down \
+	--bind 'focus:transform-preview-label:echo [ {1} ]' \
+	--bind "start:unbind(change,ctrl-f,alt-w)"
+
+rm /tmp/rg-fzf-* 2>/dev/null

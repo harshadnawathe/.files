@@ -176,6 +176,13 @@ return {
               height = 0.3,
             },
           },
+          lsp_references = {
+            theme = "ivy",
+            initial_mode = "normal",
+            layout_config = {
+              height = 0.3,
+            },
+          }
         },
       })
     end,

@@ -16,6 +16,9 @@ return {
     "nvim-neo-tree/neo-tree.nvim",
     opts = function(_, opts)
       return vim.tbl_deep_extend("force", opts, {
+        filesystem = {
+          hijack_netrw_behavior = "open_current",
+        },
         window = {
           position = "right",
         },
@@ -114,7 +117,7 @@ return {
             layout_config = {
               height = 0.3,
             },
-          }
+          },
         },
       })
     end,

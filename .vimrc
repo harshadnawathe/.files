@@ -4,6 +4,7 @@ Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-rsi'
 
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
+Plug 'rose-pine/vim', { 'as': 'rose-pine' }
 
 
 call plug#end()
@@ -24,4 +25,4 @@ set termguicolors
 
 set notimeout
 
-colorscheme catppuccin_mocha
+colorscheme rosepine

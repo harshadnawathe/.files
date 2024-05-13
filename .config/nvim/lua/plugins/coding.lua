@@ -6,12 +6,6 @@ return {
     end,
   },
   {
-    "zbirenbaum/copilot.lua",
-    cond = function()
-      return vim.env.ENABLE_COPILOT ~= nil
-    end,
-  },
-  {
     "echasnovski/mini.comment",
     keys = {
       {

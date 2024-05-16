@@ -19,6 +19,33 @@ return {
         Refactor = {
           prompt = "Please refactor the following code to improve its clarity and readability.",
         },
+        BetterNamings = {
+          prompt = "Please provide better names for the following variables and functions.",
+        },
+        SwaggerApiDocs = {
+          prompt = "Please provide documentation for the following API using Swagger.",
+        },
+        SwaggerJsDocs = {
+          prompt = "Please write JSDoc for the following API using Swagger.",
+        },
+        Summarize = {
+          prompt = "Please summarize the following text.",
+        },
+        Spelling = {
+          prompt = "Please correct any grammar and spelling errors in the following text.",
+        },
+        Wording = {
+          prompt = "Please improve the grammar and wording of the following text.",
+        },
+        Concise = {
+          prompt = "Please rewrite the following text to make it more concise.",
+        },
+        Tests = {
+          prompt = "/COPILOT_GENERATE Please explain how the selected code works, then generate unit tests for it.",
+        }
+      },
+      window = {
+        width = 0.3,
       },
     },
     commands = {
@@ -30,16 +57,6 @@ return {
       "CopilotChatReset",
       "CopilotChatSave",
       "CopilotChatLoad",
-      "CopilotChatDebugInfo",
-      "CopilotChatExplain",
-      "CopilotChatReview",
-      "CopilotChatFix",
-      "CopilotChatOptimize",
-      "CopilotChatDocs",
-      "CopilotChatTests",
-      "CopilotChatFixDiagnostic",
-      "CopilotChatCommit",
-      "CopilotChatCommitStaged",
     },
     cond = function()
       return vim.env.ENABLE_COPILOT ~= nil
@@ -71,10 +88,12 @@ return {
           require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
         end,
         desc = "CopilotChat - Prompt actions",
+        mode = { "n", "x" },
       },
-      { "<leader>cpe", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code" },
-      { "<leader>cpt", "<cmd>CopilotChatTests<cr>", desc = "CopilotChat - Generate tests" },
-      { "<leader>cpr", "<cmd>CopilotChatReview<cr>", desc = "CopilotChat - Review code" },
+      { "<leader>cpe", "<cmd>CopilotChatExplain<cr>", desc = "CopilotChat - Explain code", mode = { "n", "x" } },
+      { "<leader>cpt", "<cmd>CopilotChatTests<cr>", desc = "CopilotChat - Generate tests", mode = { "n", "x" } },
+      { "<leader>cpr", "<cmd>CopilotChatReview<cr>", desc = "CopilotChat - Review code", mode = { "n", "x" } },
+      { "<leader>cpR", "<cmd>CopilotChatRefactor<cr>", desc = "CopilotChat - Refactor code", mode = { "n", "x" } },
       {
         "<leader>cpm",
         "<cmd>CopilotChatCommit<cr>",

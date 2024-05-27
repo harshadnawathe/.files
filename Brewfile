@@ -116,6 +116,7 @@ brew "neovim"
 # brew "stylua"
 # brew "prettier", args: ["ignore-dependencies"]
 brew "lazygit"
+brew "lazydocker"
 # brew "cmatrix" 
 # Alternative is https://github.com/st3w/neo - requires build
 #brew "automake"  #required for neo build

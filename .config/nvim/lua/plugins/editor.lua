@@ -165,12 +165,12 @@ return {
     event = "BufReadPre",
     opts = {
       default_mappings = false,
-      keymaps = {
-        -- Open blame window
-        blame = "<leader>gb",
-        -- Open file/folder in git repository
-        browse = "<leader>go",
-      },
+    },
+    keys = {
+      { "<leader>gB", "<CMD>lua require('git.blame').blame()<CR>", desc = "Open Git Blame" },
+      { "<leader>gO", "<CMD>lua require('git.browse').open(false)<CR>", desc = "Open repo in browser" },
+      { "<leader>gO", ":<C-u> lua require('git.browse').open(false)<CR>", desc = "Open repo in browser", mode = "x" },
+      { "<leader>gP", "<CMD>lua require('git.browse').create_pull_request()<CR>", desc = "Create new pull request" },
     },
   },
   {

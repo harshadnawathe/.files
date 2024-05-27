@@ -159,42 +159,4 @@ return {
     cmd = "IncRename",
     config = true,
   },
-  {
-    "nvimdev/lspsaga.nvim",
-    event = "LspAttach",
-    dependencies = {
-      "neovim/nvim-lspconfig",
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-tree/nvim-web-devicons",
-    },
-    opts = {
-      lightbulb = {
-        enable = false,
-      },
-      beacon = {
-        enable = false,
-      },
-      code_action = {
-        show_server_name = true,
-      },
-      callhierarchy = {
-        layout = "normal",
-      },
-      finder = {
-        layout = "normal",
-      },
-    },
-    keys = function()
-      local wk = require("which-key")
-      wk.register({
-        ["]D"] = { ":Lspsaga diagnostic_jump_next<CR>", "Next diagnostic action (Lspsaga)" },
-        ["[D"] = { ":Lspsaga diagnostic_jump_prev<CR>", "Next diagnostic action (Lspsaga)" },
-        ["<leader>cl"] = {
-          f = { ":Lspsaga finder<CR>", "Find references (Lspsaga)" },
-          o = { ":Lspsaga outgoing_calls<CR>", "Outgoing calls (Lspsaga)" },
-          S = { ":Lspsaga outline<CR>", "Document outline (Lspsaga)" },
-        },
-      })
-    end,
-  },
 }

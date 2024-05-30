@@ -10,8 +10,6 @@ return {
     opts = function(_, opts)
       local nls = require("null-ls")
       vim.list_extend(opts.sources, {
-        -- typescript diagnostics
-        nls.builtins.diagnostics.tsc,
         -- xml/html
         nls.builtins.formatting.tidy,
         nls.builtins.diagnostics.tidy,

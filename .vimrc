@@ -25,4 +25,4 @@ set termguicolors
 
 set notimeout
 
-colorscheme rosepine
+colorscheme catppuccin_mocha

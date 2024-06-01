@@ -46,6 +46,8 @@ return {
         "kotlin_language_server",
         -- shell
         "bashls",
+        -- go
+        "gopls",
       },
     },
   },

@@ -29,11 +29,12 @@ else
   mise activate --shims | source
 end
 
-# Go
-export GOPATH=/Users/harshadn/Go
+# golang
+set -Ux GOPATH (go env GOPATH)
+fish_add_path $GOPATH/bin
 
+# custom tools
 fish_add_path -m \
-  $GOPATH/bin \
   ~/bin \
   /usr/sbin/ \
   "/Users/harshadn/Library/Application Support/JetBrains/Toolbox/scripts/"

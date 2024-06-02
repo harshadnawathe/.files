@@ -94,7 +94,7 @@ brew "fzf"       #for tmux plugin
 brew "fpp"       #for tmux plugin
 #brew "urlview"   #for tmux urlview
 #brew "extract_url"
-# brew "gifski"
+brew "gifski"
 #brew "zellij"  # not able to replicate the current tmux workflow of session manangement
 
 #brew "asdf" #replaced with rtx

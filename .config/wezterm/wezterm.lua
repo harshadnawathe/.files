@@ -21,10 +21,7 @@ config.background = {
 }
 
 config.font = wezterm.font_with_fallback({
-	{
-		family = "Monaspace Neon",
-		weight = 400,
-	},
+	{ family = "Monaspace Neon", weight = 500 },
 	{ family = "Symbols Nerd Font", scale = 1.2 },
 })
 

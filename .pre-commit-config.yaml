@@ -7,6 +7,7 @@ repos:
       - id: check-json
       - id: check-xml
       - id: check-added-large-files
+        exclude: .config/wezterm/wallpapers/.*
       - id: detect-private-key
   - repo: https://github.com/gitleaks/gitleaks
     rev: v8.17.0

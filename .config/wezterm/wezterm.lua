@@ -2,27 +2,30 @@ local wezterm = require("wezterm")
 
 local config = wezterm.config_builder()
 
+config.term = "wezterm"
+
 config.color_scheme = "Catppuccin Mocha"
 
 config.background = {
 	{
 		source = {
 			File = {
-				path = os.getenv("HOME") .. "/.config/wezterm/wallpapers/darth-vader-red-lightsaber-star-wars-moewalls-com.gif",
+				path = os.getenv("HOME")
+					.. "/.config/wezterm/wallpapers/darth-vader-red-lightsaber-star-wars-moewalls-com.gif",
 			},
 		},
 		hsb = { brightness = 0.2 },
-    horizontal_align = "Center",
-    vertical_align = "Middle",
+		horizontal_align = "Center",
+		vertical_align = "Middle",
 	},
 }
 
 config.font = wezterm.font_with_fallback({
 	{
-		family = "FiraCode Nerd Font Mono",
-		weight = "Regular",
+		family = "Monaspace Neon",
+		weight = 400,
 	},
-	{ family = "JetBrainsMono Nerd Font" },
+	{ family = "Symbols Nerd Font", scale = 1.2 },
 })
 
 config.font_size = 16

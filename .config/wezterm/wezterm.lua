@@ -2,8 +2,6 @@ local wezterm = require("wezterm")
 
 local config = wezterm.config_builder()
 
-config.term = "wezterm"
-
 config.color_scheme = "Catppuccin Mocha"
 
 config.background = {

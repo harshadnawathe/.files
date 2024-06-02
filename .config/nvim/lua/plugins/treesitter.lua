@@ -2,7 +2,6 @@ return {
   "nvim-treesitter/nvim-treesitter",
   dependencies = {
     "nvim-treesitter/nvim-treesitter-textobjects",
-    { "elgiano/nvim-treesitter-angular", branch = "topic/jsx-fix" },
   },
   opts = function(_, opts)
     return vim.tbl_deep_extend("force", opts, {

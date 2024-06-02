@@ -58,7 +58,6 @@
   "nvim-snippets": { "branch": "main", "commit": "0b86938397512dad4c0790b4ea4a835ad65dc0f6" },
   "nvim-spectre": { "branch": "master", "commit": "366f46fdd4a1593cc237aea13d5ef113739a472c" },
   "nvim-treesitter": { "branch": "master", "commit": "5c924407cf110e9da4f3ba02ffed127b4198ad89" },
-  "nvim-treesitter-angular": { "branch": "topic/jsx-fix", "commit": "024f5fbcc6fab26aa5699cd632e02d0ae98c2314" },
   "nvim-treesitter-textobjects": { "branch": "master", "commit": "3557e41418b4a6c5b85d5d64abe94c9c50fa9b14" },
   "nvim-ts-autotag": { "branch": "main", "commit": "bcf3146864262ef2d3c877beba3e222b5c73780d" },
   "nvim-vtsls": { "branch": "main", "commit": "719fabc328c48fa03b1f3373205fcd1f60d21dc2" },

@@ -30,7 +30,7 @@ else
 end
 
 # golang
-set -Ux GOPATH (go env GOPATH)
+set -Ux GOPATH (~/.local/share/mise/shims/go env GOPATH)
 fish_add_path $GOPATH/bin
 
 # custom tools

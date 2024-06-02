@@ -48,6 +48,8 @@ return {
         "bashls",
         -- go
         "gopls",
+        -- lua
+        "lua_ls",
       },
     },
   },

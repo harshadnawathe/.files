@@ -56,7 +56,7 @@ config.mouse_bindings = {
 	},
 }
 
-k = require("utils.keys")
+local k = require("utils.keys")
 
 config.keys = {
 	-- Tmux Panes

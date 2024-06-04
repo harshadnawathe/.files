@@ -19,8 +19,8 @@ config.background = {
 }
 
 config.font = wezterm.font_with_fallback({
-	{ family = "Monaspace Neon", weight = 500 },
-	{ family = "Symbols Nerd Font", scale = 1.2 },
+	{ family = "Monaspace Argon", weight = 400 },
+	{ family = "Symbols Nerd Font", scale = 1.1 },
 })
 
 config.font_size = 16

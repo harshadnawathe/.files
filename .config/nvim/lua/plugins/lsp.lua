@@ -17,17 +17,25 @@ return {
           -- ktlint is slow
           timeout_ms = 3000,
         },
+        setup = {
+          rust_analyzer = function()
+            -- lsp configuration is managed by rustaceanvim
+            return true
+          end,
+        },
       })
     end,
   },
   {
     "williamboman/mason.nvim",
-    opts = {
-      registries = {
-        "github:nvim-java/mason-registry",
-        "github:mason-org/mason-registry",
-      },
-    },
+    opts = function(_, opts)
+      return vim.tbl_deep_extend("force", opts, {
+        registries = {
+          "github:nvim-java/mason-registry",
+          "github:mason-org/mason-registry",
+        },
+      })
+    end,
   },
   {
     "williamboman/mason-lspconfig.nvim",
@@ -50,6 +58,13 @@ return {
         "gopls",
         -- lua
         "lua_ls",
+        -- rust
+        "rust-analyzer",
+      },
+      handlers = {
+        ["rust_analyzer"] = function()
+          -- lsp configuration is managed by rustaceanvim
+        end,
       },
     },
   },

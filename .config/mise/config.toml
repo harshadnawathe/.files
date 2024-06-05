@@ -1,7 +1,7 @@
 [tools]
 go = "1.22"
 node = "20.11.0"
-rust = "1.70.0"
+rust = "1.78.0"
 java = "17"
 python = "3.10"
 gradle = "8.5"

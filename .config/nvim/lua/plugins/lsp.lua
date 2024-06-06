@@ -67,6 +67,8 @@ return {
         "jdtls",
         --toml
         "taplo",
+        --yaml
+        "yaml-language-server",
       },
       handlers = {
         ["rust_analyzer"] = function()

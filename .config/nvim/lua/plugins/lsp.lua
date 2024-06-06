@@ -65,6 +65,8 @@ return {
         "rust-analyzer",
         --java
         "jdtls",
+        --toml
+        "taplo",
       },
       handlers = {
         ["rust_analyzer"] = function()

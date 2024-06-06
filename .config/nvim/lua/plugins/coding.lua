@@ -154,10 +154,4 @@ return {
       { "<leader>%", ":TSJToggle<CR>", desc = "args: Split or Join" },
     },
   },
-  -- Incremental rename
-  {
-    "smjonas/inc-rename.nvim",
-    cmd = "IncRename",
-    config = true,
-  },
 }

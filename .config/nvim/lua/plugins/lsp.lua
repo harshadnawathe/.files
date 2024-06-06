@@ -72,6 +72,7 @@ return {
   },
   {
     "mfussenegger/nvim-jdtls",
+    ft = "java",
     opts = function(_, opts)
       -- override jdtls command to work with projects using jdks older than 17
       return vim.tbl_deep_extend("force", opts, {

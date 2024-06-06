@@ -117,8 +117,11 @@ return {
     event = { "CmdlineEnter" },
     ft = { "go", "gomod" },
     build = ':lua require("go.install").update_all_sync()',
-    config = function()
-      require("go").setup()
+    opts = {
+      diagnostic = false,
+    },
+    config = function(_, opts)
+      require("go").setup(opts)
 
       vim.api.nvim_create_autocmd("LspAttach", {
         callback = function(args)

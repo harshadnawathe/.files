@@ -60,6 +60,8 @@ return {
         "lua_ls",
         -- rust
         "rust-analyzer",
+        --java
+        "jdtls",
       },
       handlers = {
         ["rust_analyzer"] = function()
@@ -93,7 +95,7 @@ return {
           "--add-opens",
           "java.base/java.lang=ALL-UNNAMED",
           "-jar",
-          vim.fn.expand("$MASON/share/jdtls/plugins/org.eclipse.equinox.launcher_*.jar"),
+          vim.fn.expand("$MASON/share/jdtls/plugins/org.eclipse.equinox.launcher.jar"),
         },
         on_attach = function()
           vim.keymap.set("n", "<leader>tg", function()

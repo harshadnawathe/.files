@@ -34,6 +34,9 @@ return {
           "github:nvim-java/mason-registry",
           "github:mason-org/mason-registry",
         },
+        ensure_installed = {
+          "json-lsp",
+        },
       })
     end,
   },

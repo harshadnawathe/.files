@@ -62,13 +62,13 @@ return {
         -- lua
         "lua_ls",
         -- rust
-        "rust-analyzer",
+        "rust_analyzer",
         --java
         "jdtls",
         --toml
         "taplo",
         --yaml
-        "yaml-language-server",
+        "yamlls",
       },
       handlers = {
         ["rust_analyzer"] = function()

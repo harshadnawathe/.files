@@ -29,13 +29,6 @@ config.window_decorations = "RESIZE"
 config.enable_tab_bar = false
 config.adjust_window_size_when_changing_font_size = false
 
-config.window_padding = {
-	left = 20,
-	right = 20,
-	top = 20,
-	bottom = 20,
-}
-
 config.initial_cols = 180
 config.initial_rows = 50
 

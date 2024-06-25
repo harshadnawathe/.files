@@ -104,9 +104,9 @@ brew "gpg"
 brew "gawk"
 brew "gnu-sed" # required by nvim plugin spectre
 brew "stow"
-# brew "neovim"
+brew "neovim"
 # cask "neovide"
-brew "neovim", args: ["HEAD"]
+# brew "neovim", args: ["HEAD"]
 
 #brew "helix", args: ["ignore-dependencies"]
 #language-servers for helix

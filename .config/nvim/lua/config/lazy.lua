@@ -36,6 +36,8 @@ require("lazy").setup({
 
     { import = "lazyvim.plugins.extras.lsp.none-ls" },
 
+    { import = "lazyvim.plugins.extras.ui.edgy" },
+
     -- import/override with your plugins
     { import = "plugins" },
   },

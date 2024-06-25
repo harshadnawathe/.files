@@ -22,6 +22,10 @@ return {
             -- lsp configuration is managed by rustaceanvim
             return true
           end,
+          jdtls = function()
+            -- lsp configuration is managed by nvim-jdtls
+            return true
+          end,
         },
       })
     end,
@@ -73,6 +77,9 @@ return {
       handlers = {
         ["rust_analyzer"] = function()
           -- lsp configuration is managed by rustaceanvim
+        end,
+        ["jdtls"] = function()
+          -- lsp configuration is managed by nvim-jdtls
         end,
       },
     },

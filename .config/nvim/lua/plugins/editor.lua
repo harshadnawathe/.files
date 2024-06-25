@@ -1,16 +1,6 @@
 local Util = require("lazyvim.util")
 
 return {
-  {
-    "stevearc/aerial.nvim",
-    keys = {
-      {
-        "<leader>cS",
-        "<cmd>AerialToggle!<cr>",
-        desc = "Document symbols view",
-      },
-    },
-  },
   { "max397574/better-escape.nvim", event = "InsertCharPre", opts = { timeout = 300 } },
   {
     "nvim-neo-tree/neo-tree.nvim",
@@ -47,7 +37,6 @@ return {
     "nvim-telescope/telescope.nvim",
     dependencies = {
       "nvim-telescope/telescope-file-browser.nvim",
-      "stevearc/aerial.nvim",
     },
     keys = {
       { "<leader>/", false },
@@ -68,11 +57,6 @@ return {
         desc = "Find in buffer",
       },
       {
-        "<leader>cs",
-        "<cmd>Telescope aerial<cr>",
-        desc = "Search code symbols",
-      },
-      {
         "<leader>;",
         "<cmd>Telescope resume<cr>",
         desc = "Resume last Telescope search",
@@ -80,7 +64,6 @@ return {
     },
     opts = function(_, opts)
       require("telescope").load_extension("file_browser")
-      require("telescope").load_extension("aerial")
 
       local actions = require("telescope.actions")
       return vim.tbl_deep_extend("force", opts, {

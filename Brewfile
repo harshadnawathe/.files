@@ -107,6 +107,7 @@ brew "stow"
 brew "neovim"
 # cask "neovide"
 # brew "neovim", args: ["HEAD"]
+brew "yazi"
 
 #brew "helix", args: ["ignore-dependencies"]
 #language-servers for helix

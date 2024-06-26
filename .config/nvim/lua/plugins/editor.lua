@@ -108,6 +108,8 @@ return {
       },
       keymaps = {
         ["<ESC>"] = "actions.close",
+        ["<C-s>"] = false,
+        ["<C-h>"] = false,
       },
     },
     dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -115,14 +117,14 @@ return {
       {
         "<leader>fe",
         function()
-          require("oil").open_float(Util.root())
+          require("oil").toggle_float(Util.root())
         end,
         desc = "Explorer (root dir)",
       },
       {
         "<leader>fE",
         function()
-          require("oil").open_float()
+          require("oil").toggle_float()
         end,
         desc = "Explorer (cwd)",
       },

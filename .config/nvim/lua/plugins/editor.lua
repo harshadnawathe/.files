@@ -35,22 +35,9 @@ return {
   },
   {
     "nvim-telescope/telescope.nvim",
-    dependencies = {
-      "nvim-telescope/telescope-file-browser.nvim",
-    },
     keys = {
       { "<leader>/", false },
       { "<leader>?", ":Telescope live_grep<cr>", desc = "Grep (root dir)", silent = true },
-      {
-        "<leader>sf",
-        "<cmd>Telescope file_browser<cr>",
-        desc = "Explorer Telescope (root dir)",
-      },
-      {
-        "<leader>sF",
-        "<cmd>Telescope file_browser path=%:p:h select_buffer=true<cr>",
-        desc = "Explorer Telescope (cwd)",
-      },
       {
         "<leader>s/",
         "<cmd>Telescope current_buffer_fuzzy_find<cr>",
@@ -63,8 +50,6 @@ return {
       },
     },
     opts = function(_, opts)
-      require("telescope").load_extension("file_browser")
-
       local actions = require("telescope.actions")
       return vim.tbl_deep_extend("force", opts, {
         defaults = {

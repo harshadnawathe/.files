@@ -72,39 +72,4 @@ return {
       }
     end,
   },
-  {
-    "akinsho/toggleterm.nvim",
-    version = "*",
-    opts = {
-      size = 10,
-      open_mapping = [[<F7>]],
-      shading_factor = 2,
-      direction = "float",
-      float_opts = {
-        border = "curved",
-        highlights = { border = "Normal", background = "Normal" },
-      },
-    },
-    keys = {
-      {
-        "<leader>$",
-        desc = "+terminal [F7]",
-      },
-      {
-        "<leader>$f",
-        "<cmd>ToggleTerm direction=float<cr>",
-        desc = "ToggleTerm float",
-      },
-      {
-        "<leader>$h",
-        "<cmd>ToggleTerm size=10 direction=horizontal<cr>",
-        desc = "ToggleTerm horizontal split",
-      },
-      {
-        "<leader>$v",
-        "<cmd>ToggleTerm size=80 direction=vertical<cr>",
-        desc = "ToggleTerm vertical split",
-      },
-    },
-  },
 }

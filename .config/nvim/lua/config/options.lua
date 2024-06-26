@@ -3,6 +3,10 @@
 
 vim.g.mapleader = " "
 vim.g.autoformat = false
+vim.g.loaded_netrwPlugin = 0
+vim.g.trouble_lualine = true
+
+vim.o.shell = "/opt/homebrew/bin/fish"
 
 vim.opt.colorcolumn = "120"
 vim.opt.cursorcolumn = false
@@ -15,6 +19,3 @@ vim.opt.wrap = false
 vim.cmd([[let &t_Cs = "\e[4:3m"]])
 vim.cmd([[let &t_Ce = "\e[4:0m"]])
 
-vim.g.loaded_netrwPlugin = 0
-
-vim.g.trouble_lualine = true

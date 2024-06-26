@@ -1,7 +1,6 @@
 local Util = require("lazyvim.util")
 
 return {
-  { "max397574/better-escape.nvim", event = "InsertCharPre", opts = { timeout = 300 } },
   {
     "nvim-neo-tree/neo-tree.nvim",
     opts = function(_, opts)

@@ -116,7 +116,6 @@ return {
           vim.keymap.set("n", "<leader>tg", function()
             require("jdtls.tests").generate()
           end, { desc = "Generate tests" })
-          vim.keymap.set("n", "<leader>ts", "gS", { desc = "Goto Subjects", remap = true })
         end,
       })
     end,
@@ -143,13 +142,12 @@ return {
           if client and client.name == "gopls" then
             local wk = require("which-key")
             wk.register({
-              ["gS"] = { ":GoAlt<CR>", "Goto Subjects" },
               ["<leader>t"] = {
                 name = "+test",
                 t = { ":GoTestFile -v<CR>", "Run All Test (Go)" },
                 r = { ":GoTestFunc<CR>", "Run Nearest Test (Go)" },
                 T = { ":GoTestFunc -s<CR>", "Run Test (Go)" },
-                s = { "gS", "Goto Subjects (Go)", remap = true },
+                s = { ":GoAlt<CR>", "Goto Subjects (Go)" },
                 g = { ":GoAddTest<CR>", "Generate Test (Go)" },
               },
               ["<leader>cg"] = {

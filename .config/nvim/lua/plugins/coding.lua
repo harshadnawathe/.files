@@ -6,25 +6,6 @@ return {
     end,
   },
   {
-    "echasnovski/mini.comment",
-    keys = {
-      {
-        "<leader>/",
-        "gcc",
-        mode = "n",
-        desc = "Comment line",
-        remap = true,
-      },
-      {
-        "<leader>/",
-        "gc",
-        mode = "x",
-        desc = "Comment selection",
-        remap = true,
-      },
-    },
-  },
-  {
     "Wansmer/treesj",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     cmd = { "TSJToggle", "TSJSplit", "TSJJoin" },

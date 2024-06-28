@@ -113,9 +113,23 @@ return {
           vim.fn.expand("$MASON/share/jdtls/plugins/org.eclipse.equinox.launcher.jar"),
         },
         on_attach = function()
-          vim.keymap.set("n", "<leader>tg", function()
-            require("jdtls.tests").generate()
-          end, { desc = "Generate tests" })
+          local wk = require("which-key")
+          wk.register({
+            ["<leader>t"] = {
+              g = {
+                function()
+                  require("jdtls.tests").generate()
+                end,
+                "Generate tests",
+              },
+              s = {
+                function()
+                  require("jdtls.tests").goto_subjects()
+                end,
+                "Goto subjects",
+              },
+            },
+          })
         end,
       })
     end,

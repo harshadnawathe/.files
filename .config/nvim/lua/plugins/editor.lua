@@ -32,17 +32,17 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     keys = {
-      { "<leader>/", false },
-      { "<leader>?", ":Telescope live_grep<cr>", desc = "Grep (root dir)", silent = true },
       {
-        "<leader>s/",
-        "<cmd>Telescope current_buffer_fuzzy_find<cr>",
-        desc = "Find in buffer",
+        "<leader>?",
+        "<leader>sG",
+        desc = "Grep (cwd)",
+        remap = true,
       },
       {
         "<leader>;",
-        "<cmd>Telescope resume<cr>",
+        "<leader>sR",
         desc = "Resume last Telescope search",
+        remap = true,
       },
     },
     opts = function(_, opts)
@@ -150,26 +150,26 @@ return {
     "folke/edgy.nvim",
     opts = {
       wo = {
-         winfixwidth =false,
+        winfixwidth = false,
       },
       keys = {
-              -- increase width
-      ["<A-Right>"] = function(win)
-        win:resize("width", 2)
-      end,
-      -- decrease width
-      ["<A-Left>"] = function(win)
-        win:resize("width", -2)
-      end,
-      -- increase height
-      ["<A-Up>"] = function(win)
-        win:resize("height", 2)
-      end,
-      -- decrease height
-      ["<A-Down>"] = function(win)
-        win:resize("height", -2)
-      end,
-      }
-    }
+        -- increase width
+        ["<A-Right>"] = function(win)
+          win:resize("width", 2)
+        end,
+        -- decrease width
+        ["<A-Left>"] = function(win)
+          win:resize("width", -2)
+        end,
+        -- increase height
+        ["<A-Up>"] = function(win)
+          win:resize("height", 2)
+        end,
+        -- decrease height
+        ["<A-Down>"] = function(win)
+          win:resize("height", -2)
+        end,
+      },
+    },
   },
 }

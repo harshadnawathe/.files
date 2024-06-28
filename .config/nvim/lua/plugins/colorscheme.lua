@@ -16,22 +16,22 @@ return {
     end,
     keys = {
       {
-        "<leader>uB", "<Cmd>TransparentToggle<CR>", desc = "Toggle background transparency",
-      }
+        "<leader>uB",
+        "<Cmd>TransparentToggle<CR>",
+        desc = "Toggle background transparency",
+      },
     },
   },
   {
     "catppuccin/nvim",
     name = "catppuccin",
-    opts = function(_, opts)
-      return vim.tbl_deep_extend("force", opts, {
-        dim_inactive = {
-          enabled = true, -- dims the background color of inactive window
-          shade = "light",
-          percentage = 0.9, -- percentage of the shade to apply to the inactive window
-        },
-      })
-    end,
+    opts = {
+      dim_inactive = {
+        enabled = true, -- dims the background color of inactive window
+        shade = "light",
+        percentage = 0.9, -- percentage of the shade to apply to the inactive window
+      },
+    },
   },
   {
     "LazyVim/LazyVim",

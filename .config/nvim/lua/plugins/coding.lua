@@ -101,12 +101,22 @@ return {
     end,
   },
   {
-    "hrsh7th/nvim-cmp",
+    "hrsh7th/cmp-emoji",
     dependencies = {
-      "hrsh7th/cmp-emoji",
+      "hrsh7th/nvim-cmp",
+      opts = function(_, opts)
+        if not opts.sources then
+          opts.sources = {}
+        end
+        table.insert(opts.sources, { name = "emoji", priority = 700 })
+      end,
     },
+  },
+  {
+    "hrsh7th/nvim-cmp",
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
+      -- configuration for super-tab
       local has_words_before = function()
         unpack = unpack or table.unpack
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))

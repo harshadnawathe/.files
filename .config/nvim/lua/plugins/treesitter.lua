@@ -87,12 +87,8 @@ return {
   keys = function()
     local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
     return {
-      { ";", ts_repeat_move.repeat_last_move, mode = { "n", "x", "o" } },
-      { ",", ts_repeat_move.repeat_last_move_opposite, mode = { "n", "x", "o" } },
-      { "f", ts_repeat_move.builtin_f, mode = { "n", "x", "o" } },
-      { "F", ts_repeat_move.builtin_F, mode = { "n", "x", "o" } },
-      { "t", ts_repeat_move.builtin_t, mode = { "n", "x", "o" } },
-      { "T", ts_repeat_move.builtin_T, mode = { "n", "x", "o" } },
+      { ";", ts_repeat_move.repeat_last_move_next, mode = { "n", "x", "o" } },
+      { ",", ts_repeat_move.repeat_last_move_previous, mode = { "n", "x", "o" } },
     }
   end,
 }

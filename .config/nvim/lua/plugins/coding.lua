@@ -60,36 +60,51 @@ return {
     end,
   },
   {
+    "hrsh7th/cmp-cmdline",
+    keys = { ":", "/", "?" },
+    dependencies = {
+      "hrsh7th/nvim-cmp",
+      "hrsh7th/cmp-buffer",
+    },
+    opts = function()
+      local cmp = require("cmp")
+      return {
+        {
+          type = "/",
+          mapping = cmp.mapping.preset.cmdline(),
+          sources = {
+            { name = "buffer" },
+          },
+        },
+        {
+          type = ":",
+          mapping = cmp.mapping.preset.cmdline(),
+          sources = cmp.config.sources({
+            { name = "path" },
+          }, {
+            {
+              name = "cmdline",
+              option = {
+                ignore_cmds = { "Man", "!" },
+              },
+            },
+          }),
+        },
+      }
+    end,
+    config = function(_, opts)
+      -- register each opt on cmp
+      local cmp = require("cmp")
+      vim.tbl_map(function(opt)
+        cmp.setup.cmdline(opt.type, opt)
+      end, opts)
+    end,
+  },
+  {
     "hrsh7th/nvim-cmp",
     dependencies = {
       "hrsh7th/cmp-emoji",
-      "hrsh7th/cmp-cmdline",
-      "hrsh7th/cmp-buffer",
     },
-    init = function()
-      local cmp = require("cmp")
-
-      cmp.setup.cmdline("/", {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = {
-          { name = "buffer" },
-        },
-      })
-
-      cmp.setup.cmdline(":", {
-        mapping = cmp.mapping.preset.cmdline(),
-        sources = cmp.config.sources({
-          { name = "path" },
-        }, {
-          {
-            name = "cmdline",
-            option = {
-              ignore_cmds = { "Man", "!" },
-            },
-          },
-        }),
-      })
-    end,
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
       local has_words_before = function()

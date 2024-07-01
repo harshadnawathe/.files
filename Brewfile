@@ -31,6 +31,13 @@ brew "mas"
 
 # brew "zsh"
 brew "fish"
+is_fish_installed = !`which fish`.chomp.empty?
+if is_fish_installed 
+  File.open("#{Dir.home}/.config/fish/conf.d/brew-shellenv.fish", mode:'w') do |f|
+    f.write(`brew shellenv fish`)
+  end
+end
+
 brew "jq"
 brew "ripgrep"
 # brew "git"

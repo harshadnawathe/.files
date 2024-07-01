@@ -125,6 +125,15 @@ brew "gifski"
 # brew "asdf" #replaced with rtx
 # brew "rtx"
 brew "mise"
+is_mise_installed = !`which mise`.chomp.empty?
+if is_fish_installed && is_mise_installed 
+  File.open("#{Dir.home}/.config/fish/conf.d/mise-activate.fish", mode:'w') do |f|
+    f.write("if status is-interactive\n\n")
+    f.write(`mise activate fish`)
+    f.write("\n\nend")
+  end
+end
+
 brew "gpg"
 brew "gawk"
 brew "gnu-sed" # required by nvim plugin spectre

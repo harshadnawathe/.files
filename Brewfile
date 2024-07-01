@@ -43,6 +43,15 @@ brew "ripgrep"
 # brew "git"
 brew "pre-commit"
 brew "starship"
+is_starship_installed = !`which starship`.chomp.empty?
+if is_fish_installed && is_starship_installed 
+  File.open("#{Dir.home}/.config/fish/conf.d/starship-activate.fish", mode:'w') do |f|
+    f.write("if status is-interactive\n\n")
+    f.write(`starship init fish --print-full-init`)
+    f.write("\n\nend")
+  end
+end
+
 # brew "autojump"  # replaces with zoxide
 brew "zoxide"
 # brew "thefuck"

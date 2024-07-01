@@ -63,7 +63,16 @@ if is_fish_installed && is_zoxide_installed
   end
 end
 
-# brew "thefuck"
+brew "thefuck"
+is_thefuck_installed = !`which thefuck`.chomp.empty?
+if is_fish_installed && is_thefuck_installed
+  File.open("#{Dir.home}/.config/fish/conf.d/thefuck-alias.fish", mode:'w') do |f|
+    f.write("if status is-interactive\n\n")
+    f.write(`TF_SHELL=fish thefuck --alias`)
+    f.write("\n\nend")
+  end
+end
+
 brew "lsd"
 brew "bat"
 brew "git-delta"

@@ -73,6 +73,8 @@ return {
         "taplo",
         --yaml
         "yamlls",
+        --cpp
+        "clangd",
       },
       handlers = {
         ["rust_analyzer"] = function()

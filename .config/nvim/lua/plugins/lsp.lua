@@ -40,6 +40,7 @@ return {
         },
         ensure_installed = {
           "json-lsp",
+          "markdownlint-cli2",
         },
       })
     end,

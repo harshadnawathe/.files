@@ -73,6 +73,8 @@ return {
         "taplo",
         --yaml
         "yamlls",
+        --xml
+        "lemminx",
         --cpp
         "clangd",
       },

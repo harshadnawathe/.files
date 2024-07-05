@@ -209,6 +209,7 @@ cask "postman"
 cask "raycast"
 # cask "openoffice"
 cask "libreoffice"
+cask "drawio"
 
 cask "font-symbols-only-nerd-font"
 cask "font-fira-code"

@@ -14,9 +14,7 @@ return {
     "b0o/incline.nvim",
     event = "BufReadPre",
     priority = 1200,
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
-    },
+    dependencies = { "echasnovski/mini.icons" },
     config = function()
       require("incline").setup({
         highlight = {
@@ -37,12 +35,13 @@ return {
         },
         render = function(props)
           local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
+          local icon, color = require("mini.icons").get("file", filename)
+
           if vim.bo[props.buf].modified then
             filename = "[+] " .. filename
           end
 
-          local icon, color = require("nvim-web-devicons").get_icon_color(filename)
-          return { { icon, guifg = color }, { " " }, { filename } }
+          return { { icon, group = color }, { " " }, { filename } }
         end,
       })
     end,

@@ -88,6 +88,7 @@ return {
   },
   {
     "stevearc/oil.nvim",
+    dependencies = { "echasnovski/mini.icons" },
     opts = {
       default_file_explorer = false,
       view_options = {
@@ -108,7 +109,6 @@ return {
         ["<C-h>"] = false,
       },
     },
-    dependencies = { "nvim-tree/nvim-web-devicons" },
     keys = {
       {
         "<leader>fe",

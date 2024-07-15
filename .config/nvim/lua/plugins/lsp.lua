@@ -7,8 +7,8 @@ return {
       keys[#keys + 1] = { "<leader>cli", "<cmd>LspInfo<cr>", desc = "Lsp Info" }
 
       local wk = require("which-key")
-      wk.register({
-        ["<leader>cl"] = { name = "lsp" },
+      wk.add({
+        { "<leader>cl", group = "lsp" },
       })
     end,
     opts = function(_, opts)
@@ -119,20 +119,20 @@ return {
         },
         on_attach = function()
           local wk = require("which-key")
-          wk.register({
-            ["<leader>t"] = {
-              g = {
-                function()
-                  require("jdtls.tests").generate()
-                end,
-                "Generate tests",
-              },
-              s = {
-                function()
-                  require("jdtls.tests").goto_subjects()
-                end,
-                "Goto subjects",
-              },
+          wk.add({
+            {
+              "<leader>tg",
+              function()
+                require("jdtls.tests").generate()
+              end,
+              desc = "Generate tests (JDTLS)",
+            },
+            {
+              "<leader>ts",
+              function()
+                require("jdtls.tests").goto_subjects()
+              end,
+              desc = "Goto subjects",
             },
           })
         end,
@@ -160,32 +160,29 @@ return {
           local client = vim.lsp.get_client_by_id(args.data.client_id)
           if client and client.name == "gopls" then
             local wk = require("which-key")
-            wk.register({
-              ["<leader>t"] = {
-                name = "+test",
-                t = { ":GoTestFile -v<CR>", "Run All Test (Go)" },
-                r = { ":GoTestFunc<CR>", "Run Nearest Test (Go)" },
-                T = { ":GoTestFunc -s<CR>", "Run Test (Go)" },
-                s = { ":GoAlt<CR>", "Goto Subjects (Go)" },
-                g = { ":GoAddTest<CR>", "Generate Test (Go)" },
+            wk.add({
+              { "<leader>cg", group = "generate" },
+              { "<leader>cgc", ":GoFillSwitch<CR>", desc = "Fill switch (Go)" },
+              { "<leader>cgd", ":GoCmt<CR>", desc = "Documentation comment (Go)" },
+              { "<leader>cge", ":GoIfErr<CR>", desc = "If Err (Go)" },
+              {
+                "<leader>cgi",
+                function()
+                  vim.ui.input({ prompt = "Interface to implement: " }, function(input)
+                    vim.cmd(":GoImpl " .. input)
+                  end)
+                end,
+                desc = "Implment Interface (Go)",
               },
-              ["<leader>cg"] = {
-                name = "+generate",
-                s = { ":GoFillStruct<CR>", "Auto fill struct Value (Go)" },
-                e = { ":GoIfErr<CR>", "If Err (Go)" },
-                r = { ":GoGenReturn<CR>", "Return Value (Go)" },
-                c = { ":GoFillSwitch<CR>", "Fill switch (Go)" },
-                d = { ":GoCmt<CR>", "Documentation comment (Go)" },
-                p = { ":GoFixPlurals<CR>", "Fix Plurals (Go)" },
-                i = {
-                  function()
-                    vim.ui.input({ prompt = "Interface to implement: " }, function(input)
-                      vim.cmd(":GoImpl " .. input)
-                    end)
-                  end,
-                  "Implment Interface (Go)",
-                },
-              },
+              { "<leader>cgp", ":GoFixPlurals<CR>", desc = "Fix Plurals (Go)" },
+              { "<leader>cgr", ":GoGenReturn<CR>", desc = "Return Value (Go)" },
+              { "<leader>cgs", ":GoFillStruct<CR>", desc = "Auto fill struct Value (Go)" },
+              { "<leader>t", group = "test" },
+              { "<leader>tT", ":GoTestFunc -s<CR>", desc = "Run Test (Go)" },
+              { "<leader>tg", ":GoAddTest<CR>", desc = "Generate Test (Go)" },
+              { "<leader>tr", ":GoTestFunc<CR>", desc = "Run Nearest Test (Go)" },
+              { "<leader>ts", ":GoAlt<CR>", desc = "Goto Subjects (Go)" },
+              { "<leader>tt", ":GoTestFile -v<CR>", desc = "Run All Test (Go)" },
             })
           end
         end,

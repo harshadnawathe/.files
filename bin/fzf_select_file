@@ -84,6 +84,6 @@ fzf \
 	--bind ctrl-d:preview-page-down \
   --bind alt-p:toggle-preview \
 	--bind 'focus:transform-preview-label:echo [ {1} ]' \
-	--bind "start:unbind(change,ctrl-f,alt-w)"
+	--bind "start:unbind(change,ctrl-f,alt-w)" | awk -F':' '{ print $1 }'
 
 rm /tmp/rg-fzf-* 2>/dev/null

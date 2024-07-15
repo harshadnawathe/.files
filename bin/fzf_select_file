@@ -72,8 +72,8 @@ fzf \
 	--prompt "$SEARCH_FILE_PROMPT" \
 	--header="$SEARCH_FILE_HEADER" \
 	--border-label "$SEARCH_FILE_BORDER_LABEL" \
-  --preview 'bat --style=plain --color=always {1}' \
-  --preview-window 'right,hidden' \
+	--preview 'bat --style=plain --color=always {1}' \
+	--preview-window 'right,hidden' \
 	--bind "$SERACH_BY_TEXT_BIND" \
 	--bind "$SEARCH_BY_NAME_BIND" \
 	--bind "$SEARCH_BY_TEXT_CHANGE_BIND" \
@@ -82,7 +82,7 @@ fzf \
 	--bind ctrl-e:preview-down \
 	--bind ctrl-u:preview-page-up \
 	--bind ctrl-d:preview-page-down \
-  --bind alt-p:toggle-preview \
+	--bind alt-p:toggle-preview \
 	--bind 'focus:transform-preview-label:echo [ {1} ]' \
 	--bind "start:unbind(change,ctrl-f,alt-w)" | awk -F':' '{ print $1 }'
 

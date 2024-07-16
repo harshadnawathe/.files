@@ -3,7 +3,7 @@
 
 INITIAL_QUERY="${*:-}"
 
-export FZF_DEFAULT_COMMAND='fd --ignore --hidden --type=f --color=always'
+export FZF_DEFAULT_COMMAND='fd --hidden --type=f --color=always'
 
 SEARCH_FILE_PROMPT="󰱽 󰁕 "
 SEARCH_FILE_BORDER_LABEL="[ Search files by name ]"

@@ -172,4 +172,100 @@ return {
       },
     },
   },
+  {
+    "ThePrimeagen/harpoon",
+    branch = "harpoon2",
+    specs = {
+      {
+        "catppuccin",
+        optional = true,
+        opts = {
+          integrations = {
+            harpoon = true,
+          },
+        },
+      },
+    },
+    opts = {
+      menu = {
+        width = vim.api.nvim_win_get_width(0) - 4,
+      },
+      settings = {
+        save_on_toggle = true,
+      },
+    },
+    config = function(_, opts)
+      local harpoon = require("harpoon")
+      harpoon:setup(opts)
+
+      local extensions = require("harpoon.extensions")
+      harpoon:extend(extensions.builtins.navigate_with_number())
+    end,
+    keys = function()
+      local harpoon_nav_opts = {
+        ui_nav_wrap = true,
+      }
+
+      local keys = {
+        {
+          "<leader>h", desc = "+Harpoon"
+        },
+        {
+          "<leader>ha",
+          function()
+            require("harpoon"):list():add()
+          end,
+          desc = "Harpoon File",
+        },
+        {
+          "<leader>\\",
+          function()
+            require("harpoon"):list():add()
+          end,
+          desc = "Harpoon File",
+        },
+        {
+          "<leader>hr",
+          function()
+            require("harpoon"):list():remove()
+          end,
+          desc = "Harpoon Remove File",
+        },
+        {
+          "<leader>hh",
+          function()
+            local harpoon = require("harpoon")
+            harpoon.ui:toggle_quick_menu(harpoon:list())
+          end,
+          desc = "Harpoon Quick Menu",
+        },
+        {
+          "<leader>hp",
+          function()
+            require("harpoon"):list():prev(harpoon_nav_opts)
+          end,
+          desc = "Harpoon Previous File",
+        },
+        {
+          "<leader>hn",
+          function()
+            require("harpoon"):list():next(harpoon_nav_opts)
+          end,
+          desc = "Harpoon Next File",
+        },
+      }
+
+      for i = 1, 5 do
+        table.insert(keys, {
+          "<leader>h" .. i,
+          function()
+            require("harpoon"):list():select(i)
+          end,
+          desc = "Harpoon to File " .. i,
+        })
+      end
+
+      return keys
+    end,
+  },
 }

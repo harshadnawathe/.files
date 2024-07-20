@@ -106,6 +106,8 @@ brew "docker-compose"
 # brew "terraform"
 # brew "spring-boot"
 
+brew "k9s"
+
 # brew "go" #using asdf-vm
 # brew "node@16" #using asdf-vm
 # brew "node@14" #using asdf-vm

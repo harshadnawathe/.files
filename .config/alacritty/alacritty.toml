@@ -1,7 +1,7 @@
 import = ["/Users/harshadn/.config/alacritty/themes/themes/catppuccin_mocha.toml"]
 
 [font]
-size = 16
+size = 14
 
 [font.normal]
 family = "FiraCode Nerd Font Mono"
@@ -218,8 +218,8 @@ key = "M"
 mods = "Command|Shift"
 
 [shell]
-args = ["new-session", "-A", "-D", "-s", "__"]
-program = "/opt/homebrew/bin/tmux"
+args = ["attach", "--create", "__"]
+program = "/opt/homebrew/bin/zellij"
 
 [window]
 decorations = "buttonless"

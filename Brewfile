@@ -131,7 +131,7 @@ brew "fpp"       #for tmux plugin
 # brew "urlview"   #for tmux urlview
 # brew "extract_url"
 brew "gifski"
-# brew "zellij"  # not able to replicate the current tmux workflow of session manangement
+brew "zellij"  # not able to replicate the current tmux workflow of session manangement
 
 # brew "asdf" #replaced with rtx
 # brew "rtx"
@@ -186,7 +186,7 @@ cask "whatsapp"
 # cask "xmind"
 # cask "kitty"
 # cask "iterm2"
-# cask "alacritty"
+cask "alacritty"
 cask "wezterm"
 # cask "warp"
 # cask "adobe-acrobat-reader"
@@ -219,7 +219,7 @@ cask "font-jetbrains-mono"
 cask "font-monaspace"
 
 # cask "font-hack-nerd-font"
-# cask "font-fira-code-nerd-font"
+cask "font-fira-code-nerd-font"
 # cask "font-jetbrains-mono-nerd-font"
 # cask "font-monaspace-nerd-font"
 # cask "font-meslo-lg-nerd-font"

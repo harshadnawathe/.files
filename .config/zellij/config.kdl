@@ -1,0 +1,4 @@
+default_mode "locked"
+default_shell "/opt/homebrew/bin/fish"
+scrollback_editor "/opt/homebrew/bin/nvim"
+theme "catppuccin-mocha"

@@ -1,0 +1,22 @@
+{
+  "Package": {
+    "prefix": "pkg",
+    "body": "package $1;$0",
+    "description": "Package declaration statement"
+  },
+  "Import": {
+    "prefix": "imp",
+    "body": "import $1;$0",
+    "description": "Import statement"
+  },
+  "Return": {
+    "prefix": "ret",
+    "body": "return ${1:ReturnValue};$0",
+    "description": "Return statement"
+  },
+  "LambdaFunction": {
+    "prefix": "afn",
+    "body": "($1) -> {$2}$0",
+    "description": "Lambda function"
+  }
+}

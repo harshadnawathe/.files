@@ -44,41 +44,6 @@ return {
     end,
   },
   {
-    "L3MON4D3/LuaSnip",
-    keys = function()
-      return {
-        {
-          "<C-L>",
-          function()
-            local ls = require("luasnip")
-            if ls.choice_active() then
-              ls.change_choice(1)
-            end
-          end,
-          mode = { "i", "s" },
-          desc = "LuaSnip: select next choice",
-        },
-        {
-          "<C-H>",
-          function()
-            local ls = require("luasnip")
-            if ls.choice_active() then
-              ls.change_choice(-1)
-            end
-          end,
-          mode = { "i", "s" },
-          desc = "LuaSnip: select previous choice",
-        },
-      }
-    end,
-    opts = function(_, _)
-      -- register custom snippets
-      local nvim_config_path = vim.fn.stdpath("config") .. "/snippets"
-      require("luasnip.loaders.from_vscode").lazy_load({ paths = { nvim_config_path .. "/vscode/" } })
-      require("luasnip.loaders.from_lua").lazy_load({ paths = { nvim_config_path .. "/lua/" } })
-    end,
-  },
-  {
     "hrsh7th/cmp-cmdline",
     keys = { ":", "/", "?" },
     dependencies = {

@@ -119,16 +119,4 @@ return {
       end, opts)
     end,
   },
-  {
-    "hrsh7th/cmp-emoji",
-    dependencies = {
-      "hrsh7th/nvim-cmp",
-      opts = function(_, opts)
-        if not opts.sources then
-          opts.sources = {}
-        end
-        table.insert(opts.sources, { name = "emoji", priority = 700 })
-      end,
-    },
-  },
 }

@@ -4,19 +4,7 @@ local config = wezterm.config_builder()
 
 config.color_scheme = "Catppuccin Mocha"
 
-config.background = {
-	{
-		source = {
-			File = {
-				path = os.getenv("HOME")
-					.. "/.config/wezterm/wallpapers/darth-vader-red-lightsaber-star-wars-moewalls-com.gif",
-			},
-		},
-		hsb = { brightness = 0.2 },
-		horizontal_align = "Center",
-		vertical_align = "Middle",
-	},
-}
+config.background = require("utils.backgrounds")["Batman-Logo-The-Dark-Knight"]
 
 config.font = wezterm.font_with_fallback({
 	{

@@ -2,7 +2,7 @@
 go = "1.22"
 node = "20.11.0"
 rust = "1.78.0"
-java = "17"
+java = "21"
 python = "3.10"
 gradle = "8.5"
 ruby = "3.2.2"

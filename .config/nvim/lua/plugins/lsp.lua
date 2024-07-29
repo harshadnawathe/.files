@@ -96,7 +96,7 @@ return {
       -- override jdtls command to work with projects using jdks older than 17
       return vim.tbl_deep_extend("force", opts, {
         cmd = {
-          vim.fn.expand("$HOME/.local/share/mise/installs/java/17/bin/java"),
+          vim.fn.expand("$HOME/.local/share/mise/installs/java/21/bin/java"),
           "-Declipse.application=org.eclipse.jdt.ls.core.id1",
           "-Dosgi.bundles.defaultStartLevel=4",
           "-Declipse.product=org.eclipse.jdt.ls.core.product",

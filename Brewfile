@@ -126,7 +126,17 @@ brew "k9s"
 # brew "mongodb/brew/mongodb-community"
 # brew "direnv"
 brew "tmux"
+
 brew "fzf"       #for tmux plugin
+is_fzf_installed = !`which fzf`.chomp.empty?
+if is_fish_installed && is_fzf_installed 
+  File.open("#{Dir.home}/.config/fish/conf.d/fzf-activate.fish", mode:'w') do |f|
+    f.write("status is-interactive; or exit 0\n\n")
+    f.write(`fzf --fish`)
+    f.write("\n\nbind --erase \cr")
+  end
+end
+
 brew "fpp"       #for tmux plugin
 # brew "urlview"   #for tmux urlview
 # brew "extract_url"

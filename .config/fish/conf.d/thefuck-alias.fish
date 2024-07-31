@@ -1,4 +1,4 @@
-if status is-interactive
+status is-interactive; or exit 0
 
 function fuck -d "Correct your previous console command"
   set -l fucked_up_command $history[1]
@@ -8,7 +8,4 @@ function fuck -d "Correct your previous console command"
     builtin history delete --exact --case-sensitive -- $fucked_up_command
     builtin history merge
   end
-end
-
-
 end

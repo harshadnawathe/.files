@@ -1,4 +1,4 @@
-if status is-interactive
+status is-interactive; or exit 0
 
 set -gx MISE_SHELL fish
 set -gx __MISE_ORIG_PATH $PATH
@@ -68,7 +68,4 @@ function fish_command_not_found
     else
         __fish_default_command_not_found_handler $argv
     end
-end
-
-
 end

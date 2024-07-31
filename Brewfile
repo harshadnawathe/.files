@@ -46,9 +46,8 @@ brew "starship"
 is_starship_installed = !`which starship`.chomp.empty?
 if is_fish_installed && is_starship_installed 
   File.open("#{Dir.home}/.config/fish/conf.d/starship-activate.fish", mode:'w') do |f|
-    f.write("if status is-interactive\n\n")
+    f.write("status is-interactive; or exit 0\n\n")
     f.write(`starship init fish --print-full-init`)
-    f.write("\n\nend")
   end
 end
 
@@ -57,9 +56,8 @@ brew "zoxide"
 is_zoxide_installed = !`which zoxide`.chomp.empty?
 if is_fish_installed && is_zoxide_installed 
   File.open("#{Dir.home}/.config/fish/conf.d/zoxide-activate.fish", mode:'w') do |f|
-    f.write("if status is-interactive\n\n")
+    f.write("status is-interactive; or exit 0\n\n")
     f.write(`zoxide init fish`)
-    f.write("\n\nend")
   end
 end
 
@@ -67,9 +65,8 @@ brew "thefuck"
 is_thefuck_installed = !`which thefuck`.chomp.empty?
 if is_fish_installed && is_thefuck_installed
   File.open("#{Dir.home}/.config/fish/conf.d/thefuck-alias.fish", mode:'w') do |f|
-    f.write("if status is-interactive\n\n")
+    f.write("status is-interactive; or exit 0\n\n")
     f.write(`TF_SHELL=fish thefuck --alias`)
-    f.write("\n\nend")
   end
 end
 
@@ -149,9 +146,8 @@ brew "mise"
 is_mise_installed = !`which mise`.chomp.empty?
 if is_fish_installed && is_mise_installed 
   File.open("#{Dir.home}/.config/fish/conf.d/mise-activate.fish", mode:'w') do |f|
-    f.write("if status is-interactive\n\n")
+    f.write("status is-interactive; or exit 0\n\n")
     f.write(`mise activate fish`)
-    f.write("\n\nend")
   end
 end
 

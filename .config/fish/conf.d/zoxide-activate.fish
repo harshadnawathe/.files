@@ -1,4 +1,4 @@
-if status is-interactive
+status is-interactive; or exit 0
 
 # =============================================================================
 #
@@ -105,6 +105,3 @@ alias zi=__zoxide_zi
 # ~/.config/fish/config.fish):
 #
 #   zoxide init fish | source
-
-
-end

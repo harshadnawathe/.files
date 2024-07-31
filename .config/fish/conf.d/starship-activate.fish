@@ -1,4 +1,4 @@
-if status is-interactive
+status is-interactive; or exit 0
 
 function fish_prompt
     switch "$fish_key_bindings"
@@ -89,6 +89,3 @@ end
 # Set up the session key that will be used to store logs
 # We don't use `random [min] [max]` because it is unavailable in older versions of fish shell
 set -gx STARSHIP_SESSION_KEY (string sub -s1 -l16 (random)(random)(random)(random)(random)0000000000000000)
-
-
-end

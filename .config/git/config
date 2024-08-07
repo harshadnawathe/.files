@@ -1,6 +1,9 @@
 [include]
   path = ~/.config/delta/themes/gitconfig.inc 
 
+[init]
+	defaultBranch = master
+
 [color]
 	status = always
 
@@ -252,6 +255,7 @@
 
   # show diffs with colored words (red word is deleted, green word is added)
   dcolor = diff --color-words	
+
 [http]
 	sslVerify = false
 

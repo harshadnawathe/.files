@@ -29,7 +29,7 @@
   # dependencies: fd & find commands 
   all = "!\
     p() { fd \
-      -H --no-ignore-vcs \
+      -H --no-ignore \
       -t d \
       --min-depth 1 --max-depth 3 \
       -x sh -c 'cd {//}; \

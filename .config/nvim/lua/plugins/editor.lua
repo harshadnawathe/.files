@@ -87,46 +87,6 @@ return {
     end,
   },
   {
-    "stevearc/oil.nvim",
-    dependencies = { "echasnovski/mini.icons" },
-    opts = {
-      default_file_explorer = false,
-      view_options = {
-        show_hidden = true,
-      },
-      float = {
-        override = function(conf)
-          conf.row = conf.row + math.floor(conf.height * 0.15)
-          conf.col = conf.col + math.floor(conf.width * 0.15)
-          conf.width = math.floor(conf.width * 0.7)
-          conf.height = math.floor(conf.height * 0.7)
-          return conf
-        end,
-      },
-      keymaps = {
-        ["<ESC>"] = "actions.close",
-        ["<C-s>"] = false,
-        ["<C-h>"] = false,
-      },
-    },
-    keys = {
-      {
-        "<leader>fe",
-        function()
-          require("oil").toggle_float(Util.root())
-        end,
-        desc = "Explorer (root dir)",
-      },
-      {
-        "<leader>fE",
-        function()
-          require("oil").toggle_float()
-        end,
-        desc = "Explorer (cwd)",
-      },
-    },
-  },
-  {
     "dinhhuy258/git.nvim",
     event = "BufReadPre",
     opts = {

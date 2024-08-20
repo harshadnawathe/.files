@@ -12,6 +12,7 @@ return {
       vim.list_extend(opts.sources, {
         -- xml/html
         nls.builtins.formatting.tidy,
+        nls.builtins.formatting.xmllint,
         nls.builtins.diagnostics.tidy,
       })
     end,

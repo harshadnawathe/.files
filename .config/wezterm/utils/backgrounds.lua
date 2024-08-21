@@ -1,3 +1,7 @@
+function expand_home(path) 
+  return string.gsub(path, "^~", os.getenv("HOME"))
+end
+
 return {
 	["Darth-Vader-Rogue-One"] = {
 		{
@@ -79,4 +83,23 @@ return {
       opacity = 0.2,
     }
 	},
+  ["Iron-Man"] = {
+    {
+      source = {
+        File = {
+          path = expand_home("~/.config/wezterm/wallpapers/iron-man-wallhaven-j8xlpy.jpg"),
+        }
+      },
+      horizontal_align = "Center",
+      vertical_align = "Middle",
+    },
+    {
+      source = {
+        Color = "black"
+      },
+      width = "100%",
+      height = "100%",
+      opacity = 0.6,
+    }
+  },
 }

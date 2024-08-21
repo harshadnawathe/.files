@@ -4,7 +4,7 @@ local config = wezterm.config_builder()
 
 config.color_scheme = "Catppuccin Mocha"
 
-config.background = require("utils.backgrounds")["Batman-Logo-The-Dark-Knight"]
+config.background = require("utils.backgrounds")["Iron-Man"]
 
 config.font = wezterm.font_with_fallback({
 	{

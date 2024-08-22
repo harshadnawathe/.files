@@ -14,6 +14,7 @@ return {
         "angular",
         -- kotlin support
         "kotlin",
+        "latex",
       }),
       textobjects = {
         select = {

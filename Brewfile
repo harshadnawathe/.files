@@ -40,6 +40,7 @@ end
 
 brew "jq"
 brew "ripgrep"
+brew "ast-grep"
 # brew "git"
 brew "pre-commit"
 brew "starship"
@@ -79,7 +80,7 @@ brew "fswatch"
 brew "entr"
 brew "coreutils"
 # brew "parallel"
-# brew "wget"
+brew "wget"
 # brew "dos2unix"
 
 brew "colima"

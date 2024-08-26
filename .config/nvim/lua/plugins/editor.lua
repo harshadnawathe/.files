@@ -11,20 +11,6 @@ return {
   },
   {
     "nvim-telescope/telescope.nvim",
-    keys = {
-      {
-        "<leader>?",
-        "<leader>sG",
-        desc = "Grep (cwd)",
-        remap = true,
-      },
-      {
-        "<leader>;",
-        "<leader>sR",
-        desc = "Resume last Telescope search",
-        remap = true,
-      },
-    },
     opts = function(_, opts)
       local actions = require("telescope.actions")
       return vim.tbl_deep_extend("force", opts, {

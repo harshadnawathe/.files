@@ -12,19 +12,7 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     opts = function(_, opts)
-      local actions = require("telescope.actions")
       return vim.tbl_deep_extend("force", opts, {
-        defaults = {
-          path_display = { "smart" },
-          mappings = {
-            i = {
-              ["<C-n>"] = actions.cycle_history_next,
-              ["<C-p>"] = actions.cycle_history_prev,
-              ["<C-j>"] = actions.move_selection_next,
-              ["<C-k>"] = actions.move_selection_previous,
-            },
-          },
-        },
         pickers = {
           find_files = {
             theme = "dropdown",

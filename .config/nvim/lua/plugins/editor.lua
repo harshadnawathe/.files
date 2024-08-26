@@ -14,6 +14,10 @@ return {
     opts = function(_, opts)
       return vim.tbl_deep_extend("force", opts, {
         pickers = {
+          yank_history = {
+            theme = "dropdown",
+            previewer = false,
+          },
           find_files = {
             theme = "dropdown",
             previewer = false,

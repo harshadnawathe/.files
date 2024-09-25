@@ -91,6 +91,7 @@ brew "colima"
 
 brew "docker"
 brew "docker-compose"
+brew "docker-buildx"
 
 # brew "libgit2"
 # brew "python-tabulate"

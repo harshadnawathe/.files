@@ -88,10 +88,10 @@ end
 # Commands for zoxide. Disable these using --no-cmd.
 #
 
-builtin abbr --erase z &>/dev/null
+abbr --erase z &>/dev/null
 alias z=__zoxide_z
 
-builtin abbr --erase zi &>/dev/null
+abbr --erase zi &>/dev/null
 alias zi=__zoxide_zi
 
 # =============================================================================

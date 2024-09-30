@@ -185,7 +185,7 @@ cask "notunes"
 # cask "amethyst"   #Tiling manager with layout
 cask "zoom"
 # cask "microsoft-remote-desktop"
-cask "microsoft-teams"
+# cask "microsoft-teams"
 cask "webex"
 cask "visual-studio-code"
 # cask "vscodium"

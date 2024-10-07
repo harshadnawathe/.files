@@ -86,7 +86,7 @@ brew "wget"
 brew "colima"
 # brew "minikube" # repalced with rancher
 # cask "rancher"   # replaced with colima
-
+brew "kind"
 brew "docker"
 brew "docker-compose"
 brew "docker-buildx"

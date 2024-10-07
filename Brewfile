@@ -84,8 +84,6 @@ brew "wget"
 # brew "dos2unix"
 
 brew "colima"
-# brew "lima"   #required by colima
-# brew "qemu"   #required by lima
 # brew "minikube" # repalced with rancher
 # cask "rancher"   # replaced with colima
 

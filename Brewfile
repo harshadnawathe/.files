@@ -39,6 +39,7 @@ if is_fish_installed
 end
 
 brew "jq"
+brew "yq"
 brew "ripgrep"
 brew "ast-grep"
 # brew "git"

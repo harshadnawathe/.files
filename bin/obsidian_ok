@@ -1,0 +1,78 @@
+#!/bin/bash
+# vi: ft=sh
+
+# Check if the file argument is provided
+if [ -z "$1" ]; then
+  echo "Error: No file provided."
+  exit 1
+fi
+
+# Check if yq is installed
+if ! command -v yq &> /dev/null; then
+  echo "Error: 'yq' command is not installed. Please install 'yq' to continue."
+  exit 1
+fi
+
+# The name of the markdown file you want to parse
+file="$1"
+
+# Get the directory of the file
+file_dir=$(dirname "$file")
+
+# Extract the YAML frontmatter using awk
+frontmatter=$(awk '
+BEGIN {
+    inside_frontmatter = 0;
+}
+
+/^---$/ {
+    if (inside_frontmatter == 0) {
+        inside_frontmatter = 1;
+        next;
+    } else if (inside_frontmatter == 1) {
+        inside_frontmatter = 0;
+        exit;
+    }
+}
+
+inside_frontmatter == 1 {
+    print;
+}
+' "$file")
+
+# If no frontmatter is found, exit
+if [ -z "$frontmatter" ]; then
+    echo "Error: No YAML frontmatter found in the file."
+    exit 1
+fi
+
+# Use yq to parse the YAML and extract the '.tags[0]' value
+tag=$(echo "$frontmatter" | yq eval '.tags[0]' -)
+
+# Check if the tag is empty
+if [ -z "$tag" ] || [ "$tag" == "null" ]; then
+  echo "Error: No tags found or '.tags[0]' path is empty."
+  exit 1
+fi
+
+# # Print the first tag
+# echo "The first tag is: $tag"
+
+# If the tag is "inbox", do not move the file
+if [ "$tag" == "inbox" ]; then
+  echo "The tag is 'inbox'. File will not be moved."
+  exit 0
+fi
+
+# Compute the target directory relative to the file location
+target_dir="$file_dir/../notes/$tag"
+
+# Create the target directory if it doesn't exist
+if [ ! -d "$target_dir" ]; then
+  mkdir -p "$target_dir"
+  # echo "Created directory: $target_dir"
+fi
+
+# Move the file to the target directory
+mv "$file" "$target_dir/"
+# echo "Moved file to: $target_dir/$(basename "$file")"

@@ -1,0 +1,4 @@
+#!/bin/bash
+# vi: ft=sh
+
+nvim -c "call feedkeys(' ot')"

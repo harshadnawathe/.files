@@ -245,6 +245,7 @@ vscode "gitlab.gitlab-workflow"
 vscode "ms-azuretools.vscode-docker"
 vscode "ms-vscode-remote.vscode-remote-extensionpack"
 vscode "humao.rest-client"
+vscode "iterative.vscode-dvc-pack"
 
 # For project work
 # brew "glab" 

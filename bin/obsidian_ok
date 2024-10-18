@@ -16,9 +16,6 @@ fi
 # The name of the markdown file you want to parse
 file="$1"
 
-# Get the directory of the file
-file_dir=$(dirname "$file")
-
 # Extract the YAML frontmatter using awk
 frontmatter=$(awk '
 BEGIN {
@@ -65,7 +62,7 @@ if [ "$tag" == "inbox" ]; then
 fi
 
 # Compute the target directory relative to the file location
-target_dir="$file_dir/../notes/$tag"
+target_dir="$HOME/Documents/smaranika/notes/$tag"
 
 # Create the target directory if it doesn't exist
 if [ ! -d "$target_dir" ]; then

@@ -104,6 +104,12 @@ return {
         desc = "obsidian remove note",
       },
       {
+        "<leader>oX",
+        "<ESC><CMD>'<,'>ObsidianExtractNote<CR>",
+        mode = "v",
+        desc = "obsidian extract note",
+      },
+      {
         "<leader>od",
         "<CMD>ObsidianDailies<CR>",
         desc = "obsidian dailies",

@@ -4,8 +4,8 @@ return {
     init = function()
       local wk = require("which-key")
       wk.add({
-        { "<leader>o", group = "obsidian" },
-        { "<leader>ol", group = "links" },
+        { "<leader>o", group = "obsidian", mode = { "n", "v" } },
+        { "<leader>ol", group = "links", mode = { "n", "v" } },
       })
     end,
     opts = {
@@ -132,6 +132,18 @@ return {
         "<leader>olb",
         "<CMD>ObsidianBacklinks<CR>",
         desc = "obsidian back links",
+      },
+      {
+        "<leader>oll",
+        "<CMD>ObsidianLink<CR>",
+        mode = "v",
+        desc = "obsidian link",
+      },
+      {
+        "<leader>oln",
+        "<CMD>ObsidianLinkNew<CR>",
+        mode = "v",
+        desc = "obsidian link new",
       },
     },
   },

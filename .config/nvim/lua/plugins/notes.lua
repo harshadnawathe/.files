@@ -5,6 +5,7 @@ return {
       local wk = require("which-key")
       wk.add({
         { "<leader>o", group = "obsidian" },
+        { "<leader>ol", group = "links" },
       })
     end,
     opts = {
@@ -121,6 +122,16 @@ return {
         "<leader>oT",
         "<CMD>ObsidianTomorrow<CR>",
         desc = "obsidian tomorrow",
+      },
+      {
+        "<leader>olf",
+        "<CMD>ObsidianLinks<CR>",
+        desc = "obsidian forward links",
+      },
+      {
+        "<leader>olb",
+        "<CMD>ObsidianBacklinks<CR>",
+        desc = "obsidian back links",
       },
     },
   },

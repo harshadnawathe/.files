@@ -1,5 +1,4 @@
 [tools]
-go = "1.22"
 node = "20.11.0"
 rust = "1.78.0"
 java = "21"
@@ -8,3 +7,4 @@ gradle = "8.5"
 ruby = "3.2.2"
 usage = "latest"
 maven = "3.9.3"
+go = "1.23"

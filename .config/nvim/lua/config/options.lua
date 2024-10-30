@@ -19,9 +19,6 @@ vim.opt.wrap = false
 vim.cmd([[let &t_Cs = "\e[4:3m"]])
 vim.cmd([[let &t_Ce = "\e[4:0m"]])
 
-vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-vim.opt.foldmethod = 'expr'
-
 -- Lazy extra - Python
 --
 -- LSP Server to use for Python.

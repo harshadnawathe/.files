@@ -2,7 +2,7 @@ return {
   {
     "mistweaverco/kulala.nvim",
     keys = {
-      { "<leader>Rc", "", desc = "+curl" },
+      { "<leader>Rc", "", desc = "+curl", ft = "http" },
       {
         "<leader>Rci",
         "<cmd>lua require('kulala').from_curl()<cr>",
@@ -11,6 +11,7 @@ return {
           silent = true,
         },
         desc = "Paste curl from clipboard as http request",
+        ft = "http",
       },
       {
         "<leader>Rco",
@@ -20,6 +21,7 @@ return {
           silent = true,
         },
         desc = "Copy the current request as a curl command",
+        ft = "http",
       },
     },
   },

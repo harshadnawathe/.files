@@ -265,10 +265,13 @@
 	pager = delta
 
 [delta]
-  features = "mellow-barbet" "catppuccin"
+  features = "mellow-barbet" "tokyonight"
  
 [delta "catppuccin"]
   syntax-theme = Catppuccin-mocha
+
+[delta "tokyonight"]
+  syntax-theme = tokyonight_night
 
 [merge]
   tool = nvimdiff

@@ -2,7 +2,7 @@ local wezterm = require("wezterm")
 
 local config = wezterm.config_builder()
 
-config.color_scheme = "Catppuccin Mocha"
+config.color_scheme = 'tokyonight_night'
 
 config.background = require("utils.backgrounds")["Iron-Man"]
 

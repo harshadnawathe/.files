@@ -180,6 +180,8 @@ brew "luarocks"
 # brew "checkstyle"
 brew "pmd"
 
+brew "ollama"
+
 cask "rectangle"
 cask "notunes"
 # cask "amethyst"   #Tiling manager with layout

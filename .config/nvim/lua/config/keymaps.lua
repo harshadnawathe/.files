@@ -26,6 +26,3 @@ keymap.set("n", "<C-a>", "gg<S-v>G")
 -- Helix like moves 
 keymap.set("n", "gh", "^", {desc = "Move to start", remap = true})
 keymap.set("n", "gl", "$", {desc = "Move to end", remap = true})
-
-keymap.del("t", "<C-l>")
-keymap.del("t", "<C-h>")

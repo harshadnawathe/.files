@@ -7,13 +7,6 @@ local keymap = vim.keymap
 keymap.set("n", "+", "<C-a>", { desc = "Increment number" })
 keymap.set("n", "-", "<C-x>", { desc = "Decrement number" })
 
--- Switch window
-keymap.set("n", "<C-h>", "<C-w>h", { desc = "Switch to left window" })
-keymap.set("n", "<C-j>", "<C-w>j", { desc = "Switch to lower window" })
-keymap.set("n", "<C-k>", "<C-w>k", { desc = "Switch to upper window" })
-keymap.set("n", "<C-l>", "<C-w>l", { desc = "Switch to right window" })
-keymap.set("n", "<C-\\>", "<C-w>p", { desc = "Switch to previous window" })
-
 -- Resize window using <option> arrow keys (repeatable)
 keymap.set("n", "<A-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })
 keymap.set("n", "<A-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window height" })

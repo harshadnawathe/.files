@@ -13,6 +13,12 @@
           "go"
         ],
         "path": "./go.json"
+      },
+      {
+        "language": [
+          "python"
+        ],
+        "path": "./python.json"
       }
     ]
   }

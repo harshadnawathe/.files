@@ -1,0 +1,12 @@
+{
+  "Swap": {
+    "prefix": "swap",
+    "body": "${1:x}, ${2:y} = $2, $1$0",
+    "description": "Swap two variables"
+  },
+  "Enumerate": {
+    "prefix": "fore",
+    "body": "for ${2:i}, ${3:elem} in enumerate($1):\n    ${0:pass}",
+    "description": "Enumerate a list"
+  }
+}

@@ -98,26 +98,9 @@ return {
       -- override jdtls command to work with projects using jdks older than 17
       return vim.tbl_deep_extend("force", opts, {
         cmd = {
-          vim.fn.expand("$HOME/.local/share/mise/installs/java/21/bin/java"),
-          "-Declipse.application=org.eclipse.jdt.ls.core.id1",
-          "-Dosgi.bundles.defaultStartLevel=4",
-          "-Declipse.product=org.eclipse.jdt.ls.core.product",
-          "-Dosgi.checkConfiguration=true",
-          "-Dosgi.sharedConfiguration.area=" .. vim.fn.expand("$MASON/share/jdtls/config"),
-          "-Dosgi.sharedConfiguration.area.readOnly=true",
-          "-Dosgi.configuration.cascaded=true",
-          "-Xms1G",
-          "-Dlog.protocol=true",
-          "-Dlog.level=ALL",
-          "-javaagent:" .. vim.fn.expand("$MASON/share/jdtls/lombok.jar"),
-          "-Xms1g",
-          "--add-modules=ALL-SYSTEM",
-          "--add-opens",
-          "java.base/java.util=ALL-UNNAMED",
-          "--add-opens",
-          "java.base/java.lang=ALL-UNNAMED",
-          "-jar",
-          vim.fn.expand("$MASON/share/jdtls/plugins/org.eclipse.equinox.launcher.jar"),
+          vim.fn.exepath("jdtls"),
+          "--java-executable=" .. vim.fn.expand("$HOME/.local/share/mise/installs/java/21/bin/java"),
+          string.format("--jvm-arg=-javaagent:%s", vim.fn.expand("$MASON/share/jdtls/lombok.jar")),
         },
         on_attach = function()
           local wk = require("which-key")

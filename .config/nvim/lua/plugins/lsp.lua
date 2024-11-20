@@ -95,13 +95,11 @@ return {
     "mfussenegger/nvim-jdtls",
     ft = "java",
     opts = function(_, opts)
-      -- override jdtls command to work with projects using jdks older than 17
+      -- java executable option for projects using JDK version older than 17
+      table.insert(opts.cmd, "--java-executable=" .. vim.fn.expand("$HOME/.local/share/mise/installs/java/21/bin/java"))
+
       return vim.tbl_deep_extend("force", opts, {
-        cmd = {
-          vim.fn.exepath("jdtls"),
-          "--java-executable=" .. vim.fn.expand("$HOME/.local/share/mise/installs/java/21/bin/java"),
-          string.format("--jvm-arg=-javaagent:%s", vim.fn.expand("$MASON/share/jdtls/lombok.jar")),
-        },
+        -- custom on_attach hook to register additional options
         on_attach = function()
           local wk = require("which-key")
           wk.add({

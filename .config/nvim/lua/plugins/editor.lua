@@ -71,4 +71,13 @@ return {
       harpoon:extend(extensions.builtins.navigate_with_number())
     end,
   },
+  {
+    "folke/flash.nvim",
+    opts = {
+      highlight = { backdrop = false },
+      char = {
+        highlight = { backdrop = true },
+      },
+    },
+  },
 }

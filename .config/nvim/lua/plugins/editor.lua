@@ -10,43 +10,6 @@ return {
     end,
   },
   {
-    "nvim-telescope/telescope.nvim",
-    opts = function(_, opts)
-      return vim.tbl_deep_extend("force", opts, {
-        pickers = {
-          yank_history = {
-            theme = "dropdown",
-            previewer = false,
-          },
-          buffers = {
-            theme = "dropdown",
-            previewer = false,
-          },
-          find_files = {
-            theme = "dropdown",
-            previewer = false,
-          },
-          git_files = {
-            theme = "dropdown",
-            previewer = false,
-          },
-          diagnostics = {
-            theme = "ivy",
-            layout_config = {
-              height = 0.3,
-            },
-          },
-          lsp_references = {
-            theme = "ivy",
-            layout_config = {
-              height = 0.3,
-            },
-          },
-        },
-      })
-    end,
-  },
-  {
     "dinhhuy258/git.nvim",
     event = "BufReadPre",
     opts = {

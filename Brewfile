@@ -84,6 +84,7 @@ brew "coreutils"
 brew "wget"
 # brew "dos2unix"
 
+brew "qemu"
 brew "colima"
 # brew "minikube" # repalced with rancher
 # cask "rancher"   # replaced with colima

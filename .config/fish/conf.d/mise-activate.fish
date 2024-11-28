@@ -69,3 +69,5 @@ function fish_command_not_found
         __fish_default_command_not_found_handler $argv
     end
 end
+set -gx PATH '/opt/homebrew/Library/Homebrew/shims/shared:/Users/harshadn/.local/share/mise/installs/node/20.11.0/bin:/Users/harshadn/.local/share/mise/installs/rust/1.78.0/bin:/Users/harshadn/.local/share/mise/installs/java/21.0.2/bin:/Users/harshadn/.local/share/mise/installs/python/3.10.15/bin:/Users/harshadn/.local/share/mise/installs/gradle/8.5/bin:/Users/harshadn/.local/share/mise/installs/ruby/3.2.2/bin:/Users/harshadn/.local/share/mise/installs/usage/1.2.0/bin:/Users/harshadn/.local/share/mise/installs/maven/3.9.3/bin:/Users/harshadn/.local/share/mise/installs/go/1.23.2/bin:/Users/harshadn/bin:/Users/harshadn/go/bin:/Users/harshadn/.local/bin:/Users/harshadn/Library/Application Support/JetBrains/Toolbox/scripts:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/Library/Taps/buo/homebrew-cask-upgrade/cmd:/opt/homebrew/Library/Taps/homebrew/homebrew-bundle/cmd:/opt/homebrew/Library/Taps/homebrew/homebrew-services/cmd'
+

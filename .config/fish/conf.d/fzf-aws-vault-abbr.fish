@@ -20,6 +20,10 @@ function __fzf-aws-vault-abbr
         __fzf_select $(aws-vault list --credentials)
     end
 
+    function __avx
+        echo "aws-vault exec $(__fzf-aws-profile) -- "
+    end
+
     function __avsh
         echo "aws-vault exec $(__fzf-aws-profile) -- fish"
     end
@@ -36,6 +40,7 @@ function __fzf-aws-vault-abbr
     abbr -a avsh -f __avsh
     abbr -a avenv -f __avenv
     abbr -a avl -f __avl
+    abbr -a avx -f __avx
 
 end
 

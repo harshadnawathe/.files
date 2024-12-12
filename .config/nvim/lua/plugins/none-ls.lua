@@ -24,28 +24,14 @@ return {
     },
     opts = {
       ensure_installed = {
-        -- lua
-        "stylua",
         -- java formatter
         "google_java_format",
         -- golang formatters and lsp tools
-        "gomodifytags",
-        "gofumpt",
         "golines",
         "iferr",
-        "impl",
-        "goimports",
         "golangci_lint",
-        -- json formatter
-        "prettierd",
-        -- typescript and javascript linting
-        "eslint",
         -- c++
         "clang_format",
-        -- kotlin
-        "ktlint",
-        -- shell
-        "shellcheck",
       },
       automatic_installation = false,
       handlers = {

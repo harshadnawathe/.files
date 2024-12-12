@@ -1,5 +1,3 @@
-local Util = require("lazyvim.util")
-
 return {
   {
     "stevearc/conform.nvim",
@@ -53,7 +51,6 @@ return {
       handlers = {
         ktlint = function()
           local nls = require("null-ls")
-          local editorConfigPath = Util.root() .. ".editorconfig"
           nls.register(nls.builtins.diagnostics.ktlint.with({
             args = { "--log-level=none", "--relative", "--reporter=json", "**/*.kt", "**/*.kts" },
           }))

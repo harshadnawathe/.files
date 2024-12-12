@@ -33,6 +33,7 @@ return {
         -- golang formatters and lsp tools
         "gomodifytags",
         "gofumpt",
+        "golines",
         "iferr",
         "impl",
         "goimports",

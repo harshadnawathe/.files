@@ -161,7 +161,7 @@ brew "stow"
 brew "neovim"
 # cask "neovide"
 # brew "neovim", args: ["HEAD"]
-brew "yazi"
+# brew "yazi"
 
 # brew "helix", args: ["ignore-dependencies"]
 # language-servers for helix
@@ -171,7 +171,7 @@ brew "yazi"
 # brew "stylua"
 # brew "prettier", args: ["ignore-dependencies"]
 brew "lazygit"
-brew "lazydocker"
+# brew "lazydocker"
 # brew "cmatrix" 
 # Alternative is https://github.com/st3w/neo - requires build
 # brew "automake"  #required for neo build
@@ -189,7 +189,7 @@ cask "notunes"
 cask "zoom"
 # cask "microsoft-remote-desktop"
 # cask "microsoft-teams"
-cask "webex"
+# cask "webex"
 cask "visual-studio-code"
 # cask "vscodium"
 # cask "skype"
@@ -214,7 +214,7 @@ cask "slack"
 # cask "anaconda"
 cask "kindle"
 # cask "logitech-options"
-cask "logi-options-plus"
+# cask "logi-options-plus"
 cask "logitech-camera-settings"
 cask "caffeine"
 cask "obsidian"

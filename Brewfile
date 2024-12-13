@@ -9,9 +9,9 @@ tap "buo/cask-upgrade"
 
 # clojure
 # not able to find a rtx plugin for this
-# tap "clojure/tools"
-# brew "clojure/tools/clojure"
-# brew "leiningen"
+tap "clojure/tools"
+brew "clojure/tools/clojure"
+brew "leiningen"
 
 # scala
 # brew "sbt"

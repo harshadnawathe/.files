@@ -1,11 +1,5 @@
 return {
   {
-    "Exafunction/codeium.nvim",
-    cond = function()
-      return vim.env.DISABLE_CODEIUM == nil
-    end,
-  },
-  {
     "Wansmer/treesj",
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     cmd = { "TSJToggle", "TSJSplit", "TSJJoin" },

@@ -15,6 +15,10 @@ return {
           path = "~/Documents/smaranika/",
         },
       },
+      completion = {
+        -- blink is not supported
+        nvim_cmp = false,
+      },
       disable_frontmatter = true,
       templates = {
         subdir = "templates",

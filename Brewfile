@@ -194,7 +194,6 @@ cask "visual-studio-code"
 # cask "vscodium"
 # cask "skype"
 # cask "whatsapp"
-mas "‎WhatsApp", id: 310633997
 # cask "xmind"
 # cask "kitty"
 # cask "iterm2"
@@ -250,6 +249,10 @@ vscode "ms-azuretools.vscode-docker"
 vscode "ms-vscode-remote.vscode-remote-extensionpack"
 vscode "humao.rest-client"
 vscode "iterative.vscode-dvc-pack"
+
+mas "Keynote", id: 409183694
+mas "Numbers", id: 409203825
+mas "‎WhatsApp", id: 310633997
 
 # For project work
 # brew "glab" 

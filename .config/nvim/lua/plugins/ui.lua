@@ -1,14 +1,12 @@
 return {
   {
     "nvim-lualine/lualine.nvim",
-    opts = function(_, opts)
-      return vim.tbl_deep_extend("force", opts, {
-        options = {
-          component_separators = { left = "│", right = "│" },
-          section_separators = { left = "█", right = "█" },
-        },
-      })
-    end,
+    opts = {
+      options = {
+        component_separators = { left = "│", right = "│" },
+        section_separators = { left = "█", right = "█" },
+      },
+    },
   },
   {
     "b0o/incline.nvim",

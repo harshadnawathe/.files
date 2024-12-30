@@ -33,15 +33,6 @@ return {
     end,
   },
   {
-    "folke/flash.nvim",
-    opts = {
-      highlight = { backdrop = false },
-      char = {
-        highlight = { backdrop = true },
-      },
-    },
-  },
-  {
     "ibhagwan/fzf-lua",
     keys = {
       { "<leader>sg", LazyVim.pick("live_grep_glob"), desc = "Grep (Root Dir)" },

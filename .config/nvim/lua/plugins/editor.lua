@@ -1,13 +1,11 @@
 return {
   {
     "nvim-neo-tree/neo-tree.nvim",
-    opts = function(_, opts)
-      return vim.tbl_deep_extend("force", opts, {
-        filesystem = {
-          hijack_netrw_behavior = "open_current",
-        },
-      })
-    end,
+    opts = {
+      filesystem = {
+        hijack_netrw_behavior = "open_current",
+      },
+    },
   },
   {
     "dinhhuy258/git.nvim",

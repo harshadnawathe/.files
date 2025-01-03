@@ -228,6 +228,7 @@ cask "font-symbols-only-nerd-font"
 cask "font-fira-code"
 cask "font-jetbrains-mono"
 cask "font-monaspace"
+cask "karabiner-elements"
 
 # cask "font-hack-nerd-font"
 cask "font-fira-code-nerd-font"

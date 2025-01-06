@@ -83,6 +83,7 @@ brew "coreutils"
 # brew "parallel"
 brew "wget"
 # brew "dos2unix"
+brew "btop"
 
 brew "qemu"
 brew "colima"

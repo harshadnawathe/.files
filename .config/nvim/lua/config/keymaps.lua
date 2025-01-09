@@ -4,8 +4,8 @@
 local keymap = vim.keymap
 
 -- Increment/decrement
-keymap.set("n", "+", "<C-a>", { desc = "Increment number" })
-keymap.set("n", "-", "<C-x>", { desc = "Decrement number" })
+keymap.set("n", "+", "<C-a>", { desc = "Increment number", remap = true })
+keymap.set("n", "-", "<C-x>", { desc = "Decrement number", remap = true })
 
 -- Resize window using <option> arrow keys (repeatable)
 keymap.set("n", "<A-Up>", "<cmd>resize +2<cr>", { desc = "Increase window height" })

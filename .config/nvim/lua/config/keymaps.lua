@@ -13,9 +13,6 @@ keymap.set("n", "<A-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window heig
 keymap.set("n", "<A-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
 keymap.set("n", "<A-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
 
--- Select all (press twice if C-a is tmux prefix)
-keymap.set("n", "<C-a>", "gg<S-v>G")
-
 -- Helix like moves 
 keymap.set("n", "gh", "^", {desc = "Move to start", remap = true})
 keymap.set("n", "gl", "$", {desc = "Move to end", remap = true})

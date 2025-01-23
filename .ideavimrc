@@ -6,6 +6,7 @@
 """ Configuration
 let mapleader = " "
 set relativenumber
+set clipboard+=unnamed
 
 """ Plugins
 set which-key

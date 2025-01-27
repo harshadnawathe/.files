@@ -102,7 +102,7 @@ nmap <leader>fp <Action>(OpenProjectWindows)
 " Git
 nmap <leader>ghr <Action>(Vcs.RollbackChangedLines)
 nmap <leader>ghR <Action>(ChangesView.Revert)
-nmap <leader>gb <Action>(Annotate)
+nmap <leader>ghB <Action>(Annotate)
 nmap <leader>gg <Action>(CheckinProject)
 
 " Explorer
@@ -207,7 +207,7 @@ let g:WhichKeyDesc_find_project = "<leader>fp Open projects"
 """ Git commands
 let g:WhichKeyDesc_git_rollback_lines = "<leader>ghr Rollback lines"
 let g:WhichKeyDesc_git_rollback_file = "<leader>ghR Revert file"
-let g:WhichKeyDesc_git_blame = "<leader>gb Show blame"
+let g:WhichKeyDesc_git_blame = "<leader>ghB Show blame"
 let g:WhichKeyDesc_git_commit = "<leader>gg Commit project"
 
 """ Test commands

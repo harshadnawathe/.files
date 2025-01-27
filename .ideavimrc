@@ -41,28 +41,13 @@ inoremap <C-S> <esc>:w<cr>
 nnoremap <C-S> :w<cr>
 
 " Code
-let g:WhichKeyDesc_code = "<Space>c Code+"
-
 nmap <leader>ca <Action>(ShowIntentionActions)
-let g:WhichKeyDesc_code_action = "<Space>ca code actions"
-
 nmap <leader>cs <Action>(FileStructurePopup)
-let g:WhichKeyDesc_code_structure = "<Space>cs code structure"
-
 nmap <leader>cf <Action>(ReformatCode)
-let g:WhichKeyDesc_code_format = "<Space>cf code format"
-
 nmap <leader>cS <Action>(ActivateStructureToolWindow)
-let g:WhichKeyDesc_code_structureSidebar = "<Space>cS code structure sidebar"
-
 nmap <leader>cr <Action>(RenameElement)
-let g:WhichKeyDesc_code_rename = "<Space>cr rename symbol"
-
 nmap <leader>cd <Action>(ShowErrorDescription)
-let g:WhichKeyDesc_code_diagnosticsAtLine = "<Space>cd show diagnostics"
-
 nmap <leader>cS <Action>(ActivateStructureToolWindow)
-
 nmap <leader>co <Action>(OrganizeImports)
 
 " Refactor
@@ -177,3 +162,100 @@ nmap <leader>bb <Action>(Switcher)
 
 " Paste
 nmap <leader>p <Action>(PasteMultiple)
+
+""" Which Key Variables
+""" Main prefix descriptions
+let g:WhichKeyDesc_leader = "<leader> Leader key"
+let g:WhichKeyDesc_code = "<leader>c Code"
+let g:WhichKeyDesc_refactor = "<leader>r Refactor"
+let g:WhichKeyDesc_find = "<leader>f Find"
+let g:WhichKeyDesc_git = "<leader>g Git"
+let g:WhichKeyDesc_test = "<leader>t Test"
+let g:WhichKeyDesc_search = "<leader>s Search"
+let g:WhichKeyDesc_ui = "<leader>u UI"
+let g:WhichKeyDesc_debug = "<leader>d Debug"
+let g:WhichKeyDesc_buffer = "<leader>b Buffer"
+let g:WhichKeyDesc_tab = "<leader><tab> Tabs/Projects"
+
+""" Code actions
+let g:WhichKeyDesc_code_actions = "<leader>ca Show intentions"
+let g:WhichKeyDesc_code_structure = "<leader>cs File structure popup"
+let g:WhichKeyDesc_code_format = "<leader>cf Reformat code"
+let g:WhichKeyDesc_code_structure_window = "<leader>cS Structure tool window"
+let g:WhichKeyDesc_code_rename = "<leader>cr Rename element"
+let g:WhichKeyDesc_code_error = "<leader>cd Show error description"
+let g:WhichKeyDesc_code_organize = "<leader>co Organize imports"
+
+""" Refactor commands
+let g:WhichKeyDesc_refactor_rename = "<leader>rr Rename element"
+let g:WhichKeyDesc_refactor_signature = "<leader>rs Change signature"
+let g:WhichKeyDesc_refactor_extract = "<leader>rx Extract"
+let g:WhichKeyDesc_refactor_extract_var = "<leader>rxv Extract variable"
+let g:WhichKeyDesc_refactor_extract_method = "<leader>rxm Extract method"
+let g:WhichKeyDesc_refactor_extract_param = "<leader>rxp Extract parameter"
+let g:WhichKeyDesc_refactor_extract_field = "<leader>rxf Extract field"
+let g:WhichKeyDesc_refactor_extract_interface = "<leader>rxi Extract interface"
+let g:WhichKeyDesc_refactor_extract_superclass = "<leader>rxs Extract superclass"
+
+""" Find commands
+let g:WhichKeyDesc_find_file = "<leader>ff Find file"
+let g:WhichKeyDesc_find_class = "<leader>fc Find class"
+let g:WhichKeyDesc_find_symbol = "<leader>fs Find symbol"
+let g:WhichKeyDesc_find_recent = "<leader>fb Recent files"
+let g:WhichKeyDesc_find_project = "<leader>fp Open projects"
+
+""" Git commands
+let g:WhichKeyDesc_git_rollback_lines = "<leader>ghr Rollback lines"
+let g:WhichKeyDesc_git_rollback_file = "<leader>ghR Revert file"
+let g:WhichKeyDesc_git_blame = "<leader>gb Show blame"
+let g:WhichKeyDesc_git_commit = "<leader>gg Commit project"
+
+""" Test commands
+let g:WhichKeyDesc_test_goto = "<leader>ts Go to test"
+let g:WhichKeyDesc_test_class = "<leader>tt Run class"
+let g:WhichKeyDesc_test_generate = "<leader>tg Generate"
+let g:WhichKeyDesc_test_run = "<leader>tr Run"
+let g:WhichKeyDesc_test_config = "<leader>ta Debug configuration"
+let g:WhichKeyDesc_test_window = "<leader>tu Run tool window"
+
+""" Search commands
+let g:WhichKeyDesc_search_text = "<leader>sg Text search"
+let g:WhichKeyDesc_search_files = "<leader>sf Find in path"
+let g:WhichKeyDesc_search_buffer = "<leader>s/ Find in buffer"
+let g:WhichKeyDesc_search_action = "<leader>sa Go to action"
+let g:WhichKeyDesc_search_everywhere = "<leader>se Search everywhere"
+
+""" UI commands
+let g:WhichKeyDesc_ui_theme = "<leader>uC Change theme"
+let g:WhichKeyDesc_ui_hide = "<leader>uH Hide windows"
+
+""" Debug commands
+let g:WhichKeyDesc_debug_launch = "<leader>dl Debug"
+let g:WhichKeyDesc_debug_config = "<leader>da Debug configuration"
+let g:WhichKeyDesc_debug_breakpoint = "<leader>db Toggle breakpoint"
+let g:WhichKeyDesc_debug_edit_breakpoint = "<leader>dB Edit breakpoint"
+let g:WhichKeyDesc_debug_window = "<leader>du Debug tool window"
+let g:WhichKeyDesc_debug_step_into = "<leader>di Step into"
+let g:WhichKeyDesc_debug_step_out = "<leader>do Step out"
+let g:WhichKeyDesc_debug_step_over = "<leader>dO Step over"
+let g:WhichKeyDesc_debug_stop = "<leader>dt Stop"
+let g:WhichKeyDesc_debug_continue = "<leader>dc Continue"
+let g:WhichKeyDesc_debug_evaluate = "<leader>de Evaluate expression"
+
+""" Buffer commands
+let g:WhichKeyDesc_buffer_close = "<leader>bd Close"
+let g:WhichKeyDesc_buffer_close_unmodified = "<leader>bw Close unmodified"
+let g:WhichKeyDesc_buffer_close_others = "<leader>bo Close others"
+let g:WhichKeyDesc_buffer_pin = "<leader>bp Pin tab"
+let g:WhichKeyDesc_buffer_switch = "<leader>bb Switch buffer"
+
+""" Tab/Project commands
+let g:WhichKeyDesc_tab_next = "<leader><tab>] Next project"
+let g:WhichKeyDesc_tab_prev = "<leader><tab>[ Previous project"
+
+""" Explorer
+let g:WhichKeyDesc_explorer = "<leader>e Project explorer"
+
+""" Other
+let g:WhichKeyDesc_comment = "<leader>/ Toggle comment"
+let g:WhichKeyDesc_paste = "<leader>p Paste multiple"

@@ -4,20 +4,33 @@
 
 
 """ Configuration
-let mapleader = " "
+let mapleader=" "
 set relativenumber
 set clipboard+=unnamed
+set incsearch
 
 """ Plugins
 set which-key
 set highlightedyank
 set matchit
 set surround
+set commentary
+set argtextobj
+set easymotion
+
+""" Plugin settings
+let g:argtextobj_pairs="[:],(:),<:>"
 
 set notimeout
 set timeoutlen=5000
 
 """ Mappings
+
+" easymotion
+
+nmap s <Plug>(easymotion-s)
+nmap f <Plug>(easymotion-f)
+nmap t <Plug>(easymotion-t)
 
 " Better escape
 inoremap jk <esc>
@@ -50,9 +63,27 @@ let g:WhichKeyDesc_code_diagnosticsAtLine = "<Space>cd show diagnostics"
 
 nmap <leader>cS <Action>(ActivateStructureToolWindow)
 
-nmap <leader>cxv <Action>(IntroduceVariable)
-nmap <leader>cxm <Action>(ExtractFunction)
-vmap <leader>cxm <Action>(ExtractFunction)
+nmap <leader>co <Action>(OrganizeImports)
+
+" Refactor
+
+nmap <leader>rr <Action>(RenameElement)
+nmap <leader>rs <Action>(ChangeSignature)
+
+" Refactor - Extract
+nmap <leader>rxv <Action>(IntroduceVariable)
+vmap <leader>rxv <Action>(IntroduceVariable)
+nmap <leader>rxm <Action>(ExtractFunction)
+vmap <leader>rxm <Action>(ExtractFunction)
+nmap <leader>rxp <Action>(IntroduceParameter)
+vmap <leader>rxp <Action>(IntroduceParameter)
+nmap <leader>rxf <Action>(IntroduceField)
+vmap <leader>rxf <Action>(IntroduceField)
+nmap <leader>rxi <Action>(ExtractInterface)
+nmap <leader>rxs <Action>(ExtractSuperclass)
+
+" nmap <C-Space> <Action>(EditorSelectWord)
+" nmap <C-S-Space> <Action>(EditorUnSelectWord)
 
 " Comment
 nmap <leader>/ <Action>(CommentByLineComment)
@@ -61,6 +92,11 @@ vmap <leader>/ <Action>(CommentByLineComment)
 " Navigation
 nmap ]b gt
 nmap [b gT
+nmap H gT
+nmap L gt
+nmap gh ^
+nmap gl $
+
 
 nmap ]d <Action>(GotoNextError)
 nmap [d <Action>(GotoPreviousError)
@@ -76,6 +112,7 @@ nmap <leader>ff <Action>(GotoFile)
 nmap <leader>fc <Action>(GotoClass)
 nmap <leader>fs <Action>(GotoSymbol)
 nmap <leader>fb <Action>(RecentFiles)
+nmap <leader>fp <Action>(OpenProjectWindows)
 
 " Git
 nmap <leader>ghr <Action>(Vcs.RollbackChangedLines)
@@ -91,6 +128,8 @@ nmap <leader>ts <Action>(GotoTest)
 nmap <leader>tt <Action>(RunClass)
 nmap <leader>tg <Action>(Generate)
 nmap <leader>tr <Action>(Run)
+nmap <leader>ta <Action>(ChooseDebugConfiguration)
+nmap <leader>tu <Action>(ActivateRunToolWindow)
 
 " Goto
 nmap gd <Action>(GotoDeclaration)
@@ -107,3 +146,34 @@ nmap <leader>se <Action>(SearchEverywhere)
 " UI
 nmap <leader>uC <Action>(ChangeLaf)
 nmap <leader>uH <Action>(HideAllWindows)
+
+" Terminal
+nmap <C-/> <Action>(ActivateTerminalToolWindow)
+
+" Debug
+nmap <leader>dl <Action>(Debug)
+nmap <leader>da <Action>(ChooseDebugConfiguration)
+nmap <leader>db <Action>(ToggleLineBreakpoint)
+nmap <leader>dB <Action>(EditBreakpoint)
+nmap <leader>du <Action>(ActivateDebugToolWindow)
+nmap <leader>di <Action>(StepInto)
+nmap <leader>do <Action>(StepOut)
+nmap <leader>dO <Action>(StepOver)
+nmap <leader>dt <Action>(Stop)
+nmap <leader>dc <Action>(Resume)
+nmap <leader>de <Action>(EvaluateExpression)
+
+" Tabs / Projects
+nmap <leader><tab>] <Action>(NextProjectWindow)
+nmap <leader><tab>[ <Action>(PreviousProjectWindow)
+
+" Buffers
+nmap <leader>bd <Action>(CloseContent)
+nmap <leader>bw <Action>(CloseAllUnmodifiedEditors)
+nmap <leader>bo <Action>(CloseAllEditorsButActive)
+nmap <leader>bp <Action>(PinActiveTab)
+nmap <leader>`  <Action>(Switcher)
+nmap <leader>bb <Action>(Switcher)
+
+" Paste
+nmap <leader>p <Action>(PasteMultiple)

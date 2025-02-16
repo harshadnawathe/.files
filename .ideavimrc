@@ -32,6 +32,9 @@ nmap s <Plug>(easymotion-s)
 nmap f <Plug>(easymotion-f)
 nmap t <Plug>(easymotion-t)
 
+map ]] <Action>(Back)
+map [[ <Action>(Forward)
+
 " Better escape
 inoremap jk <esc>
 inoremap jj <esc>
@@ -42,12 +45,10 @@ nnoremap <C-S> :w<cr>
 
 " Code
 nmap <leader>ca <Action>(ShowIntentionActions)
-nmap <leader>cs <Action>(FileStructurePopup)
+nmap <leader>cs <Action>(ActivateStructureToolWindow)
 nmap <leader>cf <Action>(ReformatCode)
-nmap <leader>cS <Action>(ActivateStructureToolWindow)
 nmap <leader>cr <Action>(RenameElement)
 nmap <leader>cd <Action>(ShowErrorDescription)
-nmap <leader>cS <Action>(ActivateStructureToolWindow)
 nmap <leader>co <Action>(OrganizeImports)
 
 " Refactor
@@ -98,6 +99,7 @@ nmap <leader>fc <Action>(GotoClass)
 nmap <leader>fs <Action>(GotoSymbol)
 nmap <leader>fb <Action>(RecentFiles)
 nmap <leader>fp <Action>(OpenProjectWindows)
+nmap <leader>fS <Action>(FindUsages)
 
 " Git
 nmap <leader>ghr <Action>(Vcs.RollbackChangedLines)
@@ -120,13 +122,16 @@ nmap <leader>tu <Action>(ActivateRunToolWindow)
 nmap gd <Action>(GotoDeclaration)
 nmap gr <Action>(GotoDeclaration)
 nmap gI <Action>(GotoImplementation)
+nmap gs <Action>(GotoSuperMethod)
 
 " Search
 nmap <leader>sg <Action>(TextSearchAction)
 nmap <leader>sf <Action>(FindInPath)
 nmap <leader>s/ <Action>(Find)
+nmap <leader>sb <Action>(Find)
 nmap <leader>sa <Action>(GotoAction)
 nmap <leader>se <Action>(SearchEverywhere)
+nmap <leader>ss <Action>(FileStructurePopup)
 
 " UI
 nmap <leader>uC <Action>(ChangeLaf)
@@ -162,6 +167,11 @@ nmap <leader>bb <Action>(Switcher)
 
 " Paste
 nmap <leader>p <Action>(PasteMultiple)
+
+" Diagnostics
+nmap <leader>xx <Action>(ActivateProblemsViewToolWindow)
+nmap <leader>xt <Action>(ActivateTODOToolWindow)
+
 
 """ Which Key Variables
 """ Main prefix descriptions

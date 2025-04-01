@@ -126,6 +126,7 @@ brew "k9s"
 # brew "yarn"
 # brew "mongodb/brew/mongodb-community"
 # brew "direnv"
+brew "duckdb"
 brew "tmux"
 
 brew "fzf"       #for tmux plugin

@@ -9,9 +9,9 @@ tap "buo/cask-upgrade"
 
 # clojure
 # not able to find a rtx plugin for this
-tap "clojure/tools"
-brew "clojure/tools/clojure"
-brew "leiningen"
+# tap "clojure/tools"
+# brew "clojure/tools/clojure"
+# brew "leiningen"
 
 # scala
 # brew "sbt"
@@ -78,7 +78,7 @@ brew "git-delta"
 # brew "libssh"
 # brew "talisman"
 brew "fswatch"
-brew "entr"
+# brew "entr"
 brew "coreutils"
 # brew "parallel"
 brew "wget"
@@ -89,7 +89,7 @@ brew "qemu"
 brew "colima"
 # brew "minikube" # repalced with rancher
 # cask "rancher"   # replaced with colima
-brew "kind"
+# brew "kind"
 brew "docker"
 brew "docker-compose"
 brew "docker-buildx"

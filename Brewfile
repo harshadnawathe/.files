@@ -26,7 +26,7 @@ brew "mas"
 
 # brew "grpc"
 # brew "apache-arrow"
-brew "cmake"
+# brew "cmake"
 # brew "pack"
 
 # brew "zsh"
@@ -126,7 +126,7 @@ brew "k9s"
 # brew "yarn"
 # brew "mongodb/brew/mongodb-community"
 # brew "direnv"
-brew "duckdb"
+# brew "duckdb"
 brew "tmux"
 
 brew "fzf"       #for tmux plugin
@@ -142,8 +142,8 @@ end
 brew "fpp"       #for tmux plugin
 # brew "urlview"   #for tmux urlview
 # brew "extract_url"
-brew "gifski"
-brew "zellij"  # not able to replicate the current tmux workflow of session manangement
+# brew "gifski"
+# brew "zellij"  # not able to replicate the current tmux workflow of session manangement
 
 # brew "asdf" #replaced with rtx
 # brew "rtx"
@@ -181,7 +181,7 @@ brew "lazygit"
 brew "fd" # required by nvim venv-selector-plugin
 brew "luarocks"
 # brew "checkstyle"
-brew "pmd"
+# brew "pmd"
 
 brew "ollama"
 
@@ -199,7 +199,7 @@ cask "visual-studio-code"
 # cask "xmind"
 # cask "kitty"
 # cask "iterm2"
-cask "alacritty"
+#cask "alacritty"
 cask "wezterm"
 # cask "warp"
 # cask "adobe-acrobat-reader"

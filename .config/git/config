@@ -55,6 +55,23 @@
       esac;\
     }; ps"
 
+  # create summary of commits for the PR
+  summary = "!f() { \
+    target_branch=\"$1\"; \
+    if [ -z \"$target_branch\" ]; then \
+      echo \"Usage: git summary <target_branch>\"; \
+      exit 1; \
+    fi; \
+    \
+    commit_list=$(git log --oneline \"$target_branch\"..\"HEAD\"); \
+    \
+    if [ -n \"$commit_list\" ]; then \
+      echo \"$commit_list\" | tac | sed -E 's/^[a-f0-9]+ (.*)/\\1/' | sed 's/^/- /'; \
+    else \
+      echo \"No new commits found compared to $target_branch.\"; \
+    fi; \
+  }; f"
+
   # find dangling commits
   dangling = fsck --no-reflog
 

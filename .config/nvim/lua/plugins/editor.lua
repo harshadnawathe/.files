@@ -22,17 +22,6 @@ return {
     "tpope/vim-rsi",
   },
   {
-    "ThePrimeagen/harpoon",
-    branch = "harpoon2",
-    config = function(_, opts)
-      local harpoon = require("harpoon")
-      harpoon:setup(opts)
-
-      local extensions = require("harpoon.extensions")
-      harpoon:extend(extensions.builtins.navigate_with_number())
-    end,
-  },
-  {
     "ibhagwan/fzf-lua",
     opts = {
       grep = {

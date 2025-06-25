@@ -27,6 +27,7 @@ brew "mas"
 # brew "grpc"
 # brew "apache-arrow"
 brew "cmake"
+brew "clang-format"
 # brew "pack"
 
 # brew "zsh"

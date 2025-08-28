@@ -22,10 +22,18 @@ return {
     "tpope/vim-rsi",
   },
   {
-    "ibhagwan/fzf-lua",
+    "stevearc/conform.nvim",
+    dependencies = {
+      "mason.nvim",
+      opts = {
+        ensure_installed = {
+          "xmlformatter",
+        },
+      },
+    },
     opts = {
-      grep = {
-        rg_glob = true,
+      formatters_by_ft = {
+        xml = { "xmlformatter" },
       },
     },
   },

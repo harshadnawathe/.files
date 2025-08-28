@@ -37,4 +37,20 @@ return {
       },
     },
   },
+  {
+    "stevearc/conform.nvim",
+    dependencies = {
+      "mason.nvim",
+      opts = {
+        ensure_installed = {
+          "xmlformatter",
+        },
+      },
+    },
+    opts = {
+      formatters_by_ft = {
+        xml = { "xmlformatter" },
+      },
+    },
+  },
 }

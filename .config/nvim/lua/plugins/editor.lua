@@ -1,13 +1,5 @@
 return {
   {
-    "nvim-neo-tree/neo-tree.nvim",
-    opts = {
-      filesystem = {
-        hijack_netrw_behavior = "open_current",
-      },
-    },
-  },
-  {
     "dinhhuy258/git.nvim",
     event = "BufReadPre",
     opts = {
@@ -20,22 +12,6 @@ return {
   },
   {
     "tpope/vim-rsi",
-  },
-  {
-    "stevearc/conform.nvim",
-    dependencies = {
-      "mason.nvim",
-      opts = {
-        ensure_installed = {
-          "xmlformatter",
-        },
-      },
-    },
-    opts = {
-      formatters_by_ft = {
-        xml = { "xmlformatter" },
-      },
-    },
   },
   {
     "stevearc/conform.nvim",

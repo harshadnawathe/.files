@@ -1,6 +1,9 @@
 return {
   {
     "epwalsh/obsidian.nvim",
+    dependencies = {
+      "ibhagwan/fzf-lua",
+    },
     init = function()
       local wk = require("which-key")
       wk.add({
@@ -75,6 +78,9 @@ return {
       },
       ui = {
         enable = false,
+      },
+      picker = {
+        name = "fzf-lua",
       },
     },
     keys = {

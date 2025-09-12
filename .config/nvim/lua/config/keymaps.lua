@@ -13,6 +13,9 @@ keymap.set("n", "<A-Down>", "<cmd>resize -2<cr>", { desc = "Decrease window heig
 keymap.set("n", "<A-Left>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width" })
 keymap.set("n", "<A-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width" })
 
--- Helix like moves 
-keymap.set("n", "gh", "^", {desc = "Move to start", remap = true})
-keymap.set("n", "gl", "$", {desc = "Move to end", remap = true})
+-- Helix like moves
+keymap.set("n", "gh", "^", { desc = "Move to start", remap = true })
+keymap.set("n", "gl", "$", { desc = "Move to end", remap = true })
+
+keymap.set({ "n", "x" }, "<A-S-k>", "<C-Space>", { desc = "Incremental selection - Select", remap = true })
+keymap.set("x", "<A-S-j>", "<BS>", { desc = "Incremental selection - Deselect", remap = true })

@@ -1,9 +1,6 @@
 return {
   {
-    "epwalsh/obsidian.nvim",
-    dependencies = {
-      "ibhagwan/fzf-lua",
-    },
+    "obsidian-nvim/obsidian.nvim",
     init = function()
       local wk = require("which-key")
       wk.add({
@@ -19,8 +16,7 @@ return {
         },
       },
       completion = {
-        -- blink is not supported
-        nvim_cmp = false,
+        blink = true,
       },
       disable_frontmatter = true,
       templates = {
@@ -80,7 +76,7 @@ return {
         enable = false,
       },
       picker = {
-        name = "fzf-lua",
+        name = "snacks.pick",
       },
     },
     keys = {

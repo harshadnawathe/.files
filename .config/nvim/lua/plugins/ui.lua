@@ -12,7 +12,7 @@ return {
     "b0o/incline.nvim",
     event = "BufReadPre",
     priority = 1200,
-    dependencies = { "echasnovski/mini.icons" },
+    dependencies = { "nvim-mini/mini.icons" },
     config = function()
       require("incline").setup({
         highlight = {

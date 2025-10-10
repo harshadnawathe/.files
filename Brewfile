@@ -42,7 +42,7 @@ end
 brew "jq"
 brew "yq"
 brew "ripgrep"
-brew "ast-grep"
+# brew "ast-grep"
 # brew "git"
 brew "pre-commit"
 brew "starship"

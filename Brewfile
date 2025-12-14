@@ -81,10 +81,10 @@ brew "wget"
 # brew "dos2unix"
 brew "btop"
 
-brew "qemu"
-brew "colima"
+# brew "qemu"
+# brew "colima"
 # brew "minikube" # repalced with rancher
-# cask "rancher"   # replaced with colima
+cask "rancher"   # replaced with colima
 # brew "kind"
 brew "docker"
 brew "docker-compose"

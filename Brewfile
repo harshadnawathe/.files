@@ -178,6 +178,11 @@ brew "fd" # required by nvim venv-selector-plugin
 brew "luarocks"
 # brew "checkstyle"
 # brew "pmd"
+brew "grpcurl"
+brew "websocat"
+brew "imagemagick"
+brew "gs"
+brew "pngpaste"
 
 brew "ollama"
 

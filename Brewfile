@@ -1,10 +1,5 @@
 cask_args appdir: "/Applications"
 
-tap "homebrew/bundle"
-# tap "homebrew/cask"
-# tap "homebrew/core"
-tap "homebrew/cask-fonts"
-tap "homebrew/services"
 tap "buo/cask-upgrade"
 
 # clojure

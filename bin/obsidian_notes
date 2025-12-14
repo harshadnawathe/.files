@@ -1,0 +1,20 @@
+#!/bin/bash
+# vi: ft=sh
+
+choices=("New note" "Today's note" "Find note")
+
+choice=$(printf "%s\n" "${choices[@]}" | fzf)
+
+case $choice in
+"${choices[0]}")
+  nvim -c "call feedkeys(' on')"
+  ;;
+
+"${choices[1]}")
+  nvim -c "call feedkeys(' ot')"
+  ;;
+
+"${choices[2]}")
+  nvim -c "call feedkeys(' of')"
+  ;;
+esac

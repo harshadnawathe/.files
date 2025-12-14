@@ -184,7 +184,7 @@ brew "imagemagick"
 brew "gs"
 brew "pngpaste"
 
-brew "ollama"
+# brew "ollama"
 
 cask "rectangle"
 cask "notunes"

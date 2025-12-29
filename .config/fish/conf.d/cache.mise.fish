@@ -1,7 +1,10 @@
 status is-interactive; or exit 0
 
+fish_add_path --global --path /opt/homebrew/bin
 set -gx MISE_SHELL fish
-set -gx __MISE_ORIG_PATH $PATH
+if not set -q __MISE_ORIG_PATH
+    set -gx __MISE_ORIG_PATH $PATH
+end
 
 function mise
   if test (count $argv) -eq 0

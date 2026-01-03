@@ -37,12 +37,8 @@ return {
               { "<leader>cgp", ":GoFixPlurals<CR>", desc = "Fix Plurals (Go)" },
               { "<leader>cgr", ":GoGenReturn<CR>", desc = "Return Value (Go)" },
               { "<leader>cgs", ":GoFillStruct<CR>", desc = "Auto fill struct Value (Go)" },
-              { "<leader>t", group = "test" },
-              { "<leader>tT", ":GoTestFunc -s<CR>", desc = "Run Test (Go)" },
               { "<leader>tg", ":GoAddTest<CR>", desc = "Generate Test (Go)" },
-              { "<leader>tr", ":GoTestFunc<CR>", desc = "Run Nearest Test (Go)" },
-              { "<leader>ts", ":GoAlt<CR>", desc = "Goto Subjects (Go)" },
-              { "<leader>tt", ":GoTestFile -v<CR>", desc = "Run All Test (Go)" },
+              { "<leader>t<CR>", ":GoAlt<CR>", desc = "Switch between test and code (Go)" },
             })
           end
         end,

@@ -19,7 +19,7 @@ return {
               desc = "Generate tests (JDTLS)",
             },
             {
-              "<leader>ts",
+              "<leader>t<CR>",
               function()
                 require("jdtls.tests").goto_subjects()
               end,

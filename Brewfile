@@ -27,6 +27,7 @@ brew "clang-format"
 
 # brew "zsh"
 brew "fish"
+brew "fisher"
 brew "jq"
 brew "yq"
 brew "ripgrep"

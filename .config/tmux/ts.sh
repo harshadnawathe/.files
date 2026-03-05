@@ -23,8 +23,8 @@ export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
   --color=spinner:#ff007c \
 "
 
-PROJECT_DIRS_PATHS=(~/dev ~/data)
-PROJECT_FILES_PATTERN="(settings\.xml|pom.xml|go.mod|package.json|[cC]argo.toml|.git\$)"
+PROJECT_DIRS_PATHS=(~/dev ~/code/)
+PROJECT_FILES_PATTERN="(settings\.xml|settings\.gradle|pom\.xml|go\.mod|package\.json|[cC]argo\.toml|\.git\\$)"
 PROJECT_SEARCH_DEPTH="${PROJECT_SEARCH_DEPTH:-6}"
 
 HOME_REPLACER=""                                          # default to a noop

@@ -1,6 +1,6 @@
 [tools]
 node = "20.11.0"
-rust = "1.78.0"
+rust = "1.93"
 java = "25"
 python = "3.10"
 gradle = "8.5"

@@ -276,13 +276,4 @@ if is_fish_installed && is_thefuck_installed
   end
 end
 
-is_fzf_installed = File.exist?('/opt/homebrew/bin/fzf')
-if is_fish_installed && is_fzf_installed 
-  File.open("#{Dir.home}/.config/fish/conf.d/cache.fzf.fish", mode:'w') do |f|
-    f.write("status is-interactive; or exit 0\n\n")
-    f.write(`/opt/homebrew/bin/fzf --fish`)
-    f.write("\n\nbind --erase \cr")
-  end
-end
-
 end

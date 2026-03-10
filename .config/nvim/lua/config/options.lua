@@ -8,3 +8,5 @@ vim.g.trouble_lualine = true
 vim.o.shell = "/opt/homebrew/bin/fish"
 
 vim.opt.colorcolumn = "120"
+
+vim.g.lazyvim_python_lsp = "basedpyright"

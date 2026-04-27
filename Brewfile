@@ -74,7 +74,7 @@ brew "ghq"
 # brew "terraform"
 # brew "spring-boot"
 
-brew "k9s"
+# brew "k9s"
 
 # brew "go" #using asdf-vm
 # brew "node@16" #using asdf-vm

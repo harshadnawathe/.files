@@ -290,6 +290,9 @@
 [delta "tokyonight"]
   syntax-theme = tokyonight_night
 
+[ghq]
+  root = "~/code"
+
 [merge]
   tool = nvimdiff
 [mergetool]

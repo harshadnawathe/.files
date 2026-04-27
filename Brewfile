@@ -65,6 +65,7 @@ brew "docker-credential-helper"
 # brew "python-tabulate"
 # brew "dvc"
 # brew "gh"
+brew "ghq"
 # brew "gnupg"
 
 # brew "hyperkit"

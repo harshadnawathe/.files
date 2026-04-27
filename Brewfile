@@ -181,7 +181,7 @@ cask "obsidian"
 cask "raycast"
 # cask "openoffice"
 # cask "libreoffice"
-cask "drawio"
+# cask "drawio"
 cask "karabiner-elements"
 
 cask "font-symbols-only-nerd-font"

@@ -190,7 +190,7 @@ cask "font-jetbrains-mono"
 cask "font-monaspace"
 
 # cask "font-hack-nerd-font"
-cask "font-fira-code-nerd-font"
+# cask "font-fira-code-nerd-font"
 # cask "font-jetbrains-mono-nerd-font"
 # cask "font-monaspace-nerd-font"
 # cask "font-meslo-lg-nerd-font"

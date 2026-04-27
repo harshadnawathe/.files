@@ -217,7 +217,7 @@ mas "‎WhatsApp", id: 310633997
 # For project work
 # brew "glab" 
 # brew "kubectx" 
-brew "kubectl" 
+# brew "kubectl" 
 # brew "helm"
 # brew "just" 
 # brew "sshuttle" 

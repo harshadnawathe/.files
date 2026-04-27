@@ -96,6 +96,8 @@ brew "k9s"
 # brew "duckdb"
 brew "tmux"
 
+tap "morantron/tmux-fingers"
+brew "tmux-fingers"
 brew "fzf"       #for tmux plugin
 brew "fpp"       #for tmux plugin
 # brew "urlview"   #for tmux urlview

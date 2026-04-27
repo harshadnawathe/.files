@@ -56,3 +56,4 @@ tags
 [._]*.un~
 
 # End of https://www.toptal.com/developers/gitignore/api/macos,vim
+/Library/Application Support/lazygit/state.yml

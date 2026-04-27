@@ -221,7 +221,7 @@ mas "‎WhatsApp", id: 310633997
 # brew "helm"
 # brew "just" 
 # brew "sshuttle" 
-brew "aws-vault" 
+# brew "aws-vault" 
 # tap "alajmo/mani" 
 # brew "mani"
 # brew "ansible" 

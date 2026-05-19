@@ -1,0 +1,65 @@
+command = /opt/homebrew/bin/tmux new-session -A -D -s __
+
+theme = Tokyonight Night
+window-decoration = false
+font-size = 15
+
+background = 000000
+background-image = ~/.files/assets/iron-man-wallhaven-j8xlpy.jpg
+background-image-fit = cover
+background-image-opacity = 0.4
+
+macos-option-as-alt = true
+
+# Key bindings
+
+# New pane
+keybind = cmd+t=text:\x01c
+keybind = cmd+x=text:\x01x
+
+# Split Panes
+keybind = cmd+d=text:\x01|
+keybind = cmd+shift+d=text:\x01-
+
+# Close window
+keybind = cmd+w=text:\x01&
+
+# Pane navigation
+keybind = cmd+left=text:\x01h
+keybind = cmd+right=text:\x01l
+keybind = cmd+up=text:\x01k
+keybind = cmd+down=text:\x01j
+
+# Window navigation
+keybind = cmd+[=text:\x01p
+keybind = cmd+]=text:\x01n
+keybind = cmd+\=text:\x01a
+
+keybind = cmd+1=text:\x011
+keybind = cmd+2=text:\x012
+keybind = cmd+3=text:\x013
+keybind = cmd+4=text:\x014
+keybind = cmd+5=text:\x015
+keybind = cmd+6=text:\x016
+keybind = cmd+7=text:\x017
+keybind = cmd+8=text:\x018
+keybind = cmd+9=text:\x019
+
+# Shift window
+keybind = cmd+shift+,=text:\x01<
+keybind = cmd+shift+.=text:\x01>
+
+# Session navigation
+keybind = cmd+shift+[=text:\x01(
+keybind = cmd+shift+]=text:\x01)
+keybind = cmd+shift+\=text:\x01S
+
+# Promotion
+keybind = cmd+/=text:\x01!
+keybind = cmd+shift+/=text:\x01@
+
+# Mark & move (Chords)
+keybind = cmd+.>m=text:\x01m
+keybind = cmd+.>-=text:\x01t-
+keybind = cmd+.>|=text:\x01t|
+keybind = cmd+.>@=text:\x01t@

@@ -5,9 +5,9 @@ window-decoration = false
 font-size = 15
 
 background = 000000
-background-image = ~/.files/assets/iron-man-wallhaven-j8xlpy.jpg
+background-image = ~/.files/assets/avatar-elements-wallhaven-4xlwel.png
 background-image-fit = cover
-background-image-opacity = 0.4
+background-image-opacity = 0.25
 
 macos-option-as-alt = true
 

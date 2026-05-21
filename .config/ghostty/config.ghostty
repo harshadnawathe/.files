@@ -7,7 +7,7 @@ font-size = 15
 background = 000000
 background-image = ~/.files/assets/avatar-elements-wallhaven-4xlwel.png
 background-image-fit = cover
-background-image-opacity = 0.25
+background-image-opacity = 0.30
 
 macos-option-as-alt = true
 

@@ -46,8 +46,8 @@ keybind = cmd+8=text:\x018
 keybind = cmd+9=text:\x019
 
 # Shift window
-keybind = cmd+shift+,=text:\x01<
-keybind = cmd+shift+.=text:\x01>
+keybind = cmd+shift+left=text:\x01<
+keybind = cmd+shift+right=text:\x01>
 
 # Session navigation
 keybind = cmd+shift+[=text:\x01(

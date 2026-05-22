@@ -1,3 +1,7 @@
+
+# Enable Vi mode
+set -g fish_key_bindings fish_vi_key_bindings
+
 # brew
 if not test -f ~/.config/fish/caches/brew_shellenv.fish
   brew shellenv fish > ~/.config/fish/caches/brew_shellenv.fish

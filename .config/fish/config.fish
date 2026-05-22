@@ -19,6 +19,10 @@ if not status is-interactive
 end
 
 if status is-interactive
+  if test -f (brew --prefix)/etc/brew-wrap.fish
+    source (brew --prefix)/etc/brew-wrap.fish
+  end
+
   fzf_configure_bindings --directory=\cf --git_log= --git_status=\cs --history= --processes= --variables=\cv
 
   # starship

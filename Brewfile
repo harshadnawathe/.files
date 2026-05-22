@@ -261,6 +261,7 @@ if is_fish_installed && is_starship_installed
   File.open("#{Dir.home}/.config/fish/conf.d/cache.starship.fish", mode:'w') do |f|
     f.write("status is-interactive; or exit 0\n\n")
     f.write(`/opt/homebrew/bin/starship init fish --print-full-init`)
+    f.write("enable_transience")
   end
 end
 

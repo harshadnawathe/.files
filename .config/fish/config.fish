@@ -22,6 +22,7 @@ if status is-interactive
     starship init fish > ~/.config/fish/caches/starship_init.fish
   end
   source ~/.config/fish/caches/starship_init.fish
+  enable_transience
 
   # mise
   if not test -f ~/.config/fish/caches/mise_activate.fish

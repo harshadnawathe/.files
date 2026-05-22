@@ -240,45 +240,6 @@ mas "‎WhatsApp", id: 310633997
 # brew "Azure/kubelogin/kubelogin"
 
 at_exit do
-
-is_fish_installed = File.exist?('/opt/homebrew/bin/fish')
-if is_fish_installed 
-  File.open("#{Dir.home}/.config/fish/conf.d/cache.brew.fish", mode:'w') do |f|
-    f.write(`/opt/homebrew/bin/brew shellenv fish`)
-  end
-end
-
-is_mise_installed = File.exist?('/opt/homebrew/bin/mise')
-if is_fish_installed && is_mise_installed 
-  File.open("#{Dir.home}/.config/fish/conf.d/cache.mise.fish", mode:'w') do |f|
-    f.write("status is-interactive; or exit 0\n\n")
-    f.write(`/opt/homebrew/bin/mise activate fish`)
-  end
-end
-
-is_starship_installed = File.exist?('/opt/homebrew/bin/starship')
-if is_fish_installed && is_starship_installed 
-  File.open("#{Dir.home}/.config/fish/conf.d/cache.starship.fish", mode:'w') do |f|
-    f.write("status is-interactive; or exit 0\n\n")
-    f.write(`/opt/homebrew/bin/starship init fish --print-full-init`)
-    f.write("enable_transience")
-  end
-end
-
-is_zoxide_installed = File.exist?('/opt/homebrew/bin/zoxide')
-if is_fish_installed && is_zoxide_installed 
-  File.open("#{Dir.home}/.config/fish/conf.d/cache.zoxide.fish", mode:'w') do |f|
-    f.write("status is-interactive; or exit 0\n\n")
-    f.write(`/opt/homebrew/bin/zoxide init fish`)
-  end
-end
-
-is_thefuck_installed = File.exist?('/opt/homebrew/bin/thefuck')
-if is_fish_installed && is_thefuck_installed
-  File.open("#{Dir.home}/.config/fish/conf.d/cache.thefuck.fish", mode:'w') do |f|
-    f.write("status is-interactive; or exit 0\n\n")
-    f.write(`/opt/homebrew/bin/thefuck --alias`)
-  end
-end
-
+  # delete cached configurations to re-generate on fish init
+  File.delete(*Dir.glob("#{Dir.home}/.config/fish/caches/*.fish"))
 end

@@ -3,5 +3,6 @@
 .gitignore
 .pre-commit-config.yaml
 assets
+Brewfile.old
 LICENSE
 README.md

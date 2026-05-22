@@ -1,0 +1,56 @@
+# Enable autocomplete and validation in your editor (requires Taplo LSP)
+#:schema https://github.com/joshmedeski/sesh/raw/main/sesh.schema.json
+
+cache = false
+
+blacklist = ["_cheat", "_notes"]
+
+sort_order = [
+    "tmuxinator",
+    "tmux",
+    "zoxide",
+    "config",
+]
+
+[default_session]
+preview_command = "ls {}"
+
+[[session]]
+name = "git config"
+path = "~/.files/.config/git/"
+startup_command = "nvim config"
+preview_command = "bat --color=always ~/.files/.config/git/config"
+
+[[session]]
+name = "tmux config"
+path = "~/.files/.config/tmux/"
+startup_command = "nvim tmux.conf"
+preview_command = "bat --color=always ~/.files/.config/tmux/tmux.conf"
+
+[[session]]
+name = "nvim config"
+path = "~/.files/.config/nvim/"
+startup_command = "nvim -c \"call feedkeys(' fF')\""
+
+[[session]]
+name = "fish config"
+path = "~/.files/.config/fish/"
+startup_command = "nvim -c \"call feedkeys(' fF')\""
+
+[[session]]
+name = "ghostty config"
+path = "~/.files/.config/ghostty/"
+startup_command = "nvim config.ghostty"
+preview_command = "bat --color=always ~/.files/.config/ghostty/config.ghostty"
+
+[[session]]
+name = "starship config"
+path = "~/.files/.config/"
+startup_command = "nvim starship.toml"
+preview_command = "bat --color=always ~/.files/.config/starship.toml"
+
+[[session]]
+name = "mise config"
+path = "~/.files/.config/mise/"
+startup_command = "nvim config.toml"
+preview_command = "bat --color=always ~/.files/.config/mise/config.toml"

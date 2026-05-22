@@ -1,4 +1,4 @@
-command = /opt/homebrew/bin/tmux new-session -A -D -s __
+command = /bin/zsh -l -c 'tmux new-session -A -D -s __'
 
 theme = Tokyonight Night
 window-decoration = false

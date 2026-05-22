@@ -29,6 +29,10 @@ if status is-interactive
   if not test -f ~/.config/fish/caches/starship_init.fish 
     starship init fish > ~/.config/fish/caches/starship_init.fish
   end
+  function starship_transient_prompt_func
+    printf "   "
+    starship module character
+  end
   source ~/.config/fish/caches/starship_init.fish
   enable_transience
 

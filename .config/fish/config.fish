@@ -8,7 +8,7 @@ fish_add_path -gm \
 ~/bin \
 ~/go/bin \
 ~/.local/bin \
-"/Users/harshadn/Library/Application Support/JetBrains/Toolbox/scripts/"
+"~/Library/Application Support/JetBrains/Toolbox/scripts/"
 
 if not status is-interactive
   fish_add_path -gm ~/.local/share/mise/shims

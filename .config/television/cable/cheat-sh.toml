@@ -1,0 +1,21 @@
+
+[metadata]
+name = "cheat.sh"
+description = "Browse cheatsheets from https://cheat.sh/"
+
+[source]
+command = "curl https://cheat.sh/:list 2>/dev/null | grep -v '^:'"
+no_sort = true
+frecency = false
+
+[preview]
+command = "curl https://cheat.sh/{}"
+
+[keybindings]
+enter = "actions:open"
+ctrl-e = "actions:open"
+ 
+[actions.open]
+description = "Show cheatsheet in pager"
+command     = "curl https://cheat.sh/{} 2>/dev/null | less -R"
+mode        = "execute"

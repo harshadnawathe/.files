@@ -4,7 +4,7 @@ name = "cheat.sh"
 description = "Browse cheatsheets from https://cheat.sh/"
 
 [source]
-command = "curl https://cheat.sh/:list 2>/dev/null | grep -v '^:'"
+command = "curl https://cheat.sh/:list 2>/dev/null"
 no_sort = true
 frecency = false
 

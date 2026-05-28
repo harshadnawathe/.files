@@ -53,4 +53,11 @@ if status is-interactive
     zoxide init fish > ~/.config/fish/caches/zoxide-init.fish
   end
   source ~/.config/fish/caches/zoxide-init.fish
+
+  # television
+  if not test -f ~/.config/fish/caches/television_integration.fish
+    tv init fish > ~/.config/fish/caches/television_integration.fish
+  end
+  source ~/.config/fish/caches/television_integration.fish
+  
 end

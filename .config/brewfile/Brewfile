@@ -1,4 +1,4 @@
 # Common brew packages
-include './Brewfile.common'
+file './Brewfile.common'
 # Main file
 main './Brewfile.$HOSTNAME'

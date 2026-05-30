@@ -151,7 +151,6 @@ cask google-chrome
 cask google-drive
 cask jetbrains-toolbox
 cask karabiner-elements
-cask kitty
 cask microsoft-teams
 cask notunes
 cask obsidian

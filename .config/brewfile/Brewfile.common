@@ -140,6 +140,7 @@ cask font-jetbrains-mono
 cask font-monaspace
 cask font-symbols-only-nerd-font
 cask ghostty
+cask google-chrome
 cask karabiner-elements
 cask notunes
 cask obsidian
@@ -149,3 +150,5 @@ cask rectangle
 tap morantron/tmux-fingers
 
 tap rcmdnk/file
+brew brew-file
+

@@ -2,8 +2,15 @@
 # tap repositories and their packages
 
 tap homebrew/core
+brew bdw-gc
+brew crystal
+brew llvm
+brew pkgconf
+brew reattach-to-user-namespace
+brew z3
 
 tap homebrew/cask
+cask google-chrome
 cask google-drive
 cask jetbrains-toolbox
 cask microsoft-teams
@@ -11,11 +18,10 @@ cask rancher
 cask slack
 cask visual-studio-code
 
-tap buo/cask-upgrade
-
 tap morantron/tmux-fingers
 
 tap rcmdnk/file
+brew brew-file
 
 # App Store applications
 appstore 682658836 GarageBand (10.4.13)
@@ -23,4 +29,3 @@ appstore 408981434 iMovie (10.4.3)
 appstore 409183694 Keynote (14.5)
 appstore 409203825 Numbers (14.4)
 appstore 409201541 Pages (14.4)
-appstore 310633997 WhatsApp (26.20.72)

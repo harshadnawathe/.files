@@ -4,16 +4,13 @@
 tap homebrew/core
 brew aom
 brew bat
-brew bdw-gc
 brew btop
 brew ca-certificates
 brew cairo
 brew clang-format
 brew cmake
 brew coreutils
-brew crystal
 brew docker
-brew docker-completion
 brew docker-compose
 brew docker-credential-helper
 brew eza
@@ -80,7 +77,6 @@ brew libxrender
 brew libyaml
 brew little-cms2
 brew llhttp
-brew llvm
 brew lpeg
 brew lsd
 brew lua
@@ -90,7 +86,6 @@ brew luv
 brew lz4
 brew lzo
 brew m4
-brew mas
 brew mise
 brew mpdecimal
 brew mpfr
@@ -107,7 +102,6 @@ brew parallel
 brew pcre2
 brew pinentry
 brew pixman
-brew pkgconf
 brew pngpaste
 brew pre-commit
 brew python@3.14
@@ -135,7 +129,6 @@ brew xorgproto
 brew xz
 brew yazi
 brew yq
-brew z3
 brew zoxide
 brew zstd
 
@@ -147,17 +140,12 @@ cask font-jetbrains-mono
 cask font-monaspace
 cask font-symbols-only-nerd-font
 cask ghostty
-cask google-chrome
 cask karabiner-elements
 cask notunes
 cask obsidian
 cask raycast
 cask rectangle
 
-tap buo/cask-upgrade
-
 tap morantron/tmux-fingers
-brew tmux-fingers
 
 tap rcmdnk/file
-brew brew-file

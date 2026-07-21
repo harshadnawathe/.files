@@ -57,7 +57,6 @@ brew libheif
 brew libidn
 brew libidn2
 brew libksba
-brew libnghttp2
 brew libpng
 brew libssh2
 brew libtasn1
@@ -117,7 +116,6 @@ brew thefuck
 brew tlrc
 brew tmux
 brew tree-sitter
-brew unbound
 brew unibilium
 brew usage
 brew utf8proc

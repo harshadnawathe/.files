@@ -4,12 +4,15 @@
 tap homebrew/core
 brew bdw-gc
 brew crystal
+brew json-c
 brew llvm
 brew pkgconf
 brew reattach-to-user-namespace
 brew z3
 
 tap homebrew/cask
+cask claude-code
+cask excalidrawz
 cask google-drive
 cask jetbrains-toolbox
 cask microsoft-teams
@@ -18,6 +21,8 @@ cask slack
 cask visual-studio-code
 
 tap morantron/tmux-fingers
+
+tap rcmdnk/file
 
 # App Store applications
 appstore 682658836 GarageBand (10.4.13)

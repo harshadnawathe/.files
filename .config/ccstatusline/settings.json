@@ -1,0 +1,110 @@
+{
+  "version": 3,
+  "lines": [
+    [
+      {
+        "id": "ed792eb5-8855-443c-a65b-262f79842f8f",
+        "type": "context-bar",
+        "metadata": {
+          "display": "progress-short"
+        }
+      },
+      {
+        "id": "3",
+        "type": "context-length",
+        "color": "brightBlack"
+      },
+      {
+        "id": "e303c7a0-d1d7-4a22-88ee-3b98a2290420",
+        "type": "tokens-total",
+        "backgroundColor": "bgBrightRed"
+      }
+    ],
+    [
+      {
+        "id": "b52a1e1d-3877-4e13-b7c3-3aa221fb8c4e",
+        "type": "current-working-dir",
+        "metadata": {
+          "segments": "2"
+        }
+      },
+      {
+        "id": "a39743af-f57b-4175-9c8a-a4ab64eb4047",
+        "type": "git-branch",
+        "metadata": {
+          "linkToGitHub": "false"
+        }
+      },
+      {
+        "id": "b7b2e0f2-9e56-490e-be8e-14971eed89f6",
+        "type": "git-status",
+        "metadata": {
+          "hideNoGit": "false"
+        }
+      }
+    ],
+    [
+      {
+        "id": "b97976f9-a7a9-4a68-971c-e455444ae4b1",
+        "type": "model",
+        "backgroundColor": "bgBrightGreen"
+      },
+      {
+        "id": "e91b14c4-44a2-4c56-b92b-f309f16db280",
+        "type": "thinking-effort",
+        "backgroundColor": "bgRed"
+      },
+      {
+        "id": "b846a246-76be-459a-9594-eaf29c393c3c",
+        "type": "skills",
+        "backgroundColor": "bgBrightYellow"
+      }
+    ],
+    [
+      {
+        "id": "01d42517-d5c2-409f-a8de-f1ffe98915b1",
+        "type": "claude-account-email",
+        "backgroundColor": "bgBrightBlack"
+      },
+      {
+        "id": "d42d8258-b607-4563-b4e1-7b84e74551ad",
+        "type": "session-clock"
+      },
+      {
+        "id": "f53ce2f4-e6f0-4efd-a23f-741509afb2d1",
+        "type": "session-cost"
+      }
+    ]
+  ],
+  "flexMode": "full",
+  "compactThreshold": 60,
+  "colorLevel": 2,
+  "defaultPadding": " ",
+  "defaultPaddingSide": "both",
+  "inheritSeparatorColors": false,
+  "globalBold": false,
+  "gitCacheTtlSeconds": 5,
+  "minimalistMode": true,
+  "powerline": {
+    "enabled": true,
+    "separators": [
+      ""
+    ],
+    "separatorInvertBackground": [
+      false
+    ],
+    "startCaps": [
+      ""
+    ],
+    "endCaps": [
+      ""
+    ],
+    "theme": "onedark",
+    "autoAlign": true,
+    "continueThemeAcrossLines": false
+  },
+  "installation": {
+    "method": "auto-update",
+    "packageManager": "npm"
+  }
+}

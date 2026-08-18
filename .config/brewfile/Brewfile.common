@@ -142,6 +142,7 @@ cask font-symbols-only-nerd-font
 cask ghostty
 cask google-chrome
 cask karabiner-elements
+cask kitty
 cask notunes
 cask obsidian
 cask raycast

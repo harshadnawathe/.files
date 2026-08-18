@@ -1,5 +1,7 @@
-# 1. Ensure Homebrew paths are front-and-center
-eval "$(/opt/homebrew/bin/brew shellenv)"
+# Login shells only. The PATH itself is built in ~/.zshenv.
+#
+# /etc/zprofile runs path_helper *after* ~/.zshenv, rebuilding PATH with
+# /etc/paths first and appending ours after — which pushes the mise shims behind
+# /usr/bin, letting /usr/bin/ruby and the java stub win. Re-assert to undo that.
 
-# 2. Expose Mise shims and local bins to the core environment
-export PATH="$HOME/.local/share/mise/shims:$HOME/.local/share/mise/bin:$HOME/.local/bin:$PATH"
+(( $+functions[zsh_set_path] )) && zsh_set_path

@@ -1,0 +1,128 @@
+onboarding = false
+# herdr configuration
+#
+# Trial setup that mirrors the tmux workflow in ../tmux/tmux.conf.
+# tmux remains the default (Ghostty still autostarts it); herdr is launched
+# explicitly with `herdr-window` (see ../../bin/herdr-window).
+#
+# Full schema: `herdr --default-config`. Reload in a running server with
+# `prefix+shift+r` or `herdr server reload-config`.
+
+[theme]
+# Matches Ghostty's "Tokyonight Night" and ../tmux/theme.conf.
+name = "tokyo-night"
+
+[terminal]
+# tmux equivalent: set -g default-command "exec fish -i"
+default_shell = "/opt/homebrew/bin/fish"
+shell_mode = "auto"
+# New panes/tabs inherit the source pane's directory, like `bind c -c "#{pane_current_path}"`.
+new_cwd = "follow"
+
+[keys]
+# tmux equivalent: set -g prefix C-a
+prefix = "ctrl+a"
+split_vertical = ["prefix+shift+\\", "prefix+v" ]
+split_horizontal = ["prefix+minus"]
+toggle_sidebar = ["prefix+a"]
+
+# --- Displaced herdr defaults -------------------------------------------------
+# Convention: prefix+shift+<key> is kept for the tmux muscle-memory popups
+# below, and the herdr action that owned that key moves to prefix+alt+<key>.
+rename_tab = "prefix+alt+t"     # was prefix+shift+t -> sesh picker
+new_worktree = "prefix+alt+g"   # was prefix+shift+g -> lazygit
+new_workspace = "prefix+alt+n"  # was prefix+shift+n -> obsidian notes
+
+# --- Workspace navigation -----------------------------------------------------
+# Unset by default; vim-style siblings of focus_pane_left/right (prefix+h/l).
+goto = "prefix+s"
+settings = "prefix+comma"
+previous_workspace = "prefix+shift+h"
+next_workspace = "prefix+shift+l"
+
+# Everything else stays on herdr defaults, which already line up with the
+# Ghostty cmd+* bindings that send tmux prefix sequences:
+#   cmd+t -> prefix+c (new_tab)          cmd+x -> prefix+x (close_pane)
+#   cmd+[/] -> prefix+p/n (prev/next tab) cmd+1..9 -> switch_tab
+#   cmd+arrows -> prefix+h/j/k/l (focus_pane_*)
+#   cmd+shift+d -> prefix+minus (split_horizontal)
+# Not portable: cmd+d sends prefix+| and cmd+w sends prefix+& (tmux-only keys;
+# use prefix+v to split vertically and prefix+shift+x to close a tab).
+# Built-in pickers worth knowing: workspace_picker = prefix+w, goto = prefix+g.
+
+# --- Custom commands ----------------------------------------------------------
+# tmux equivalent: bind-key -n 'M-Space' display-popup -E -w 70% -h 70% tv sesh
+# Ghostty sets macos-option-as-alt = true, so opt+space arrives as alt+space.
+[[keys.command]]
+key = "alt+space"
+type = "plugin_action"
+command = "fullerzz.sesh.open-picker"
+
+# tmux equivalent: bind -r G display-popup -w80% -h80% -E lazygit
+[[keys.command]]
+key = "prefix+shift+g"
+type = "popup"
+command = "lazygit"
+width = "80%"
+height = "80%"
+
+# tmux equivalent: bind -r i display-popup -T '[ cheat.sh ]' ... tv cheat.sh
+# The tmux version wrapped this in a throwaway `_cheat` session to get a
+# scratch surface; a herdr popup is already modal and self-closing, so the
+# wrapper (and sesh.toml's blacklist of _cheat/_notes) is unnecessary here.
+[[keys.command]]
+key = "prefix+i"
+type = "popup"
+command = "tv cheat.sh"
+width = "80%"
+height = "80%"
+
+# tmux equivalent: bind -r N display-popup -T '[ notes ]' ... ~/bin/obsidian_notes
+[[keys.command]]
+key = "prefix+shift+n"
+type = "popup"
+command = "~/bin/obsidian_notes"
+width = "80%"
+height = "80%"
+
+[[keys.command]]
+key = "prefix+shift+b"
+type = "plugin_action"
+command = "fullerzz.sesh.last"
+
+[ui]
+# Agent panel is the reason for the trial; keep it visible and attention-ordered.
+sidebar_start_collapsed = false
+agent_panel_sort = "priority"
+accent = "#7aa2f7"
+
+[ui.sidebar.agents.rows_by_agent]
+claude = [
+  ["state_icon", "workspace", "tab"],
+  ["terminal_title_stripped"],
+  ["agent"],
+]
+
+[ui.toast]
+# "herdr" = in-app toasts. Use "terminal" to have Ghostty raise macOS
+# notifications instead, or "off" to disable.
+delivery = "herdr"
+
+[session]
+# Replaces tmux-resurrect/tmux-continuum: agent panes come back after a
+# server restart instead of being re-created empty.
+resume_agents_on_restore = true
+
+[experimental]
+# Closest analogue to `tmux-resurrect` saving scrollback: retain recent pane
+# history across full server restarts.
+pane_history = true
+
+# Replaces tmux's `set -g allow-passthrough on` for inline images. Experimental
+# and requires a Kitty-graphics-capable outer terminal (Ghostty qualifies);
+# enable if image rendering in nvim panes is missing.
+# kitty_graphics = true
+
+[advanced]
+# Matches Ghostty's own scrollback-limit default.
+scrollback_limit_bytes = 10000000

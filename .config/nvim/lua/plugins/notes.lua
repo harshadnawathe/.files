@@ -1,13 +1,15 @@
 return {
   {
-    "obsidian-nvim/obsidian.nvim",
-    init = function()
-      local wk = require("which-key")
-      wk.add({
+    "folke/which-key.nvim",
+    opts = {
+      spec = {
         { "<leader>o", group = "obsidian", mode = { "n", "v" } },
         { "<leader>ol", group = "links", mode = { "n", "v" } },
-      })
-    end,
+      },
+    },
+  },
+  {
+    "obsidian-nvim/obsidian.nvim",
     opts = {
       workspaces = {
         {

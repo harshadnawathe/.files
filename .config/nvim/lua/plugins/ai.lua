@@ -21,7 +21,7 @@ return {
   },
   opts = {
     nes = {
-      eanbled = false,
+      enabled = false,
     },
     cli = {
       mux = {

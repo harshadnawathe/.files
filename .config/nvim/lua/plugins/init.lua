@@ -1,7 +1,7 @@
 return {
   {
     "nvim-treesitter/nvim-treesitter",
-    opts = { ensure_installed = { "norg", "svelte", "typst", "vue" } }, -- required for snacks.image
+    opts = { ensure_installed = { "latex", "svelte", "typst", "vue" } }, -- required for snacks.image
   },
   {
     "mason-org/mason.nvim",

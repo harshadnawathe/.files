@@ -17,5 +17,6 @@ keymap.set("n", "<A-Right>", "<cmd>vertical resize +2<cr>", { desc = "Increase w
 keymap.set("n", "gh", "^", { desc = "Move to start", remap = true })
 keymap.set("n", "gl", "$", { desc = "Move to end", remap = true })
 
-keymap.set({ "n", "x" }, "<A-S-k>", "<C-Space>", { desc = "Incremental selection - Select", remap = true })
-keymap.set("x", "<A-S-j>", "<BS>", { desc = "Incremental selection - Deselect", remap = true })
+-- Incremental selection lives in the flash.nvim spec (lua/plugins/editor.lua):
+-- flash reads keys with getcharstr(), so remaps never reach it and it has to be
+-- configured through its own `actions` table instead.

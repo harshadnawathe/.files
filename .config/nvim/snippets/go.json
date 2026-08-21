@@ -3,5 +3,10 @@
     "prefix": "swap",
     "body": "${1:x}, ${2:y} = $2, $1$0",
     "description": "Swap two variables"
+  },
+  "If err != nil": {
+    "prefix": "iferr",
+    "body": "if err != nil {\n\treturn ${1:err}\n}$0",
+    "description": "Guard on err"
   }
 }

@@ -11,7 +11,9 @@ return {
   --   },
   -- },
   {
+    -- readline bindings; nothing it maps matters before insert or cmdline mode
     "tpope/vim-rsi",
+    event = { "InsertEnter", "CmdlineEnter" },
   },
   {
     "folke/flash.nvim",

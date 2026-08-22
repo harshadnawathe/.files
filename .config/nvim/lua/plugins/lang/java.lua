@@ -8,9 +8,10 @@ return {
 
       return vim.tbl_deep_extend("force", opts, {
         -- custom on_attach hook to register additional options
-        on_attach = function()
-          local wk = require("which-key")
-          wk.add({
+        on_attach = function(args)
+          require("which-key").add({
+            mode = "n",
+            buffer = args.buf,
             {
               "<leader>tg",
               function()

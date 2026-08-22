@@ -7,7 +7,7 @@ return {
       use_default_keymaps = false,
     },
     keys = {
-      { "<leader>%", ":TSJToggle<CR>", desc = "args: Split or Join" },
+      { "<leader>cj", "<cmd>TSJToggle<cr>", desc = "Split or Join args" },
     },
   },
   {

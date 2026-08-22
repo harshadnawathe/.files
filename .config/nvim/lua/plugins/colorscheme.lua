@@ -13,8 +13,9 @@ return {
   {
     "zenbones-theme/zenbones.nvim",
     dependencies = "rktjmp/lush.nvim",
-    lazy = false,
-    priority = 1000,
+    -- Loaded on demand: lazy.nvim's ColorSchemePre handler pulls this in when
+    -- `:colorscheme zenbones` runs, so it costs nothing until then.
+    lazy = true,
     -- you can set set configuration options here
     -- config = function()
     --     vim.g.zenbones_darken_comments = 45

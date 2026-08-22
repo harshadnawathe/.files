@@ -110,7 +110,20 @@ return {
       },
       {
         "<leader>ox",
-        "<CMD>!rm '%:p'<CR>",
+        function()
+          local file = vim.api.nvim_buf_get_name(0)
+          local name = vim.fn.fnamemodify(file, ":t")
+          Snacks.input({ prompt = "Delete " .. name .. "? (y/N) " }, function(answer)
+            if answer and answer:lower() == "y" then
+              local ok, err = pcall(vim.fn.delete, file)
+              if ok then
+                vim.api.nvim_buf_delete(0, { force = true })
+              else
+                vim.notify("Could not delete " .. name .. ": " .. tostring(err), vim.log.levels.ERROR)
+              end
+            end
+          end)
+        end,
         desc = "obsidian remove note",
         ft = "markdown",
       },

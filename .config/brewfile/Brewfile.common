@@ -25,6 +25,7 @@ brew fswatch
 brew fzf
 brew gawk
 brew gettext
+brew gh
 brew ghostscript
 brew ghq
 brew giflib

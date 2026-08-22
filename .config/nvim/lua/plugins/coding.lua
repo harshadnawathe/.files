@@ -14,18 +14,19 @@ return {
     "saghen/blink.cmp",
     opts = {
       keymap = {
+        -- Inside a snippet Tab jumps placeholders, otherwise it walks the menu.
+        -- The direction filter matters: a bare snippet_active() is still true on
+        -- the last placeholder, where there is nothing left to jump to.
         ["<Tab>"] = {
           function(cmp)
-            return cmp.snippet_active() and cmp.accept() or cmp.select_next()
+            return cmp.snippet_active({ direction = 1 }) and cmp.snippet_forward() or cmp.select_next()
           end,
-          "snippet_forward",
           "fallback",
         },
         ["<S-Tab>"] = {
           function(cmp)
-            return cmp.snippet_active() and cmp.accept() or cmp.select_prev()
+            return cmp.snippet_active({ direction = -1 }) and cmp.snippet_backward() or cmp.select_prev()
           end,
-          "snippet_backward",
           "fallback",
         },
       },

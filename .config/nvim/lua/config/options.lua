@@ -8,6 +8,6 @@ vim.g.trouble_lualine = true
 -- and plugin job control, much of which emits POSIX-only syntax. fish is set for
 -- the interactive terminal instead, in the snacks spec.
 
-vim.opt.colorcolumn = "120"
+vim.o.winborder = "rounded"
 
 vim.g.lazyvim_python_lsp = "basedpyright"

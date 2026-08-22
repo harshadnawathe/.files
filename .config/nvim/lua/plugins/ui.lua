@@ -10,8 +10,7 @@ return {
   },
   {
     "b0o/incline.nvim",
-    event = "BufReadPre",
-    priority = 1200,
+    event = "LazyFile",
     dependencies = { "nvim-mini/mini.icons" },
     config = function()
       require("incline").setup({

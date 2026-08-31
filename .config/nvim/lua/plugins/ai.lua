@@ -19,6 +19,15 @@ return {
       },
     },
   },
+  -- Herdr has no upstream mux backend yet (folke/sidekick.nvim#333), so register
+  -- our own. Outside Herdr this is a no-op and sidekick's tmux backend is used
+  -- untouched, which keeps one config working under both Ghostty+tmux and Kitty+Herdr.
+  config = function(_, opts)
+    if require("mux.herdr").setup() then
+      opts.cli = vim.tbl_deep_extend("force", opts.cli or {}, { mux = { backend = "herdr" } })
+    end
+    require("sidekick").setup(opts)
+  end,
   opts = {
     nes = {
       enabled = false,

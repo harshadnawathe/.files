@@ -123,7 +123,6 @@ brew utf8proc
 brew webp
 brew websocat
 brew wget
-brew worktrunk
 brew x265
 brew xorgproto
 brew xz
@@ -131,9 +130,6 @@ brew yazi
 brew yq
 brew zoxide
 brew zstd
-
-tap raine/workmux
-brew workmux
 
 tap homebrew/cask
 cask caffeine
@@ -152,6 +148,9 @@ cask raycast
 cask rectangle
 
 tap morantron/tmux-fingers
+
+tap raine/workmux
+brew workmux
 
 tap rcmdnk/file
 brew brew-file

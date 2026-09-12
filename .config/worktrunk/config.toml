@@ -1,7 +1,0 @@
-worktree-path = "{{ repo_path }}/../{{ repo }}.{{ branch | sanitize }}"
-
-[post-switch]
-sesh = "sesh connect '{{ worktree_path }}'"
-
-[switch]
-cd = false

@@ -119,7 +119,6 @@ brew tlrc
 brew tmux
 brew tree-sitter
 brew unibilium
-brew usage
 brew utf8proc
 brew webp
 brew websocat
@@ -132,6 +131,9 @@ brew yazi
 brew yq
 brew zoxide
 brew zstd
+
+tap raine/workmux
+brew workmux
 
 tap homebrew/cask
 cask caffeine

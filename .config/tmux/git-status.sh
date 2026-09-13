@@ -10,6 +10,10 @@ eval "$(tmux show -g 2>/dev/null | sed -n 's/^@sb_\([a-z]*\) \(.*\)$/SB_\1=\2/p'
 : "${SB_dark:=colour0}"  ; : "${SB_body:=colour0}" ; : "${SB_git:=colour5}"
 : "${SB_text:=colour15}"
 
+# Guard the empty case explicitly: `cd ""` succeeds in bash and leaves us
+# in whatever directory the tmux job inherited, which would report some
+# unrelated repo's branch as if it were this pane's.
+[ -n "$1" ] || exit 0
 cd "$1" 2>/dev/null || exit 0
 
 branch=$(git symbolic-ref --quiet --short HEAD 2>/dev/null) \

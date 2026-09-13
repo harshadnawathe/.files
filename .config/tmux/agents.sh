@@ -35,13 +35,16 @@ else                              cap=colour8   # grey: only stale left
 fi
 
 # Body: bright foregrounds, which read better than the base colours on 235.
+# 'done' is green here even though its cap is cyan -- inside the body the
+# colour is foreground text, not a block, so it doesn't compete with the
+# green blocks that mark the active session and window.
 seg=""
 add() { [ "$1" -gt 0 ] && seg="$seg#[fg=$2]$3 $1$BODY  "; }
 add "$n_waiting" colour9   '󰭹'
-add "$n_done"    colour14  '󰄬'
+add "$n_done"    colour10  '󰄬'
 add "$n_working" colour11  '󰑮'
 add "$n_stale"   colour244 '󰅖'
 
 seg="${seg%%  }"  # drop the trailing pad from the last add
 
-printf '#[fg=colour232,bg=%s] 󰚩 %s %s #[default] ' "$cap" "$BODY" "$seg"
+printf '#[fg=colour232,bg=%s]   %s %s #[default] ' "$cap" "$BODY" "$seg"

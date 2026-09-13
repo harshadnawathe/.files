@@ -5,3 +5,14 @@ panes: []
 worktree_dir: "../{project}_worktrees/"
 base_branch: auto
 window_prefix: " {project}/"
+
+# Keep workmux out of the tmux window format. Left on, it snapshots
+# whatever window-status-format is global when it creates a window and
+# pins that copy as a WINDOW-LOCAL option, which outranks `setw -g` -- so
+# those windows keep rendering whatever theme was current at creation and
+# never pick up later edits. theme.conf owns the format instead.
+#
+# status_icons is deliberately absent: it only styles the @workmux_status
+# variable rendered in tmux window names, and theme.conf no longer renders
+# it -- the agent pill in status-right reports agent state instead.
+status_format: false

@@ -65,5 +65,11 @@ if status is-interactive
     tv init fish > ~/.config/fish/caches/television_integration.fish
   end
   source ~/.config/fish/caches/television_integration.fish
+
+  # workmux
+  if not test -f ~/.config/fish/caches/workmux_completions.fish
+    workmux completions fish > ~/.config/fish/caches/workmux_completions.fish
+  end
+  source ~/.config/fish/caches/workmux_completions.fish
   
 end

@@ -3,3 +3,4 @@ mode: session
 agent: claude
 panes: []
 worktree_dir: "../{project}_worktrees/"
+base_branch: auto

@@ -4,3 +4,4 @@ agent: claude
 panes: []
 worktree_dir: "../{project}_worktrees/"
 base_branch: auto
+window_prefix: " {project}/"

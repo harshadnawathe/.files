@@ -17,5 +17,5 @@ ahead=$(git rev-list --count '@{u}..HEAD' 2>/dev/null) \
   && [ "$ahead" -gt 0 ] 2>/dev/null \
   && unpushed="$ahead"
 
-printf '#[fg=colour232,bg=colour5]  #[default,bg=colour235] %s%s%s #[default] ' \
+printf '#[fg=colour232,bg=colour5] 󰘬 #[default,bg=colour235] %s%s%s #[default] ' \
   "$branch" "$dirty" "$unpushed"

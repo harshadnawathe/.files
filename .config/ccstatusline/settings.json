@@ -64,5 +64,11 @@
     "method": "auto-update",
     "packageManager": "npm"
   },
-  "defaultSeparator": "│"
+  "powerline": {
+    "enabled": true,
+    "separators": [
+      "│"
+    ],
+    "autoAlign": true
+  }
 }

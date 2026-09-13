@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 4,
   "lines": [
     [
       {
@@ -37,10 +37,7 @@
       },
       {
         "id": "b7b2e0f2-9e56-490e-be8e-14971eed89f6",
-        "type": "git-status",
-        "metadata": {
-          "hideNoGit": "false"
-        }
+        "type": "git-status"
       }
     ],
     [

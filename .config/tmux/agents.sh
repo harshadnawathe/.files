@@ -24,9 +24,12 @@ n_stale=$(tally stale)
 
 [ $((n_waiting + n_done + n_working + n_stale)) -eq 0 ] && exit 0
 
-# Cap colour: most urgent status wins.
+# Cap colour: most urgent status wins. Deliberately no green here --
+# colour10 already means 'you are here' (session, active window, active
+# pane border, selected menu item), and a finished agent is a state, not
+# a location. Cyan is the one accent the theme wasn't already using.
 if   [ "$n_waiting" -gt 0 ]; then cap=colour1   # red: needs you
-elif [ "$n_done"    -gt 0 ]; then cap=colour2   # green: finished
+elif [ "$n_done"    -gt 0 ]; then cap=colour6   # cyan: finished
 elif [ "$n_working" -gt 0 ]; then cap=colour3   # yellow: busy
 else                              cap=colour8   # grey: only stale left
 fi
@@ -35,7 +38,7 @@ fi
 seg=""
 add() { [ "$1" -gt 0 ] && seg="$seg#[fg=$2]$3 $1$BODY  "; }
 add "$n_waiting" colour9   '󰭹'
-add "$n_done"    colour10  '󰄬'
+add "$n_done"    colour14  '󰄬'
 add "$n_working" colour11  '󰑮'
 add "$n_stale"   colour244 '󰅖'
 

@@ -2,4 +2,4 @@ nerdfont: true
 mode: session
 agent: claude
 panes: []
-worktree_dir: "{project}_worktrees/"
+worktree_dir: "../{project}_worktrees/"

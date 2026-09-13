@@ -4,8 +4,10 @@
 #
 # Why this exists: macOS GUI apps inherit launchd's PATH
 # (/usr/bin:/bin:/usr/sbin:/sbin), not a shell's. A terminal that execs a program
-# directly hands that stunted PATH straight to it — which is how herdr ended up
-# unable to find claude under kitty. Routing through zsh gets this file run.
+# directly hands that stunted PATH straight to it, so anything resolved by bare
+# name — claude, the mise shims — goes missing. Ghostty sidesteps that by
+# launching through `/bin/zsh -l -c` (.config/ghostty/config.ghostty), which is
+# what gets this file read.
 #
 # Keep it fast: this runs on every script invocation. Builtins only, no forks.
 
@@ -30,8 +32,9 @@ zsh_set_path() {
   # hook that only pays off in an interactive shell. Shims resolve node, python,
   # go, java and ruby on their own.
   #
-  # ~/bin is required, not optional: .config/television/cable/herdr.toml calls
-  # herdr-pick by bare name, and that channel runs as a herdr popup on alt+space.
+  # ~/bin is required, not optional: its obsidian_* scripts are invoked by bare
+  # name from fish abbreviations (conf.d/obs-abbr.fish) and from nvim's
+  # `:!obsidian_ok`, so they have to resolve through PATH.
   #
   # Skip directories that don't exist, matching what fish_add_path does in
   # config.fish, so the two shells agree and dead entries stay out of PATH. A

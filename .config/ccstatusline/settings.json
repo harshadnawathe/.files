@@ -7,81 +7,62 @@
         "type": "context-bar",
         "metadata": {
           "display": "progress-short"
-        }
+        },
+        "color": "blue"
       },
       {
         "id": "3",
         "type": "context-length",
-        "color": "brightBlack"
+        "color": "white"
       },
       {
         "id": "e303c7a0-d1d7-4a22-88ee-3b98a2290420",
         "type": "tokens-total",
-        "backgroundColor": "bgBrightRed"
+        "color": "brightWhite"
       }
     ],
     [
       {
         "id": "b97976f9-a7a9-4a68-971c-e455444ae4b1",
         "type": "model",
-        "backgroundColor": "bgBrightGreen"
+        "color": "blue"
       },
       {
         "id": "e91b14c4-44a2-4c56-b92b-f309f16db280",
         "type": "thinking-effort",
-        "backgroundColor": "bgRed"
+        "color": "cyan"
       },
       {
         "id": "b846a246-76be-459a-9594-eaf29c393c3c",
         "type": "skills",
-        "backgroundColor": "bgBrightYellow"
+        "color": "white"
       }
     ],
     [
       {
         "id": "01d42517-d5c2-409f-a8de-f1ffe98915b1",
         "type": "claude-account-email",
-        "backgroundColor": "bgBrightBlack"
+        "color": "white"
       },
       {
         "id": "d42d8258-b607-4563-b4e1-7b84e74551ad",
-        "type": "session-clock"
+        "type": "session-clock",
+        "color": "brightWhite"
       },
       {
         "id": "f53ce2f4-e6f0-4efd-a23f-741509afb2d1",
-        "type": "session-cost"
+        "type": "session-cost",
+        "color": "brightWhite"
       }
     ]
   ],
   "flexMode": "full",
-  "compactThreshold": 60,
-  "colorLevel": 2,
+  "colorLevel": 1,
   "defaultPadding": " ",
-  "defaultPaddingSide": "both",
-  "inheritSeparatorColors": false,
-  "globalBold": false,
-  "gitCacheTtlSeconds": 5,
   "minimalistMode": true,
-  "powerline": {
-    "enabled": true,
-    "separators": [
-      ""
-    ],
-    "separatorInvertBackground": [
-      false
-    ],
-    "startCaps": [
-      ""
-    ],
-    "endCaps": [
-      ""
-    ],
-    "theme": "onedark",
-    "autoAlign": true,
-    "continueThemeAcrossLines": false
-  },
   "installation": {
     "method": "auto-update",
     "packageManager": "npm"
-  }
+  },
+  "defaultSeparator": "│"
 }

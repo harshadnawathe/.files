@@ -84,6 +84,18 @@
   # continues without a manual `git add`.
   autoUpdate = true
 
+[interactive]
+  # Route `git add -p` (and `checkout -p`, `stash -p`, `reset -p`) through
+  # delta. Without this they were the only diffs on the machine still
+  # rendered in git's raw colours, since core.pager does not apply to the
+  # interactive hunk display.
+  #
+  # --color-only is required: it re-colours the diff but leaves its
+  # structure intact so git can still parse hunks back out. delta drops
+  # side-by-side in this mode on its own, which is what we want here --
+  # the hunk prompt is narrow.
+  diffFilter = delta --color-only
+
 [diff]
   # histogram produces noticeably better hunk boundaries than the default
   # myers, especially on refactors that shuffle adjacent blocks.

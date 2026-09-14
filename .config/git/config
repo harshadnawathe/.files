@@ -327,6 +327,21 @@
 
 [merge]
   tool = nvimdiff
+  # zdiff3 adds the merge base between the two sides:
+  #
+  #   <<<<<<< HEAD
+  #   MAIN
+  #   ||||||| 8da4211     <- what both sides started from
+  #   COMMON
+  #   =======
+  #   SIDE
+  #   >>>>>>> side
+  #
+  # Without it you see two competing versions and have to guess which one
+  # changed. It also switches delta into its merge-conflict renderer, which
+  # is what mellow-barbet's merge-conflict-* styles were written for -- those
+  # never fired under the default `merge` style.
+  conflictStyle = zdiff3
 [mergetool]
   prompt = false
   keepBackup = false

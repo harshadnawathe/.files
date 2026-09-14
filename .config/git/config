@@ -397,6 +397,25 @@
 [delta]
   features = "mellow-barbet" "tokyonight"
 
+  # n / N jump to the next / previous file in a large diff, instead of
+  # scrolling for them. delta drives this by handing less a search pattern.
+  navigate = true
+  # The regex must be set explicitly. Left to itself delta derives one from
+  # the configured labels, and the derived pattern covers [+] [-] [->] but
+  # NOT mellow-barbet's [*] -- so `n` would skip every *modified* file,
+  # which is nearly all of them. Verified against a four-file diff:
+  #
+  #   derived:  MATCH [+] add.txt   MATCH [-] del.txt
+  #             MATCH [->] ren.txt  SKIP  [*] mod.txt
+  #   below:    all four match
+  #
+  # [==] is mellow-barbet's copied label, now reachable via diff.renames.
+  #
+  # NB: the backslashes are doubled. git config only recognises \n \t \b \\
+  # and \" as escapes, so a bare \[ is "bad config line"; \\[ is how a
+  # literal backslash reaches delta.
+  navigate-regex = "^(commit|\\[\\+\\]|\\[-\\]|\\[\\*\\]|\\[==\\]|\\[->\\])"
+
   # Maps the four colours git uses for `diff.colorMoved = default`
   # (old/new moved, plus the alternating pair) onto dark tokyonight tints.
   # Set directly under [delta] rather than in a feature so it outranks

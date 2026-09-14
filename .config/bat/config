@@ -26,3 +26,15 @@
 #   Example 2: Use ".gitignore"-style highlighting for ".ignore" files
 #--map-syntax "*.ino:C++"
 #--map-syntax ".ignore:Git Ignore"
+
+# Syntax mappings for config files bat cannot identify on its own.
+#
+# config.ghostty has no extension bat knows; INI is the closest fit for its
+# `key = value` grammar. The sesh session previews read this file.
+--map-syntax "*.ghostty:INI"
+
+# tmux's config language is closest to shell. Scoped to the tmux directory on
+# purpose -- a blanket `*.conf:INI` would mis-highlight theme.conf and
+# plugins.conf, which are tmux script, not INI.
+--map-syntax "**/tmux/*.conf:Bourne Again Shell (bash)"
+--map-syntax "*.tmux:Bourne Again Shell (bash)"

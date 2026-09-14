@@ -436,9 +436,6 @@
     bold cyan => syntax "#16303b", \
     bold yellow => syntax "#33291a"
  
-[delta "catppuccin"]
-  syntax-theme = Catppuccin-mocha
-
 [delta "tokyonight"]
   syntax-theme = tokyonight_night
 

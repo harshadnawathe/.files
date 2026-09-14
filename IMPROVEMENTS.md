@@ -4,9 +4,12 @@ Scratch file for the config review (2026-09-14). Delete once worked through.
 
 Legend: **[H]** high payoff · **[M]** medium · **[L]** nice-to-have
 
-**Progress:** section 1 (git) complete — 13 commits, `3bd8ea6..5b3e824`.
-Sections 2-7 untouched; section 2 (delta) is the natural next step and its
-`interactive.diffFilter` item is the highest value-per-character left on the list.
+**Progress:** sections 1 (git) and 2 (delta) complete — 19 commits,
+`3bd8ea6..1b090ba`. Sections 3-7 untouched; section 3 (Ghostty + fonts) is next.
+
+Two items in these sections could not be applied as written — `diff.colorMoved`
+and `delta.navigate` both needed a companion setting to avoid making things
+worse. Both are annotated inline.
 
 One out-of-repo change was made: `git maintenance start` wrote to `~/.gitconfig`
 and created launchd agents. To undo, run `git maintenance unregister` in `~/.files`.
@@ -53,17 +56,25 @@ and created launchd agents. To undo, run `git maintenance unregister` in `~/.fil
 
 ## 2. Delta
 
-- [ ] **[H]** `[interactive] diffFilter = delta --color-only`
-      Biggest single win — `git add -p` currently shows raw uncolored diffs.
-- [ ] **[H]** `delta.navigate = true` (verified `false`) — n/N between files
-- [ ] **[M]** `delta.hyperlinks = true` (verified `false`) — Ghostty renders OSC-8
-- [ ] **[M]** Narrow-pane escape hatch: add `[delta "unified"] side-by-side = false`
-      and `abbr -a gdu 'DELTA_FEATURES=+unified git diff'`
-- [ ] **[L]** Drop the dead `[delta "catppuccin"]` block from `git/config`
-- [ ] **[L]** Decide: trim `delta/themes/gitconfig.inc` to `mellow-barbet` only,
-      or keep it pristine for easy upstream refresh
-
----
+- [x] **[H]** `[interactive] diffFilter = delta --color-only` — `add -p` / `checkout -p` /
+      `stash -p` / `reset -p` were the last uncoloured diffs on the machine. Verified
+      delta runs in the pipeline and hunks still stage.  `2f61a6e`
+- [x] **[H]** `delta.navigate = true`. Could **not** ship alone: delta derives its regex
+      from the labels and the derived one omits mellow-barbet's `[*]`, so `n` skipped
+      every *modified* file. Shipped with an explicit `navigate-regex`.
+      Backslashes are doubled — git config rejects a bare `\[`.  `ee4191f`
+- [x] **[M]** `delta.hyperlinks = true`. Needs less >= 581; macOS ships 668. File links
+      use the default `file://` (hands the path to the OS, not to nvim) — commit
+      links are the reason it is on.  `7d9e58b`
+- [x] **[M]** Narrow-pane escape hatch: `[delta "unified"]` + `gdu` abbreviation.
+      The `+` in `DELTA_FEATURES=+unified` is load-bearing — bare `unified`
+      *replaces* the feature list and loses mellow-barbet entirely.  `08581d0`
+- [x] **[L]** Dropped the dead `[delta "catppuccin"]` block.  `1bdf517`
+- [x] **[L]** **Decided: trim.** The vendored file contributed 362 of 491 config
+      entries for 31 used. Now 161 total. Provenance + refresh notes kept in the
+      header. Verified neutral by byte-comparing rendered output (24311 bytes,
+      identical) — `delta --show-config` is unreliable for this, it spells style
+      names inconsistently between runs.  `1b090ba`
 
 ## 3. Ghostty — `.config/ghostty/config.ghostty`
 

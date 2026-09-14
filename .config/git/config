@@ -369,6 +369,18 @@
 	autocrlf = input
 	editor = nvim
 	pager = delta
+  # Built-in FSMonitor: a background daemon watches the worktree via FSEvents
+  # so `git status` asks the daemon what changed instead of stat()ing every
+  # tracked file. Verified on this machine:
+  #   $ git fsmonitor--daemon status
+  #   fsmonitor-daemon is watching '/Users/harshadn/.files'
+  # The daemon is started on demand, per worktree, and exits on its own.
+  fsmonitor = true
+  # Cache the untracked-file scan too -- without it fsmonitor still leaves
+  # `git status` walking every untracked directory. Verified supported:
+  #   $ git update-index --test-untracked-cache
+  #   Testing mtime in '/Users/harshadn/.files' ...... OK
+  untrackedCache = true
 
 [delta]
   features = "mellow-barbet" "tokyonight"

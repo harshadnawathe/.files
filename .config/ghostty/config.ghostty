@@ -85,6 +85,20 @@ window-save-state = always
 copy-on-select = clipboard
 
 # Key bindings
+#
+# Every binding below is `text:` -- it types raw bytes into the terminal
+# rather than invoking a Ghostty action. \x01 is C-a, the tmux prefix set in
+# ../tmux/tmux.conf, so each one is "send the prefix, then a tmux key".
+#
+# Two consequences worth knowing:
+#
+#   1. Changing `set -g prefix` in tmux.conf silently breaks all of them.
+#      They carry no reference back to it; this comment is the only link.
+#   2. They fire regardless of context, including inside copy-mode or nvim,
+#      because Ghostty has no idea what is running.
+#
+# The splits/tabs here are tmux's, not Ghostty's, which is why none of these
+# use Ghostty's own new_split / new_tab actions.
 
 # New pane
 keybind = cmd+t=text:\x01c

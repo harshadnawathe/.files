@@ -58,6 +58,32 @@ background-image-opacity = 0.30
 
 macos-option-as-alt = true
 
+# Window
+#
+# Padding, balanced so an odd number of leftover pixels is split rather than
+# all landing on one side. `extend` continues the background (and the
+# wallpaper) into the padding instead of leaving a flat border around it.
+window-padding-x = 8
+window-padding-y = 4
+window-padding-balance = true
+window-padding-color = extend
+
+# Closing a window detaches tmux, it does not end anything: default-command
+# re-attaches to session __, detach-on-destroy is off, and continuum is
+# restoring. The confirmation prompt guards against a loss that cannot happen.
+confirm-close-surface = false
+
+# The transient "80x24" overlay on every resize. tmux redraws its own status
+# line immediately, so it is pure flicker here.
+resize-overlay = never
+
+mouse-hide-while-typing = true
+window-save-state = always
+
+# Select with the mouse (hold shift to bypass tmux's own mouse handling) and
+# the text is on the clipboard without a further keystroke.
+copy-on-select = clipboard
+
 # Key bindings
 
 # New pane

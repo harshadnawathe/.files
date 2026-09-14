@@ -4,8 +4,8 @@ Scratch file for the config review (2026-09-14). Delete once worked through.
 
 Legend: **[H]** high payoff · **[M]** medium · **[L]** nice-to-have
 
-**Progress:** sections 1 (git), 2 (delta) and 3 (Ghostty) complete — 24 commits,
-`3bd8ea6..f8fd267`. Sections 4-7 untouched; section 4 (bat/fd/fzf) is next.
+**Progress:** sections 1-4 complete — 31 commits, `3bd8ea6..9caeaf7`.
+Sections 5-7 remain; section 5 (lazygit) is next.
 
 Items that did not survive verification are struck through with the evidence
 inline rather than deleted — 4 in section 3 alone. Several others needed a
@@ -118,16 +118,29 @@ and created launchd agents. To undo, run `git maintenance unregister` in `~/.fil
 
 ## 4. bat / fd / fzf
 
-- [ ] **[H]** `MANPAGER` is unset — wire bat in for colored man pages (+ `MANROFFOPT=-c`)
-- [ ] **[H]** `fd/ignore` holds only `.git/` — add `node_modules/`, `target/`,
-      `.venv/`, `build/`, `dist/`, `.gradle/`
-- [ ] **[M]** fzf `--tmux center,80%,70%` in `FZF_DEFAULT_OPTS` — float in a tmux popup
-      instead of clobbering the pane (fzf 0.74 supports it)
-- [ ] **[M]** bat `--map-syntax "*.ghostty:INI"` — the sesh preview for the ghostty
-      config renders unhighlighted today. Also `*.conf:INI`, `tmux.conf:bash`
-- [ ] **[L]** bat `--style=plain`
+- [x] **[H]** `MANPAGER` wired to bat (+ `MANROFFOPT=-c`), in a new `conf.d/pager.fish`.
+      `col -bx` is required, not decorative — macOS groff still emits 153
+      backspace-overstrike sequences on `man ls` even with `MANROFFOPT=-c`, and they
+      reach the terminal as `l^Hl^Hs^Hs` without it.  `15a3e86`
+- [x] **[H]** `fd/ignore` expanded to dependency trees, build output and tool caches.
+      Honest scope: inside a git repo `.gitignore` already covers most of this; the
+      win is plain directories. `-I`/`--no-ignore` still reaches everything.  `0ec4d5a`
+- [x] **[M]** fzf popups — **but on `fzf_directory_opts`/`fzf_git_status_opts`/
+      `fzf_variables_opts`, not `FZF_DEFAULT_OPTS`.** A global `--tmux` would reach
+      fzf processes already running inside a popup and nest: `~/bin/obsidian_notes`
+      is launched by `bind N` (a display-popup) and shells out to fzf.  `9caeaf7`
+- [x] **[M]** bat `--map-syntax` for `*.ghostty` and `**/tmux/*.conf`. Measured
+      before/after: `config.ghostty` and `theme.conf` went plain → highlighted;
+      `tmux.conf`/`plugins.conf` already worked. Scoped rather than a blanket
+      `*.conf:INI`, which would mis-highlight the tmux files.  `e601fd4`
+- [ ] ~~**[L]** bat `--style=plain`~~ — **rejected, it is a downgrade.** bat's default
+      already includes grid, header and line numbers; `plain` removes them. The fzf
+      previews that want it already pass `--style=plain` explicitly.
 
----
+### Fallout handled in this section
+- [x] Removed `wfxr/tmux-fzf-url` — tmux-fingers' built-in `url` pattern covers
+      `https?://`, `git@`, `git://`, `ssh://`, `ftp://`, `file:///`.  `4a30124`
+- [x] Removed `sainnhe/tmux-fzf` — unused, and self-bound `prefix+F`.  `42cbbfd`
 
 ## 5. lazygit — bound in tmux (`C-a G`), zero config
 

@@ -442,6 +442,18 @@
 [delta "tokyonight"]
   syntax-theme = tokyonight_night
 
+# Escape hatch for narrow panes. mellow-barbet turns side-by-side on, which
+# is right in a full-width window and cramped in a tmux split or a popup.
+# Not in `features` -- it is opted into per command via the environment:
+#
+#   DELTA_FEATURES='+unified' git diff     (the `gdu` abbreviation)
+#
+# The leading + appends to the features from gitconfig. Without it the list
+# is REPLACED and mellow-barbet is lost -- verified: bare 'unified' drops
+# line-numbers to false and the syntax theme back to Monokai Extended.
+[delta "unified"]
+  side-by-side = false
+
 [ghq]
   root = "~/code"
 

@@ -14,6 +14,22 @@
 [push]
 	default = upstream
 
+[pull]
+  # `pr` and the `gup`/`gupa` abbreviations already spell this out; make the
+  # bare command agree with them instead of creating a merge commit.
+  rebase = true
+
+[rebase]
+  # Stash dirty worktree state before rebasing and restore it afterwards,
+  # rather than refusing to start.
+  autoStash = true
+  # Make `git commit --fixup <sha>` actually land: autoSquash reorders and
+  # marks the fixup commits automatically during an interactive rebase.
+  autoSquash = true
+  # When rebasing a stack, move the intermediate branch refs along with the
+  # commits they pointed at instead of orphaning them behind the rebase.
+  updateRefs = true
+
 [rerere]
   # REuse REcorded REsolution: git remembers how a conflict was resolved and
   # replays it the next time the same one appears. The payoff is long-lived

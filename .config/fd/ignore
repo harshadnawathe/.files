@@ -1,1 +1,34 @@
+# Global ignore for fd ($XDG_CONFIG_HOME/fd/ignore), in .gitignore format.
+#
+# Scope note: inside a git repository fd already honours .gitignore, so most
+# of these are redundant there. They earn their place outside git repos and
+# in repos with an incomplete .gitignore -- verified:
+#
+#   git repo, node_modules gitignored:  fd -H  ->  .gitignore, src.js
+#   plain directory, no gitignore:      fd -H  ->  node_modules/, ... , src.js
+#
+# To search these anyway, pass -I / --no-ignore (or -u for that plus hidden).
+
 .git/
+
+# Dependency trees
+node_modules/
+.venv/
+venv/
+__pycache__/
+.tox/
+vendor/
+
+# Build output
+target/
+build/
+dist/
+.gradle/
+.next/
+out/
+
+# Tooling caches
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.terraform/

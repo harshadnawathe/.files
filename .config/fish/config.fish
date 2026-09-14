@@ -35,9 +35,11 @@ if status is-interactive
   if not test -f ~/.config/fish/caches/starship_init.fish 
     starship init fish > ~/.config/fish/caches/starship_init.fish
   end
+  # $argv forwards --status/--keymap from starship's fish init, so the
+  # collapsed prompt turns red after a failure and shows the vi-mode
+  # character. Without it every scrollback arrow is a green insert-mode one.
   function starship_transient_prompt_func
-    printf "   "
-    starship module character
+    starship module character $argv
   end
   source ~/.config/fish/caches/starship_init.fish
   enable_transience

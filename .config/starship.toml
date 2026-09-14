@@ -1,73 +1,113 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
+# Two lines on purpose: line 1 is context, line 2 is yours to type on.
+#
+# Line 1 splits at $fill by what the information is FOR. Left of the fill
+# is what decides the next command -- where you are, which branch, what
+# the tree looks like. Right of it is what already happened, which you
+# glance at rather than act on. A transparent fill keeps that split
+# legible without drawing a rule across the prompt.
+#
+# The padding costs nothing in practice: enable_transience collapses each
+# prompt to a bare "> " once the command runs, so the full-width line only
+# ever exists on the live prompt at the bottom of the screen, never in
+# scrollback. $fill also has to live here rather than in right_format --
+# fish renders the right prompt on the LAST line, which would put this
+# back on the line reserved for typing.
+#
+# Each segment leads with a coloured glyph cap -- the same grammar as the
+# tmux bar, where the cap is what separates segments so they do not lean
+# on whitespace to stay readable. The git cap is literally the glyph from
+# tmux/git-status.sh and the duration cap the one from the clock pill, so
+# both surfaces name the same things the same way.
+#
+# Backgrounds are deliberately NOT carried over. The bar draws once, as
+# chrome; this draws once per command into scrollback, where solid pill
+# bodies would punch an opaque block through the terminal wallpaper on
+# every line of history.
+#
+# Colours are ANSI 0-15 only, never the colour16-255 cube -- those indices
+# are remapped by the Ghostty theme, so the prompt retints along with it
+# exactly as the status bar does. Same reasoning as tmux/theme.conf.
+#
+#   4 blue     directory
+#   5 magenta  git
+#   1 red      conflicts, in-progress rebase/merge, failed exit status
+#   3 yellow   modified, behind, slow command
+#   2 green    staged, prompt ready
+#   8 grey     untracked, ahead, stash, shell and nesting
 format = """
-[╭─](fg:fill_fg)\
 $directory\
-$git_branch\
-$git_status\
+$vcs\
 $fill\
-$golang\
-$java\
-$kotlin\
-$lua\
-$nodejs\
-$python\
-$rust\
-$aws\
-$docker_context\
-[─╮](fg:fill_fg)\
+$status\
+$cmd_duration\
 $line_break\
-[╰─╴](fg:fill_fg)\
+$shell\
 $shlvl\
 $character
 """
 
-right_format = """$status\
-$cmd_duration\
-[╶─╯](fg:fill_fg)\
-"""
-
-palette = "default"
-
-[palettes.default]
-fill_fg = '#4C566A'
-
+# A space, not a rule: the split should be felt, not drawn.
 [fill]
-symbol = '─'
-style = 'fg:fill_fg'
+symbol = ' '
 
-[java]
-symbol = "󰬷 "
+[directory]
+format = '[󰉋 ](fg:4)[$path](fg:15) '
 
-[golang]
-symbol = " "
+# $vcs resolves the first matching VCS and expands to
+# $git_branch$git_commit$git_state$git_metrics$git_status, so a detached
+# HEAD and an in-progress rebase or merge show up without extra wiring.
+[git_branch]
+format = '[󰘬 ](fg:5)[$branch](fg:15) '
 
-[kotlin]
-symbol = "󱈙 "
+[git_commit]
+format = '[$hash$tag](fg:15) '
 
-[nodejs]
-symbol = "󰎙 "
+[git_state]
+format = '[$state( $progress_current/$progress_total)](fg:1) '
 
-[python]
-symbol = "󰌠 "
+# Counts rather than bare flags: "+2 ?1" says more than "+?" for the same
+# width. Symbols and colours match tmux/git-status.sh.
+[git_status]
+format = '([$all_status$ahead_behind](fg:15))'
+conflicted = '[!$count](fg:1) '
+staged     = '[+$count](fg:2) '
+modified   = '[~$count](fg:3) '
+untracked  = '[?$count](fg:8) '
+deleted    = '[✘$count](fg:1) '
+renamed    = '[»$count](fg:8) '
+stashed    = '[≡$count](fg:8) '
+ahead      = '[↑$count](fg:8) '
+behind     = '[↓$count](fg:3) '
+diverged   = '[↕↑${ahead_count}↓${behind_count}](fg:3) '
+
+# Disabled by default upstream -- without this line the exit code of a
+# failed command never renders at all.
+[status]
 disabled = false
+format = '[󰅚 ](fg:1)[$status](fg:15) '
 
-[rust]
-symbol = "󱘗 "
-disabled = true
+[cmd_duration]
+format = '[ ](fg:3)[$duration](fg:15) '
 
-[lua]
-symbol = "󰢱 "
-
-[docker_context]
-symbol = " "
-
-[aws]
-symbol = "󰸏 "
+# Silent in fish, so it costs nothing until you are somewhere else.
+[shell]
 disabled = false
+format = '[$indicator](fg:8)'
+fish_indicator = ''
+bash_indicator = 'bash '
+zsh_indicator = 'zsh '
+nu_indicator = 'nu '
 
+# threshold = 2: only speaks up once you are actually nested.
 [shlvl]
-symbol = " "
 disabled = false
+threshold = 2
+format = '[↓$shlvl](fg:8) '
 
+[character]
+success_symbol = '[❯](fg:2)'
+error_symbol = '[❯](fg:1)'
+vimcmd_symbol = '[❮](fg:2)'

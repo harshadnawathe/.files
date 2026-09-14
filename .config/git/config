@@ -23,6 +23,14 @@
   renames = copies
   # Show the submodule pointer move as a short log rather than two hashes.
   submodule = log
+  # Tell a block that moved from a block that was rewritten. Requires the
+  # `map-styles` entry under [delta] below -- without it delta passes git's
+  # raw `bold magenta` / `bold cyan` straight through and the moved lines lose
+  # their background entirely, which is worse than leaving this off.
+  colorMoved = default
+  # Re-indenting a block while moving it (wrapping it in an if, extracting a
+  # method) should still count as a move.
+  colorMovedWS = allow-indentation-change
 
 [alias]
 	#co = checkout
@@ -297,6 +305,16 @@
 
 [delta]
   features = "mellow-barbet" "tokyonight"
+
+  # Maps the four colours git uses for `diff.colorMoved = default`
+  # (old/new moved, plus the alternating pair) onto dark tokyonight tints.
+  # Set directly under [delta] rather than in a feature so it outranks
+  # mellow-barbet's plus/minus styles for these lines only.
+  map-styles = \
+    bold purple => syntax "#2d2139", \
+    bold blue => syntax "#1f2335", \
+    bold cyan => syntax "#16303b", \
+    bold yellow => syntax "#33291a"
  
 [delta "catppuccin"]
   syntax-theme = Catppuccin-mocha

@@ -37,6 +37,20 @@ font-size = 15
 # only makes sense if it is enabled to begin with.
 font-feature = ss01, ss02, ss03, ss09
 
+# Text rendering
+#
+# font-thicken is macOS-only and compensates for Monaspace's lighter stems
+# against a dark background.
+font-thicken = true
+# A little air between lines. Monaspace sets tight default metrics, which
+# read as cramped in a full-height tmux pane.
+adjust-cell-height = 8%
+# Blend in linear space so text over the wallpaper stops picking up the dark
+# fringing that native blending produces. `linear-corrected` is the variant
+# that keeps weights looking like `native` -- plain `linear` thins dark text
+# and fattens light text.
+alpha-blending = linear-corrected
+
 background = 000000
 background-image = ~/.files/assets/avatar-elements-wallhaven-4xlwel.png
 background-image-fit = cover

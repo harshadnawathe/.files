@@ -12,7 +12,10 @@
   ui = auto
 
 [push]
-	default = upstream
+  # `simple` refuses the push when the local and upstream branch names
+  # differ, instead of pushing to the differently-named upstream anyway.
+  # With autoSetupRemote below, the first push of a new branch still works.
+  default = simple
   # Create the upstream branch on first push instead of failing with
   # "fatal: The current branch has no upstream branch". Works with
   # push.default = upstream, simple or current.

@@ -29,6 +29,18 @@
   # 0 lets git pick the parallelism for multi-remote and submodule fetches.
   parallel = 0
 
+[commit]
+  # Append the full staged diff to the commit message template, below the
+  # cut line. Nothing is committed from it; it is there so the message can
+  # be written against the change in the same nvim buffer.
+  verbose = true
+
+[help]
+  # `prompt` asks before running the guessed command. `autocorrect = 1`
+  # would run it after a 0.1s pause, which is how you end up running
+  # `git push` because you typoed `git puhs`.
+  autocorrect = prompt
+
 [branch]
   # Most recently committed first. `git b` in a repo with 40 branches
   # becomes useful without reaching for the `lc` / `recentb` aliases.

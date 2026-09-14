@@ -5,7 +5,11 @@
 	defaultBranch = master
 
 [color]
-	status = always
+  # Deliberately not `status = always`: that emits SGR escapes even when stdout
+  # is a pipe, which corrupts anything parsing git's output. The `sci` alias
+  # greps `git st` for "have diverged" / "to unstage", so it was reading
+  # colorised text. `auto` colours the terminal and stays plain in a pipe.
+  ui = auto
 
 [push]
 	default = upstream

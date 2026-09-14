@@ -424,5 +424,13 @@
 [mergetool]
   prompt = false
   keepBackup = false
+
+[diff]
+  # merge.tool was set but diff.tool was not, so `git difftool` fell back to
+  # prompting for a tool on every file.
+  tool = nvimdiff
+
+[difftool]
+  prompt = false
 [mergetool "nvimdiff"]
   layout = "LOCAL,BASE,REMOTE / MERGED"

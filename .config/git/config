@@ -14,6 +14,16 @@
 [push]
 	default = upstream
 
+[rerere]
+  # REuse REcorded REsolution: git remembers how a conflict was resolved and
+  # replays it the next time the same one appears. The payoff is long-lived
+  # branches and `rebase --onto`, where the same conflict is otherwise hit
+  # once per commit being replayed.
+  enabled = true
+  # Stage the replayed resolution rather than leaving it dirty, so a rebase
+  # continues without a manual `git add`.
+  autoUpdate = true
+
 [diff]
   # histogram produces noticeably better hunk boundaries than the default
   # myers, especially on refactors that shuffle adjacent blocks.

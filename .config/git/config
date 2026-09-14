@@ -13,6 +13,21 @@
 
 [push]
 	default = upstream
+  # Create the upstream branch on first push instead of failing with
+  # "fatal: The current branch has no upstream branch". Works with
+  # push.default = upstream, simple or current.
+  autoSetupRemote = true
+  # Push annotated tags that point at commits being pushed, so a release
+  # tag stops needing its own `git push --tags`.
+  followTags = true
+
+[fetch]
+  # Drop local copies of remote branches that were deleted upstream. This is
+  # the `rpo` alias and half of what `gfa` spells out, applied on every fetch.
+  prune = true
+  pruneTags = true
+  # 0 lets git pick the parallelism for multi-remote and submodule fetches.
+  parallel = 0
 
 [pull]
   # `pr` and the `gup`/`gupa` abbreviations already spell this out; make the

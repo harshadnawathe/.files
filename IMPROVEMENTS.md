@@ -4,12 +4,13 @@ Scratch file for the config review (2026-09-14). Delete once worked through.
 
 Legend: **[H]** high payoff · **[M]** medium · **[L]** nice-to-have
 
-**Progress:** sections 1 (git) and 2 (delta) complete — 19 commits,
-`3bd8ea6..1b090ba`. Sections 3-7 untouched; section 3 (Ghostty + fonts) is next.
+**Progress:** sections 1 (git), 2 (delta) and 3 (Ghostty) complete — 24 commits,
+`3bd8ea6..f8fd267`. Sections 4-7 untouched; section 4 (bat/fd/fzf) is next.
 
-Two items in these sections could not be applied as written — `diff.colorMoved`
-and `delta.navigate` both needed a companion setting to avoid making things
-worse. Both are annotated inline.
+Items that did not survive verification are struck through with the evidence
+inline rather than deleted — 4 in section 3 alone. Several others needed a
+companion setting to avoid making things worse (`diff.colorMoved`,
+`delta.navigate`, `font-family-bold-italic`).
 
 One out-of-repo change was made: `git maintenance start` wrote to `~/.gitconfig`
 and created launchd agents. To undo, run `git maintenance unregister` in `~/.files`.
@@ -79,29 +80,41 @@ and created launchd agents. To undo, run `git maintenance unregister` in `~/.fil
 ## 3. Ghostty — `.config/ghostty/config.ghostty`
 
 ### Fonts
-- [ ] **[H]** Set `font-family` — `font-monaspace` is installed via Brewfile and unused.
-      `Monaspace Neon` + `font-family-italic = Monaspace Radon`
-- [ ] **[H]** `font-feature = calt, liga, ss01..ss08` (enables texture healing)
-- [ ] **[M]** `font-thicken = true`, `adjust-cell-height = 8%`
-- [ ] **[L]** Evaluate `Argon` (humanist) / `Xenon` (slab) before settling
+- [x] **[H]** `font-family = Monaspace Neon` — the cask was installed and unused.
+      Nerd glyph fallback verified first: powerline separators come from Ghostty's
+      internal sprites, the rest from Symbols Nerd Font.  `bba2b16`
+- [x] **[H]** `font-family-italic`/`-bold-italic = Monaspace Radon`. Bold-italic needs
+      its own line or it falls back to Neon with a synthetic slant.  `bba2b16`
+- [x] **[H]** `font-feature = ss01, ss02, ss03, ss09` — set names read out of the font's
+      GSUB/name tables, not guessed. **`calt` deliberately omitted**: it *is* Monaspace's
+      texture healing and is already on by default.  `ee17705`
+- [x] **[M]** `font-thicken = true`, `adjust-cell-height = 8%`, `alpha-blending =
+      linear-corrected`  `a39a26f`
+- [x] **[L]** Evaluated the family: Neon (neo-grotesque) chosen as the smallest step
+      from JetBrains Mono. Argon/Xenon/Krypton/Radon all installed if you want to swap.
 
 ### Unused features
-- [ ] **[H]** Quick terminal: `quick-terminal-position = top` +
-      `keybind = global:cmd+grave_accent=toggle_quick_terminal`
-- [ ] **[M]** `copy-on-select = clipboard`
-- [ ] **[M]** `confirm-close-surface = false` (tmux persists everything)
-- [ ] **[M]** `resize-overlay = never`
-- [ ] **[M]** `window-padding-x/y` + `window-padding-balance` + `window-padding-color = extend`
-- [ ] **[M]** `alpha-blending = linear-corrected` (text over the wallpaper)
-- [ ] **[L]** `mouse-hide-while-typing = true`, `window-save-state = always`
-- [ ] **[L]** `scrollback-limit` down — tmux owns scrollback
-- [ ] **[L]** `shell-integration = none` — injected into zsh, made moot by tmux
-- [ ] **[L]** `link = regex:PROJ-\d+,action:open:https://jira/browse/$0`
+- [x] **[M]** `copy-on-select`, `confirm-close-surface = false`, `resize-overlay = never`,
+      `mouse-hide-while-typing`, `window-save-state`  `86ccfa9`
+- [x] **[M]** `window-padding-x/y` + `balance` + `color = extend`  `86ccfa9`
+- [ ] ~~**[H]** Quick terminal~~ — **not viable.** `command` applies to every surface and
+      there is no per-surface override (`initial-command` is the `-e` path). A quick
+      terminal would run `tmux new-session -A -s __` and attach a *second client to the
+      existing session*; the server reports `window-size latest`, so the session would
+      resize to whichever client has focus on every toggle. tmux `display-popup`
+      already covers this need (`C-a G`, `M-Space`, `C-a i`, `C-a N`).
+- [ ] ~~**[L]** `shell-integration = none`~~ — **would be a regression.** fish inside tmux
+      *is* receiving the integration: `GHOSTTY_SHELL_FEATURES=cursor:blink,path,title`
+      and Ghostty's resources are in `XDG_DATA_DIRS`, inherited zsh → tmux → fish.
+- [ ] ~~**[L]** `link = regex:...`~~ — **not implemented in 1.3.1.** The key is recognised
+      but returns `error.NotImplemented` (vs `unknown field` for a bogus key).
+- [ ] ~~**[L]** `scrollback-limit` down~~ — **skipped, not worth it.** tmux runs on the
+      alternate screen so Ghostty's scrollback is never populated, but the saving is
+      ~10MB of lazily-allocated memory and it degrades the no-tmux fallback case.
 
 ### Hygiene
-- [ ] **[L]** Comment that every `text:\x01…` keybind hard-codes tmux's `C-a` prefix
-
----
+- [x] **[L]** Documented that all 17 keybinds encode tmux's `C-a` prefix as `\x01`, so
+      changing `set -g prefix` breaks them silently.  `f8fd267`
 
 ## 4. bat / fd / fzf
 

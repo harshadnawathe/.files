@@ -4,17 +4,20 @@ Scratch file for the config review (2026-09-14). Delete once worked through.
 
 Legend: **[H]** high payoff · **[M]** medium · **[L]** nice-to-have
 
-**Progress:** section 1 (git) done bar two decisions — see `http.sslVerify` and
-`push.default` below. Sections 2-7 untouched.
+**Progress:** section 1 (git) complete — 13 commits, `3bd8ea6..5b3e824`.
+Sections 2-7 untouched; section 2 (delta) is the natural next step and its
+`interactive.diffFilter` item is the highest value-per-character left on the list.
+
+One out-of-repo change was made: `git maintenance start` wrote to `~/.gitconfig`
+and created launchd agents. To undo, run `git maintenance unregister` in `~/.files`.
 
 ---
 
 ## 1. Git — `.config/git/config`
 
 ### Correctness / safety
-- [ ] **[H]** Scope `http.sslVerify = false` to the one host that needs it, or drop it.
-      Currently global — disables TLS verification for every clone/fetch/push.
-      `[http "https://host.example.com"] sslVerify = false`
+- [x] **[H]** ~~Scope~~ **Removed** `http.sslVerify = false` — it was vestigial. If a host
+      ever needs it, scope it: `[http "https://host"] sslVerify = false`  `6270d39`
 - [x] **[H]** `color.status = always` → `auto`. Verified it emits escape codes when piped;
       the `sci` alias greps `git st` output and only worked by luck.  `3bd8ea6`
 
@@ -39,8 +42,11 @@ Legend: **[H]** high payoff · **[M]** medium · **[L]** nice-to-have
 - [x] **[L]** `diff.tool = nvimdiff` + `difftool.prompt = false` (merge.tool is set, diff.tool isn't)  `8ef8ccc`
 
 ### Housekeeping
-- [ ] **[L]** Run `git maintenance start` instead of invoking the `cc` alias by hand
-- [ ] **[L]** Decide on `push.default = upstream` vs `simple`
+- [x] **[L]** Ran `git maintenance start` for `~/.files`. Registered `maintenance.repo`
+      in **~/.gitconfig** (outside this repo) and loaded the hourly/daily/weekly
+      launchd agents — verified via `launchctl list`. Not a tracked change.
+- [x] **[L]** `push.default` `upstream` → `simple`; autoSetupRemote covers the
+      new-branch case that `upstream` was working around.  `5b3e824`
 - [x] **[L]** Add Homebrew `git` to the Brewfile (currently Apple Git 2.50.1)  `afaadca`
 
 ---

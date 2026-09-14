@@ -362,9 +362,6 @@
   # show diffs with colored words (red word is deleted, green word is added)
   dcolor = diff --color-words	
 
-[http]
-	sslVerify = false
-
 [core]
 	autocrlf = input
 	editor = nvim

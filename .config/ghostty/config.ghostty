@@ -19,6 +19,24 @@ font-family-italic = Monaspace Radon
 font-family-bold-italic = Monaspace Radon
 font-size = 15
 
+# Ligature sets, read out of the font's own GSUB table rather than guessed:
+#
+#   ss01 Equal Symbols    ss06 Markdown Strings
+#   ss02 Comparisons      ss07 Centered Colon
+#   ss03 Arrows           ss08 Centered Period
+#   ss04 HTML Tags        ss09 Double Arrows
+#   ss05 F# Shapes        ss10 Other Tags
+#
+# Enabled: the four that fire constantly in Go, Rust, TS, Java and Lua.
+# Left off deliberately -- ss04/ss10 (tag shapes), ss05 (|> pipelines, not
+# this stack), ss06, and ss07/ss08 which nudge : and . off the baseline.
+# Add any of them to this line to try them.
+#
+# calt is NOT listed: it is Monaspace's texture healing and is already on by
+# default. Ghostty's own docs say to pass -calt to turn ligatures off, which
+# only makes sense if it is enabled to begin with.
+font-feature = ss01, ss02, ss03, ss09
+
 background = 000000
 background-image = ~/.files/assets/avatar-elements-wallhaven-4xlwel.png
 background-image-fit = cover

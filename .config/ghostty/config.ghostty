@@ -2,6 +2,21 @@ command = /bin/zsh -l -c 'tmux new-session -A -D -s __'
 
 theme = Tokyonight Night
 window-decoration = false
+
+# Fonts
+#
+# Monaspace, installed via the font-monaspace cask but unused until now.
+# Neon is the neo-grotesque of the family, so this is a small step from the
+# bundled JetBrains Mono rather than a jarring one.
+#
+# Radon for italics is a handwriting face. Comments are italic under
+# tokyonight, so this is mostly "comments look handwritten". It is the most
+# taste-dependent line in this file -- delete it to get upright italics back.
+font-family = Monaspace Neon
+font-family-italic = Monaspace Radon
+# Without this, bold-italic falls back to Neon with a synthetic slant while
+# plain italic is real Radon -- verified with `ghostty +show-face --style`.
+font-family-bold-italic = Monaspace Radon
 font-size = 15
 
 background = 000000

@@ -14,6 +14,16 @@
 [push]
 	default = upstream
 
+[diff]
+  # histogram produces noticeably better hunk boundaries than the default
+  # myers, especially on refactors that shuffle adjacent blocks.
+  algorithm = histogram
+  # `copies` detects copied files as well as renamed ones, so a file split in
+  # two stops showing up as one rename plus one wholly new file.
+  renames = copies
+  # Show the submodule pointer move as a short log rather than two hashes.
+  submodule = log
+
 [alias]
 	#co = checkout
 	#st = status

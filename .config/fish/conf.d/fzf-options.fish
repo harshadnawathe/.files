@@ -44,6 +44,26 @@ set -l opts \
 
 # --- fzf.fish configuration ---
 
-set -gx fzf_directory_opts $opts
+# Render the pickers as a tmux popup instead of inline in the pane. Matches
+# how everything else here is reached -- sesh, lazygit, cheat and the workmux
+# dashboard are all display-popup -- and leaves the pane's scrollback alone.
+# Outside tmux the flag is ignored, so this stays correct over ssh.
+#
+# Deliberately set here rather than in FZF_DEFAULT_OPTS, which would apply to
+# every fzf on the machine -- including ones already running inside a popup,
+# where the inner fzf would try to open a popup from within a popup:
+#
+#   ~/bin/obsidian_notes   invoked by `bind N` in tmux.conf, which is itself
+#                          a display-popup, and shells out to fzf
+#
+# These fzf_*_opts variables are read only by fzf.fish's key bindings (ctrl-f
+# directory, ctrl-s git status, ctrl-v variables), which always run from a
+# shell prompt in a real pane and so cannot nest. fzf.fish appends them to its
+# own arguments rather than replacing them.
+set -l fzf_popup --tmux center,80%,70%
+
+set -gx fzf_directory_opts $opts $fzf_popup
+set -gx fzf_git_status_opts $fzf_popup
+set -gx fzf_variables_opts $fzf_popup
 set -gx fzf_fd_opts --hidden
 

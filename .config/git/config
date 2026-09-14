@@ -416,6 +416,16 @@
   # literal backslash reaches delta.
   navigate-regex = "^(commit|\\[\\+\\]|\\[-\\]|\\[\\*\\]|\\[==\\]|\\[->\\])"
 
+  # OSC-8 hyperlinks: commit hashes become links to the commit on the
+  # remote's web UI, file names become links to the file. Ghostty renders
+  # these; delta additionally needs less >= 581 to pass them through, and
+  # macOS ships less 668, so this works out of the box here.
+  #
+  # File links use the default file:// format, which hands the path to the
+  # OS rather than to the nvim instance you are already sitting in. The
+  # commit links are the reason to turn this on.
+  hyperlinks = true
+
   # Maps the four colours git uses for `diff.colorMoved = default`
   # (old/new moved, plus the alternating pair) onto dark tokyonight tints.
   # Set directly under [delta] rather than in a feature so it outranks

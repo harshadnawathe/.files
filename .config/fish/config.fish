@@ -8,11 +8,15 @@ function fish_user_key_bindings
   bind -M insert \cn down-or-search
 end
 
-# brew
-if not test -f ~/.config/fish/caches/brew_shellenv.fish
-  brew shellenv fish > ~/.config/fish/caches/brew_shellenv.fish
+# brew, by absolute path: it is not on fish's default PATH, so resolving it by
+# name only works in a shell that inherited one. Everything below relies on
+# shellenv having put the brew prefix on PATH.
+for brew_bin in /opt/homebrew/bin/brew /usr/local/bin/brew
+  if test -x $brew_bin
+    cached_eval brew_shellenv $brew_bin "$brew_bin shellenv fish"
+    break
+  end
 end
-source ~/.config/fish/caches/brew_shellenv.fish
 
 fish_add_path -gm \
 ~/bin \
@@ -31,47 +35,18 @@ if status is-interactive
 
   fzf_configure_bindings --directory=\cf --git_log= --git_status=\cs --history= --processes= --variables=\cv
 
-  # starship
-  if not test -f ~/.config/fish/caches/starship_init.fish 
-    starship init fish > ~/.config/fish/caches/starship_init.fish
-  end
   # $argv forwards --status/--keymap from starship's fish init, so the
   # collapsed prompt turns red after a failure and shows the vi-mode
   # character. Without it every scrollback arrow is a green insert-mode one.
   function starship_transient_prompt_func
     starship module character $argv
   end
-  source ~/.config/fish/caches/starship_init.fish
+  cached_eval starship_init starship "starship init fish"
   enable_transience
 
-  # mise
-  if not test -f ~/.config/fish/caches/mise_activate.fish
-    mise activate fish > ~/.config/fish/caches/mise_activate.fish
-  end
-  source ~/.config/fish/caches/mise_activate.fish
-
-  # thefuck
-  if not test -f ~/.config/fish/caches/thefuck.fish
-    thefuck --alias > ~/.config/fish/caches/thefuck.fish
-  end
-  source ~/.config/fish/caches/thefuck.fish
-
-  # zoxide
-  if not test -f ~/.config/fish/caches/zoxide-init.fish
-    zoxide init fish > ~/.config/fish/caches/zoxide-init.fish
-  end
-  source ~/.config/fish/caches/zoxide-init.fish
-
-  # television
-  if not test -f ~/.config/fish/caches/television_integration.fish
-    tv init fish > ~/.config/fish/caches/television_integration.fish
-  end
-  source ~/.config/fish/caches/television_integration.fish
-
-  # workmux
-  if not test -f ~/.config/fish/caches/workmux_completions.fish
-    workmux completions fish > ~/.config/fish/caches/workmux_completions.fish
-  end
-  source ~/.config/fish/caches/workmux_completions.fish
-  
+  cached_eval mise_activate mise "mise activate fish"
+  cached_eval thefuck thefuck "thefuck --alias"
+  cached_eval zoxide_init zoxide "zoxide init fish"
+  cached_eval television_integration tv "tv init fish"
+  cached_eval workmux_completions workmux "workmux completions fish"
 end

@@ -154,7 +154,7 @@ and created launchd agents. To undo, run `git maintenance unregister` in `~/.fil
 
 ## 6. Smaller items
 
-- [ ] **[M]** Replace `thefuck` (unmaintained, Python startup cost) with `pay-respects`
+- [x] **[M]** `thefuck` removed outright; no `pay-respects` replacement installed.
 - [ ] **[M]** `README.md` bootstrap is incomplete — add `bat cache --build`
       (custom themes won't load otherwise), `fisher update`, `pre-commit install`
 - [ ] **[L]** `eza` and `lsd` both installed; fish uses `lsd`. Drop one, or switch

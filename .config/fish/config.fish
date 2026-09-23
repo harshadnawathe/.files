@@ -45,7 +45,6 @@ if status is-interactive
   enable_transience
 
   cached_eval mise_activate mise "mise activate fish"
-  cached_eval thefuck thefuck "thefuck --alias"
   cached_eval zoxide_init zoxide "zoxide init fish"
   cached_eval television_integration tv "tv init fish"
   cached_eval workmux_completions workmux "workmux completions fish"

@@ -1,7 +1,7 @@
-# Login shells only. The PATH itself is built in ~/.zshenv.
-#
-# /etc/zprofile runs path_helper *after* ~/.zshenv, rebuilding PATH with
-# /etc/paths first and appending ours after — which pushes the mise shims behind
-# /usr/bin, letting /usr/bin/ruby and the java stub win. Re-assert to undo that.
+# Login shells only. ~/.zshenv already ran, but /etc/zprofile's path_helper has
+# since rebuilt PATH with /etc/paths first, pushing everything we set behind
+# /usr/bin -- which is how a login shell ends up with /usr/bin/ruby and the
+# /usr/bin/java stub. Just redo it, now that nothing else will reorder us.
 
 (( $+functions[zsh_set_path] )) && zsh_set_path
+(( $+functions[zsh_activate_mise] )) && zsh_activate_mise

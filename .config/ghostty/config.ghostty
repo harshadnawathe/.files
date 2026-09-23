@@ -54,7 +54,7 @@ alpha-blending = linear-corrected
 background = 000000
 background-image = ~/.files/assets/avatar-elements-wallhaven-4xlwel.png
 background-image-fit = cover
-background-image-opacity = 0.30
+background-image-opacity = 0.15
 
 macos-option-as-alt = true
 

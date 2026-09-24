@@ -1,5 +1,7 @@
 command = /bin/zsh -l -c 'tmux new-session -A -D -s __'
 
+wait-after-command = true
+
 theme = Tokyonight Night
 window-decoration = false
 

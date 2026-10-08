@@ -122,6 +122,7 @@ brew utf8proc
 brew webp
 brew websocat
 brew wget
+brew workmux
 brew x265
 brew xorgproto
 brew xz
@@ -148,7 +149,6 @@ cask rectangle
 tap morantron/tmux-fingers
 
 tap raine/workmux
-brew workmux
 
 tap rcmdnk/file
 brew brew-file

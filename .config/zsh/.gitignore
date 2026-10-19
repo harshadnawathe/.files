@@ -4,6 +4,7 @@
 # anything that ignores that, and for any other tool that decides $ZDOTDIR is
 # a good place to keep state.
 .zsh_history
+.zsh_sessions/
 .zcompdump*
 .zsh_plugins.zsh
 *.zwc

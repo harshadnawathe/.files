@@ -15,6 +15,26 @@ export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
 export XDG_STATE_HOME=${XDG_STATE_HOME:-$HOME/.local/state}
 export ZDOTDIR=$XDG_CONFIG_HOME/zsh
 
+# Here rather than in .zshrc: git, mise and nvim's `:!` are all non-interactive
+# and would never read an interactive-only file. It lived in fish's universal
+# variable store, which nothing outside fish can see.
+export EDITOR=nvim
+
+# Apple's per-session history, off. It has to be set here rather than in
+# .zshrc because /etc/zshrc runs first, and under Terminal.app it does three
+# things that together defeat .zshrc.d/00-history.zsh:
+#
+#   /etc/zshrc:16                 HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
+#   /etc/zshrc_Apple_Terminal:146 captures that as the "shared" history file
+#   /etc/zshrc_Apple_Terminal:150 repoints HISTFILE at a per-session file,
+#                                 re-applied from a precmd hook (:178)
+#   /etc/zshrc_Apple_Terminal:196 appends the session back to the shared file
+#
+# With ZDOTDIR pointing into this repo, "shared" is .config/zsh/.zsh_history --
+# so history both lands in git and stops honouring $HISTFILE. The opt-out is
+# Apple's own, documented at /etc/zshrc_Apple_Terminal:94.
+export SHELL_SESSIONS_DISABLE=1
+
 # Source $3's output, cached under ~/.cache/zsh and regenerated whenever $2 --
 # the binary that generates it -- is newer. `-nt` is a builtin, so the steady
 # state costs one source and no fork. Empty or failed output is never cached.

@@ -40,7 +40,6 @@ return {
         },
       },
       terminal = {
-        shell = "/opt/homebrew/bin/fish",
         win = {
           keys = {
             nav_h = false,

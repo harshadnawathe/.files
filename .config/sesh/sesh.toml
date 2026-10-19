@@ -33,8 +33,8 @@ path = "~/.files/.config/nvim/"
 startup_command = "nvim -c \"call feedkeys(' fF')\""
 
 [[session]]
-name = "fish config"
-path = "~/.files/.config/fish/"
+name = "zsh config"
+path = "~/.files/.config/zsh/"
 startup_command = "nvim -c \"call feedkeys(' fF')\""
 
 [[session]]

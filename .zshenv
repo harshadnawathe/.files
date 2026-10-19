@@ -1,7 +1,11 @@
-# Read by EVERY zsh: scripts, `zsh -c`, login shells. fish is the user shell;
-# zsh runs scripts and wraps GUI-launched programs, which inherit launchd's
-# stunted PATH (/usr/bin:/bin:/usr/sbin:/sbin) rather than a shell's. Ghostty
-# routes through `/bin/zsh -l -c` (.config/ghostty/config.ghostty) to get this.
+# Read by EVERY zsh: scripts, `zsh -c`, login shells, and -- since the cutover
+# -- the interactive one too. It still has to do the PATH work on its own,
+# because GUI-launched programs inherit launchd's stunted PATH
+# (/usr/bin:/bin:/usr/sbin:/sbin) rather than a shell's, and Ghostty routes
+# through `/bin/zsh -l -c` (.config/ghostty/config.ghostty) to get this.
+#
+# Keep this file free of anything interactive: it is read by every `zsh -c` on
+# the machine. Interactive setup lives in $ZDOTDIR/.zshrc.
 
 typeset -U path PATH fpath FPATH   # dedupe, keeping the leftmost entry
 

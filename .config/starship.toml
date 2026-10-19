@@ -92,13 +92,15 @@ format = '[󰅚 ](fg:1)[$status](fg:15) '
 [cmd_duration]
 format = '[ ](fg:3)[$duration](fg:15) '
 
-# Silent in fish, so it costs nothing until you are somewhere else.
+# Silent in zsh, so it costs nothing until you are somewhere else. The blank
+# one follows whichever shell is the daily driver -- it was fish's until the
+# cutover, and naming fish now is the point rather than an oversight.
 [shell]
 disabled = false
 format = '[$indicator](fg:8)'
-fish_indicator = ''
+zsh_indicator = ''
+fish_indicator = 'fish '
 bash_indicator = 'bash '
-zsh_indicator = 'zsh '
 nu_indicator = 'nu '
 
 # threshold = 2: only speaks up once you are actually nested.

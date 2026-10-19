@@ -17,5 +17,8 @@ zstyle ':completion:*:git-checkout:*' sort false
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 zstyle ':fzf-tab:complete:*:*'  fzf-preview 'bat --color=always --style=plain $realpath 2>/dev/null'
 
-# fzf-tab does not read FZF_DEFAULT_OPTS; its flags only come from here.
+# fzf-tab ignores FZF_DEFAULT_OPTS unless told otherwise, which would leave the
+# completion menu as the one unthemed fzf on the machine. 10-options.zsh sets
+# the TokyoNight palette there; this opts in to it.
+zstyle ':fzf-tab:*' use-fzf-default-opts yes
 zstyle ':fzf-tab:*' fzf-flags --height=~50% --border

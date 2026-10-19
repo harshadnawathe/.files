@@ -13,7 +13,16 @@ export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
 export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
 export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
 export XDG_STATE_HOME=${XDG_STATE_HOME:-$HOME/.local/state}
-export ZDOTDIR=$XDG_CONFIG_HOME/zsh
+
+# NOT exported, and that is the whole point. zsh resolves its startup files
+# from $ZDOTDIR/.zshenv *first*, falling back to ~/.zshenv only when ZDOTDIR is
+# unset in the environment. Export it and every nested zsh -- `zsh` from a zsh,
+# nvim's `:!`, and after the cutover every tmux pane, since tmux inherits the
+# environment of the `zsh -l -c` that started it -- looks for a
+# .config/zsh/.zshenv that does not exist, skips this file, and comes up with
+# no PATH, no mise and no zsh_cached_eval. The shell variable is all zsh needs
+# to find .zprofile and .zshrc below.
+ZDOTDIR=$XDG_CONFIG_HOME/zsh
 
 # Here rather than in .zshrc: git, mise and nvim's `:!` are all non-interactive
 # and would never read an interactive-only file. It lived in fish's universal

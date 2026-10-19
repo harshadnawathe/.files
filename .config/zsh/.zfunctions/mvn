@@ -1,0 +1,20 @@
+# Ported from functions/mvn.fish, with its bug fixed.
+#
+# The fish version walks up to find the directory containing mvnw, then tests
+# `-e ./mvnw` -- the *current* directory, not the one it just found. So from a
+# subdirectory of a maven project it always fell through to `command mvn` and
+# the wrapper it had just located was ignored. The test below uses
+# $project_dir, which is what the walk-up is for.
+mvn() {
+  local project_dir=$PWD
+  while [[ $project_dir != / ]]; do
+    [[ -e $project_dir/mvnw ]] && break
+    project_dir=${project_dir:h}
+  done
+
+  if [[ -e $project_dir/mvnw ]]; then
+    $project_dir/mvnw "$@"
+  else
+    command mvn "$@"
+  fi
+}

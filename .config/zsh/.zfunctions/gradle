@@ -1,0 +1,24 @@
+# Ported from functions/gradle.fish. Walks up from $PWD for the project root
+# and prefers its wrapper, so `gradle` from any subdirectory runs the version
+# the project pins rather than whatever mise resolves.
+#
+# ${d:h} is zsh's dirname as a parameter expansion -- fish forked `dirname`
+# once per level on the way up.
+#
+# No `compdef` needed, despite fish having wanted `--wraps gradle`: zsh
+# dispatches completion on the command word even when a function shadows the
+# binary, so _gradle still applies. fish functions do not inherit completions,
+# which is the only reason --wraps existed.
+gradle() {
+  local project_dir=$PWD
+  while [[ $project_dir != / ]]; do
+    [[ -e $project_dir/settings.gradle || -e $project_dir/settings.gradle.kts ]] && break
+    project_dir=${project_dir:h}
+  done
+
+  if [[ -e $project_dir/gradlew ]]; then
+    $project_dir/gradlew "$@"
+  else
+    command gradle "$@"
+  fi
+}

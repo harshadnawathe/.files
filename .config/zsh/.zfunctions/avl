@@ -1,0 +1,8 @@
+# Credentials, not profiles -- this one opens the console for a stored
+# credential rather than assuming a role.
+avl() {
+  local credential
+  credential=$(__fzf_aws_credential) || return
+  [[ -n $credential ]] || return 1
+  aws-vault login "$credential"
+}

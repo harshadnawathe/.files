@@ -1,0 +1,1 @@
+__fzf_aws_profile() { aws-vault list --profiles | __fzf_aws_select }

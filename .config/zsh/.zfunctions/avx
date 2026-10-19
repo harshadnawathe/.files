@@ -1,0 +1,14 @@
+# Was `abbr -a avx -f __avx` in fish, which ran the picker as you typed and
+# wrote `aws-vault exec <profile> -- ` onto the command line. zsh-abbr has no
+# function-backed abbreviations and was dropped anyway, so these four are
+# plain functions: the picker now fires when you run the command rather than
+# while you are still typing it. The one real behaviour loss in the migration.
+#
+# Every one of them guards against an empty pick -- fzf exits 130 on ESC, and
+# `aws-vault exec "" --` is a confusing way to find that out.
+avx() {
+  local profile
+  profile=$(__fzf_aws_profile) || return
+  [[ -n $profile ]] || return 1
+  aws-vault exec "$profile" -- "$@"
+}

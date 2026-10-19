@@ -1,0 +1,8 @@
+# fish ran `-- fish` here; the shell this drops you into follows the shell you
+# are in.
+avsh() {
+  local profile
+  profile=$(__fzf_aws_profile) || return
+  [[ -n $profile ]] || return 1
+  aws-vault exec "$profile" -- zsh
+}

@@ -1,0 +1,11 @@
+# The picker shared by the aws-vault wrappers, with the flags
+# conf.d/fzf-aws-vault-abbr.fish used. Candidates arrive on stdin; fish piped
+# them through `tr ' ' '\n'` only because it had flattened them to a list on
+# the way in.
+#
+# ctrl-j/ctrl-k because the rest of this setup navigates that way -- tmux
+# copy-mode, the television keybindings and fzf-tab all agree.
+__fzf_aws_select() {
+  fzf --margin=1 --padding=1 --border --ansi --height=~50% --reverse \
+      --bind 'ctrl-j:down,ctrl-k:up'
+}

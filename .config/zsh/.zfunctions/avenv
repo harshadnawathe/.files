@@ -1,0 +1,8 @@
+# Exports the picked profile into the *current* shell, so unlike avx there is
+# no subprocess to inherit it.
+avenv() {
+  local profile
+  profile=$(__fzf_aws_profile) || return
+  [[ -n $profile ]] || return 1
+  eval "$(aws-vault export "$profile" --format=export-env)"
+}

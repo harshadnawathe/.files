@@ -1,0 +1,20 @@
+# Lifted from oh-my-zsh's lib/git.zsh:300-309, because this config loads
+# plugins/git but deliberately not lib/git.zsh -- the rest of that file is
+# prompt machinery that starship makes redundant.
+#
+# Not optional: eight of the plugin's aliases call it -- current_branch,
+# ggpull, ggpush, ggsup, gluc, gpsup, gpsupf and groh.
+#
+# Upstream calls __git_prompt_git, which is only `GIT_OPTIONAL_LOCKS=0 command
+# git`; inlined here. The flag keeps a branch lookup from taking the index
+# lock, so it stays safe to call from a prompt or a hook.
+git_current_branch() {
+  local ref
+  ref=$(GIT_OPTIONAL_LOCKS=0 command git symbolic-ref --quiet HEAD 2>/dev/null)
+  local ret=$?
+  if [[ $ret != 0 ]]; then
+    [[ $ret == 128 ]] && return          # not in a repository at all
+    ref=$(GIT_OPTIONAL_LOCKS=0 command git rev-parse --short HEAD 2>/dev/null) || return
+  fi
+  print -r -- ${ref#refs/heads/}
+}

@@ -15,5 +15,23 @@ aloxaf/fzf-tab
 # ~15 of them call and that have never actually been defined on this machine.
 ohmyzsh/ohmyzsh              path:plugins/git
 
+# ll and la, which fish ships as builtin functions and zsh does not. Upstream
+# defines them identically to fish's -- `ls -lh` and `ls -lAh` -- and `ls` is
+# aliased to lsd in 30-aliases.zsh, so they render the same as they did there.
+#
+# It brings more than those two, all of it listed in lib/directories.zsh:
+#   l / lsa            `ls -lah`
+#   -                  cd -
+#   1-9                cd -1 .. cd -9, which pairs with the auto_pushd already
+#                      set in 10-options.zsh
+#   md / rd            mkdir -p / rmdir
+#   ... .... .....     GLOBAL aliases for ../.. and deeper, so they expand
+#                      anywhere on the line rather than only in command position
+#
+# and it sets four options, three of which 10-options.zsh already had. The new
+# one is auto_cd: a bare directory name becomes a cd. fish has no equivalent,
+# so that is the one deliberate behaviour change here.
+ohmyzsh/ohmyzsh              path:lib/directories.zsh
+
 zsh-users/zsh-autosuggestions
 zdharma-continuum/fast-syntax-highlighting

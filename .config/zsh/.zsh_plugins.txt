@@ -1,0 +1,19 @@
+# antidote bundle list. Compiled once to $XDG_CACHE_HOME/zsh/.zsh_plugins.zsh,
+# so startup costs one `source` and none of antidote's own machinery.
+#
+# Order is load-bearing: fzf-tab has to come after compinit and before anything
+# that wraps zle widgets. ez-compinit is what makes that ordering declarative --
+# it defers the real compinit to the end of startup, so fpath is fully populated
+# by the time completion is initialised.
+
+mattmc3/ez-compinit
+zsh-users/zsh-completions   kind:fpath path:src
+aloxaf/fzf-tab
+
+# 166 git aliases that used to be transcribed by hand into conf.d/git-abbr.fish,
+# plus the git_main_branch / git_develop_branch / _git_log_prettily helpers that
+# ~15 of them call and that have never actually been defined on this machine.
+ohmyzsh/ohmyzsh              path:plugins/git
+
+zsh-users/zsh-autosuggestions
+zdharma-continuum/fast-syntax-highlighting

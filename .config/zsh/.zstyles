@@ -1,0 +1,21 @@
+# Completion styles. Sourced from .zshrc before antidote, because compsys reads
+# most of these when compinit runs and fzf-tab reads the rest when it builds a
+# menu.
+
+zstyle ':plugin:ez-compinit' 'use-cache' 'yes'
+
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}'
+
+# fzf-tab replaces the menu entirely, so compsys must not draw its own.
+zstyle ':completion:*' menu no
+zstyle ':completion:*:descriptions' format '[%d]'
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+
+# Branches are already in most-recent-first order; sorting them loses that.
+zstyle ':completion:*:git-checkout:*' sort false
+
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+zstyle ':fzf-tab:complete:*:*'  fzf-preview 'bat --color=always --style=plain $realpath 2>/dev/null'
+
+# fzf-tab does not read FZF_DEFAULT_OPTS; its flags only come from here.
+zstyle ':fzf-tab:*' fzf-flags --height=~50% --border

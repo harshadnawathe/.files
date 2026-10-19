@@ -2,11 +2,14 @@
 # tap repositories and their packages
 
 tap homebrew/core
+brew antidote
 brew aom
+brew atuin
 brew bat
 brew btop
 brew ca-certificates
 brew cairo
+brew carapace
 brew clang-format
 brew cmake
 brew coreutils

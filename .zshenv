@@ -5,6 +5,16 @@
 
 typeset -U path PATH fpath FPATH   # dedupe, keeping the leftmost entry
 
+# Setting ZDOTDIR moves every OTHER startup file: zsh reads $ZDOTDIR/.zprofile,
+# .zshrc and .zlogin, and stops looking in $HOME for them. That is why
+# .zprofile sits in .config/zsh/ rather than beside this file. This one has to
+# stay at ~/.zshenv -- it is the only file read before ZDOTDIR exists.
+export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
+export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
+export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
+export XDG_STATE_HOME=${XDG_STATE_HOME:-$HOME/.local/state}
+export ZDOTDIR=$XDG_CONFIG_HOME/zsh
+
 # Source $3's output, cached under ~/.cache/zsh and regenerated whenever $2 --
 # the binary that generates it -- is newer. `-nt` is a builtin, so the steady
 # state costs one source and no fork. Empty or failed output is never cached.
@@ -34,8 +44,18 @@ zsh_set_path() {
   # and nvim's `:!obsidian_ok`. Skipping missing dirs matches config.fish, so one
   # created later is picked up on its own. Not ~/.cargo/bin: mise already
   # resolves those, and it would shadow the pinned rust.
+  #
+  # Listed back to front, because each iteration prepends: the resulting PATH
+  # order is ~/bin, ~/go/bin, ~/.local/bin, Toolbox -- the order config.fish:21
+  # passes to `fish_add_path -gm`. The Toolbox path is quoted there and so never
+  # expands its tilde; fish has never actually had it.
   local dir
-  for dir in $HOME/bin $HOME/.local/bin; do
+  for dir in \
+    "$HOME/Library/Application Support/JetBrains/Toolbox/scripts" \
+    $HOME/.local/bin \
+    $HOME/go/bin \
+    $HOME/bin
+  do
     [[ -d $dir ]] && path=($dir $path)
   done
 }

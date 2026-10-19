@@ -111,3 +111,16 @@ format = '[↓$shlvl](fg:8) '
 success_symbol = '[❯](fg:2)'
 error_symbol = '[❯](fg:1)'
 vimcmd_symbol = '[❮](fg:2)'
+
+# The transient prompt, used by .config/zsh/.zshrc.d/40-tools.zsh.
+#
+# starship has no transience of its own in zsh -- `enable_transience` is a
+# fish/bash/nu feature, and `starship init zsh` emits nothing for it. A profile
+# is how you ask for a second, differently-shaped prompt; the zsh side redraws
+# the finished line with this one.
+#
+# $character alone, so a past prompt collapses to the same bare arrow fish
+# leaves behind. Everything above still assumes that: the full-width $fill line
+# is only affordable because it never reaches scrollback.
+[profiles]
+transient = "$character"

@@ -14,8 +14,16 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 # Branches are already in most-recent-first order; sorting them loses that.
 zstyle ':completion:*:git-checkout:*' sort false
 
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
-zstyle ':fzf-tab:complete:*:*'  fzf-preview 'bat --color=always --style=plain $realpath 2>/dev/null'
+# No fzf-preview styles, deliberately. fzf-tab reserves a preview pane whenever
+# one matches, and lib/-ftb-preview.tpl:18 only exports $realpath for
+# completions that carry a realdir -- so for anything else, flags included, the
+# pane renders empty while still taking half the width and truncating the
+# descriptions next to it. Most completions here come from carapace, which is
+# mostly flags with descriptions, and those descriptions are the thing worth
+# the width.
+#
+# To get one back for directories:
+#   zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 
 # fzf-tab ignores FZF_DEFAULT_OPTS unless told otherwise, which would leave the
 # completion menu as the one unthemed fzf on the machine. 10-options.zsh sets

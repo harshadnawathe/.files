@@ -12,11 +12,20 @@ unsetopt beep
 # filling with one repeated directory, pushd_silent stops every cd printing it.
 setopt auto_pushd pushd_ignore_dups pushd_silent
 
-# extended_glob is the one option here that is not fish parity -- it is what
-# makes `^`, `~` and `#` operators in patterns (`ls ^*.bak`, `print *.c~foo.c`).
-# Worth knowing it changes those three characters in *unquoted glob position*,
-# so a literal `^` or `#` in a filename argument now needs quoting.
-setopt extended_glob
+# extended_glob is deliberately NOT set. It makes `^` a pattern operator, and
+# with nomatch on (the zsh default) that breaks every caret git revision:
+#
+#   $ git log HEAD^
+#   zsh:1: no matches found: HEAD^
+#
+# which takes `gd HEAD^`, `git show HEAD^` and `grh HEAD^` with it -- in a
+# config whose headline feature is 166 git aliases. The silent case is worse:
+# in a directory containing a file whose name starts with HEAD, `HEAD^` expands
+# to that filename and git is handed a revision nobody typed.
+#
+# `setopt no_nomatch` would fix the error but keep the silent misexpansion, so
+# it is not the answer either. What extended_glob buys here is `ls ^*.bak`,
+# which fd and rg already cover.
 
 # Lifted out of fish's universal variable store, where nothing but fish could
 # read it -- this is why fzf is unthemed in every zsh on the machine today.

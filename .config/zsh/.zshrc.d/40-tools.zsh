@@ -54,6 +54,13 @@ bindkey -M vicmd '^T' tv-smart-autocomplete
 # .config/starship.toml:12-17 justifies the full-width $fill line on the
 # grounds that transience keeps it out of scrollback, so this is load-bearing
 # rather than decoration.
+# Everything below is guarded on starship actually being present. The init
+# above already is; registering the hooks unconditionally meant that a missing
+# starship -- an uninstall, a Homebrew prefix move, a machine stowed before
+# `brew bundle` -- produced `command not found: starship` on every Enter, from
+# inside a ZLE widget, and set PROMPT to the empty capture.
+if [[ -x ${HOMEBREW_PREFIX:-/opt/homebrew}/bin/starship ]]; then
+
 # starship sets PROMPT once, to a literal string containing a command
 # substitution that prompt_subst re-evaluates on every draw -- it does not
 # rebuild it in precmd. So overwriting PROMPT with rendered text destroys the
@@ -111,6 +118,8 @@ _starship_transient_prompt() {
   zle .reset-prompt
 }
 add-zle-hook-widget zle-line-finish _starship_transient_prompt
+
+fi
 
 # --- atuin ------------------------------------------------------------------
 # Last, so its ^R wins over television's.

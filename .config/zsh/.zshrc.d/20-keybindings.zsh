@@ -21,40 +21,49 @@ KEYTIMEOUT=3
 # `foo-bar.baz` stays one word, `a/b` is two. This is the stock list minus `/`.
 WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
 
-# fish: ctrl-u backward-kill-line, ctrl-k kill-line, ctrl-w
-# backward-kill-path-component, backspace backward-delete-char. zsh's vi-*
-# equivalents all stop at the point where insert mode began, which fish does
-# not do.
-bindkey -M viins '^U' backward-kill-line
-bindkey -M viins '^K' kill-line
-bindkey -M viins '^W' backward-kill-word
-bindkey -M viins '^?' backward-delete-char
-bindkey -M viins '^H' backward-delete-char
-
-bindkey -M viins '^Y' yank              # fish: ctrl-y yank
-bindkey -M viins '\ey' yank-pop         # fish: alt-y yank-pop
-bindkey -M viins '\ed' kill-word        # fish: alt-d kill-word
-bindkey -M viins '\eb' backward-word    # fish: alt-b prevd-or-backward-word
-bindkey -M viins '\ef' forward-word     # fish: alt-f nextd-or-forward-word
-bindkey -M viins '\e.' insert-last-word # fish: alt-. history-token-search-backward
-
-# fish leaves ctrl-a and ctrl-e unbound in insert mode, where they do nothing.
-# In zsh they are self-insert, which types a literal control character instead
-# -- so these are bound rather than left alone. Deliberate non-parity.
-bindkey -M viins '^A' beginning-of-line
-bindkey -M viins '^E' end-of-line
-
-# fish: ctrl-d delete-or-exit. zsh handles the exit half itself -- EOF on an
-# empty buffer ends the shell whatever ^D is bound to -- so this only needs to
-# supply the delete half.
-bindkey -M viins '^D' delete-char-or-list
-
-# fish: alt-e / alt-v edit_command_buffer. vicmd `v` is left alone; it is
-# visual mode in both shells.
+# zsh's vi-kill-line / vi-backward-kill-word / vi-backward-delete-char all stop
+# at the point where insert mode began; fish's equivalents do not, so the
+# non-vi widgets are the faithful port.
 autoload -Uz edit-command-line
 zle -N edit-command-line
-bindkey -M viins '\ee' edit-command-line
-bindkey -M viins '\ev' edit-command-line
+
+# BOTH keymaps, not just viins. In `fish -c 'fish_vi_key_bindings; bind'` these
+# print with no `-M`, which means fish's default (vi normal) mode as well as
+# insert -- so in fish they keep working after you press escape. Binding them
+# in viins alone made every one of them a silent no-op in normal mode, which is
+# the largest single gap from the parity this file claims.
+() {
+  local km
+  for km in viins vicmd; do
+    bindkey -M $km '^U' backward-kill-line     # fish: ctrl-u backward-kill-line
+    bindkey -M $km '^K' kill-line              # fish: ctrl-k kill-line
+    bindkey -M $km '^W' backward-kill-word     # fish: ctrl-w backward-kill-path-component
+    bindkey -M $km '^Y' yank                   # fish: ctrl-y yank
+    bindkey -M $km '\ey' yank-pop              # fish: alt-y yank-pop
+    bindkey -M $km '\ed' kill-word             # fish: alt-d kill-word
+    bindkey -M $km '\eb' backward-word         # fish: alt-b prevd-or-backward-word
+    bindkey -M $km '\ef' forward-word          # fish: alt-f nextd-or-forward-word
+    bindkey -M $km '\e.' insert-last-word      # fish: alt-. history-token-search-backward
+    bindkey -M $km '\ee' edit-command-line     # fish: alt-e edit_command_buffer
+    bindkey -M $km '\ev' edit-command-line     # fish: alt-v edit_command_buffer
+
+    # fish: ctrl-d delete-or-exit. zsh handles the exit half itself -- EOF on an
+    # empty buffer ends the shell whatever ^D is bound to -- so this only needs
+    # to supply the delete half.
+    bindkey -M $km '^D' delete-char-or-list
+
+    # fish leaves these inert in insert mode; in zsh they would self-insert a
+    # control character, and doing nothing is not one of the options. Deliberate
+    # non-parity, applied to both modes for consistency. vicmd `v` is left alone
+    # -- it is visual mode in both shells.
+    bindkey -M $km '^A' beginning-of-line
+    bindkey -M $km '^E' end-of-line
+  done
+}
+
+# Insert-mode only: there is no text being inserted to delete in normal mode.
+bindkey -M viins '^?' backward-delete-char
+bindkey -M viins '^H' backward-delete-char
 
 # fish: up/down are up-or-search, i.e. prefix search when the line has text.
 # *-beginning-search, not zsh's up-line-or-search: the latter searches on the

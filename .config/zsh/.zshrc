@@ -23,9 +23,16 @@ antidote load
 
 # Autoloaded rather than sourced: a function body is only read the first time
 # its name is called.
+# The (N) keeps a missing directory quiet, but an EMPTY one is the trap: the
+# glob then yields zero words and `autoload -Uz` with no operands *lists* every
+# autoload in the shell instead of defining anything -- 639 lines of
+# fast-syntax-highlighting chromas onto stdout at every startup, which also
+# corrupts anything scraping `zsh -ic`.
 if [[ -d ${ZDOTDIR}/.zfunctions ]]; then
   fpath=(${ZDOTDIR}/.zfunctions $fpath)
-  autoload -Uz ${ZDOTDIR}/.zfunctions/*(.N:t)
+  _zfns=(${ZDOTDIR}/.zfunctions/*(.N:t))
+  (( $#_zfns )) && autoload -Uz $_zfns
+  unset _zfns
 fi
 
 # (N) so an absent or empty directory is not a glob error -- these files arrive

@@ -32,12 +32,16 @@
 }
 
 # --- carapace ---------------------------------------------------------------
-# Completions for 500+ commands from one binary. Its group headers do not
-# render without this format string. The bridge list deliberately omits `fish`,
-# which carapace also supports: step 9 removes fish, and a completion source
-# that disappears later is worse than not having it now.
+# Completions for 500+ commands from one binary. The bridge list deliberately
+# omits `fish`, which carapace also supports: step 9 removes fish, and a
+# completion source that disappears later is worse than not having it now.
+#
+# carapace's install docs also set `zstyle ':completion:*' format` for its group
+# headers. That is not carried here: .zstyles already sets format on
+# ':completion:*:descriptions', which is the more specific pattern for the tag
+# that actually draws group headers, so it wins -- the generic one only ever
+# reached messages and warnings. One format style, in one file.
 export CARAPACE_BRIDGES='zsh,bash'
-zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
 
 # --- television -------------------------------------------------------------
 # tv binds ^T and ^R into the current keymap only, which after `bindkey -v` is

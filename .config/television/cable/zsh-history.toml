@@ -4,7 +4,9 @@ description = "A channel to select from your zsh history"
 requirements = ["zsh"]
 
 [source]
-command = "sed '1!G;h;$!d' ${HISTFILE:-${HOME}/.zsh_history}"
+# $HISTFILE is deliberately not exported (see .config/zsh/.zshrc.d/00-history.zsh),
+# so this reads the path directly. $XDG_STATE_HOME is exported from ~/.zshenv.
+command = "sed '1!G;h;$!d' ${XDG_STATE_HOME:-${HOME}/.local/state}/zsh/history"
 display = "{split:;:1..}"
 output = "{split:;:1..}"
 no_sort = true

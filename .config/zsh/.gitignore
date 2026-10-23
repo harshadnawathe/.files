@@ -3,8 +3,12 @@
 # 00-history.zsh redirects it to $XDG_STATE_HOME; this is the backstop for
 # anything that ignores that, and for any other tool that decides $ZDOTDIR is
 # a good place to keep state.
-.zsh_history
+# A glob, not the bare name: HIST_SAVE_BY_COPY (on by default) writes
+# $HISTFILE.new and renames it, and locking uses $HISTFILE.LOCK.
+.zsh_history*
 .zsh_sessions/
+# compsys's cache, were ':completion:*' use-cache ever turned on
+.zcompcache/
 .zcompdump*
 .zsh_plugins.zsh
 *.zwc

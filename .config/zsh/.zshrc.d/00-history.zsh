@@ -2,10 +2,12 @@
 # ${ZDOTDIR:-$HOME}/.zsh_history, which now resolves inside the dotfiles repo.
 # zsh does not create the directory -- without the mkdir it simply never saves.
 #
-# Exported rather than plain, because .config/television/cable/zsh-history.toml
-# reads $HISTFILE from a child process and would otherwise silently fall back to
-# the stale ~/.zsh_history.
-export HISTFILE=$XDG_STATE_HOME/zsh/history
+# NOT exported. It was, so that television's zsh-history channel could read it
+# from a child -- but every child saw it, including bash, which writes bare
+# lines with no `: <epoch>:<elapsed>;` prefix straight into this file and
+# corrupts the format the three consumers below depend on. The channel reads
+# $XDG_STATE_HOME directly instead, which is exported anyway.
+HISTFILE=$XDG_STATE_HOME/zsh/history
 mkdir -p ${HISTFILE:h}
 
 # /etc/zshrc sets 2000/1000. Fish keeps everything by default and that is the

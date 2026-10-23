@@ -9,10 +9,15 @@ zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}
 # fzf-tab replaces the menu entirely, so compsys must not draw its own.
 zstyle ':completion:*' menu no
 zstyle ':completion:*:descriptions' format '[%d]'
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-
-# Branches are already in most-recent-first order; sorting them loses that.
-zstyle ':completion:*:git-checkout:*' sort false
+# No list-colors line. It wants $LS_COLORS, which is a GNU convention macOS
+# never sets and nothing here populates -- lsd does not emit one and there is no
+# dircolors or vivid in this config -- so `${(s.:.)LS_COLORS}` expanded to an
+# empty array and the style resolved to nothing. Setting it would mean adding
+# vivid for colour in the completion menu alone.
+#
+# No ':completion:*:git-checkout:*' sort either: that context is only ever
+# created by zsh's own _git, and carapace owns git here (994 commands claimed),
+# so _git is never invoked and the style never matched.
 
 # No fzf-preview styles, deliberately. fzf-tab reserves a preview pane whenever
 # one matches, and lib/-ftb-preview.tpl:18 only exports $realpath for

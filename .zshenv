@@ -49,18 +49,39 @@ export EDITOR=nvim
 export SHELL_SESSIONS_DISABLE=1
 
 # Source $3's output, cached under ~/.cache/zsh and regenerated whenever $2 --
-# the binary that generates it -- is newer. `-nt` is a builtin, so the steady
-# state costs one source and no fork. Empty or failed output is never cached.
+# the binary that generates it -- is newer. `-nt` and `read` are builtins, so
+# the steady state costs one source and no fork. Empty or failed output is
+# never cached.
+#
+# The command is part of the cache key, not just the binary's mtime. Keying on
+# mtime alone meant editing the generator -- adding `--disable-up-arrow` to
+# atuin's init, say -- changed nothing until that tool was next upgraded, and
+# you debug a config that is not the one running. The command is recorded as a
+# comment on line 1 and compared with a builtin `read`.
+#
+# The write goes to a temp file and is renamed into place. `[[ -s ]]` only
+# proves the cache is non-empty, so a file truncated by a crash mid-write was
+# non-empty, never regenerated, and produced a parse error on every startup
+# forever -- with the tool silently not activated, because zsh abandons the
+# whole file at the error.
 zsh_cached_eval() {
   local cache=${XDG_CACHE_HOME:-$HOME/.cache}/zsh/activation_scripts/$1.zsh
+  local marker="# zsh_cached_eval: $3"
+  local first
   if [[ -s $cache && $cache -nt $2 ]]; then
-    source $cache
-    return
+    read -r first < $cache
+    if [[ $first == $marker ]]; then
+      source $cache
+      return
+    fi
   fi
   local out
   out=$(eval "$3") && [[ -n $out ]] || return
   mkdir -p ${cache:h}
-  print -r -- "$out" > $cache
+  {
+    print -r -- $marker
+    print -r -- "$out"
+  } > $cache.$$ && command mv -f $cache.$$ $cache
   eval "$out"
 }
 
@@ -105,6 +126,17 @@ zsh_activate_mise() {
   zsh_cached_eval mise_activate $bin \
     "$bin activate zsh | sed -n '/^export MISE_SHELL=zsh\$/,\$p'"
 }
+
+# gradle and mvn are wrappers that walk up for the project's ./gradlew or
+# ./mvnw. .zshrc autoloads all of .zfunctions, but that is interactive-only --
+# and the mise comment above names nvim's `:!` and Claude Code's shell as paths
+# that must work -- which is exactly where `:!mvn test` was silently getting
+# mise's maven instead of the project's wrapper. autoload is lazy, so naming
+# them here costs nothing until one is called.
+if [[ -d $ZDOTDIR/.zfunctions ]]; then
+  fpath=($ZDOTDIR/.zfunctions $fpath)
+  autoload -Uz gradle mvn
+fi
 
 zsh_set_path
 zsh_activate_mise

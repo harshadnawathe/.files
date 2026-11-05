@@ -1,0 +1,14 @@
+# brewfile_update is brew-wrap's brew(), lifted by conf.d/brewfile_update.zsh.
+# Only refresh the cache for commands that can move brew itself -- a refresh
+# costs about as much as a read-only brew call.
+
+brewfile_update "$@"
+local ret=$?
+
+if (( ret == 0 )); then
+  case ${1:-} in
+    update|upgrade) zsh_brew_env update ;;
+  esac
+fi
+
+return $ret

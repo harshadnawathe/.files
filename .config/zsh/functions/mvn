@@ -1,0 +1,14 @@
+# Prefer the project's mvnw. The fish version tested ./mvnw rather than
+# $project_dir/mvnw, so from a subdirectory it found the wrapper and ignored it.
+
+local project_dir=$PWD
+while [[ $project_dir != / ]]; do
+  [[ -e $project_dir/mvnw ]] && break
+  project_dir=${project_dir:h}
+done
+
+if [[ -e $project_dir/mvnw ]]; then
+  $project_dir/mvnw "$@"
+else
+  command mvn "$@"
+fi

@@ -112,7 +112,6 @@ brew sesh
 brew sqlite
 brew starship
 brew stow
-brew television
 brew tesseract
 brew tlrc
 brew tmux

@@ -1,0 +1,6 @@
+alias wm='workmux'
+alias wma='workmux add'
+alias wmr='workmux remove'
+alias wml='workmux list'
+alias wmd='workmux dashboard'
+alias wms='workmux sidebar'

@@ -1,0 +1,1 @@
+alias asf='aws_secrets_fzf'

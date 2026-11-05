@@ -1,18 +1,9 @@
-# No $ZDOTDIR: stow folds a whole directory into one symlink, so state zsh wrote
-# into ~/.config/zsh landed in the repo. Linked file by file, it stays in $HOME.
-
 #
 # Variables
 #
 
 export EDITOR=nvim
-
-# Here rather than .zshrc because non-interactive shells never read that; zinit
-# honours an already-set ZPFX.
 export ZPFX=${ZPFX:-${XDG_DATA_HOME:-$HOME/.local/share}/zinit/polaris}
-
-# TokyoNight Night. Here because most fzf calls come from non-interactive shells.
-# No --tmux flag: obsidian_notes already runs inside a display-popup.
 export FZF_DEFAULT_OPTS="
   --highlight-line
   --info=inline-right
@@ -40,8 +31,8 @@ export FZF_DEFAULT_OPTS="
 # Functions
 #
 
-# Caches `brew shellenv`, which costs 26ms per shell to run live. Its output is
-# prefix-derived, so only brew moving or upgrading can change it.
+# Caches `brew shellenv`. 
+# Its output is prefix-derived, so only brew moving or upgrading can change it.
 #
 #   set      source the cache, creating it first if absent
 #   update   regenerate it
@@ -55,8 +46,6 @@ zsh_brew_env() {
       ;;
 
     update)
-      # Absolute path: `brew` is a function once conf.d has run, and the prefix
-      # may not be on $PATH yet on a first run.
       local brew out
       for brew in /opt/homebrew/bin/brew /usr/local/bin/brew; do
         [[ -x $brew ]] || continue
@@ -76,12 +65,10 @@ zsh_brew_env() {
   esac
 }
 
-# Mirrors config.fish's PATH setup. Missing directories are skipped, so one
-# created later is picked up on its own. .zprofile calls this again.
 zsh_set_path() {
-  # Here, not conf.d, so a non-interactive shell can create the cache too.
   zsh_brew_env set
 
+  # local binary paths
   local dir
   local -a dirs
   for dir in \
@@ -93,8 +80,7 @@ zsh_set_path() {
     [[ -d $dir ]] && dirs+=($dir)
   done
 
-  # .zshrc provides both for interactive shells: zinit prepends $ZPFX/bin, and
-  # `mise activate` supersedes the shims. Shims go first, as in config.fish.
+  # add mise shims for non-interactive
   if [[ ! -o interactive ]]; then
     local shims=$HOME/.local/share/mise/shims
     [[ -d $ZPFX/bin ]] && dirs+=($ZPFX/bin)
@@ -108,8 +94,7 @@ zsh_set_path() {
 # Settings
 #
 
-# Before zsh_set_path: it prepends to $path and relies on duplicates being
-# dropped, which is what makes .zprofile's second call idempotent.
+# Avoid duplicate entries in PATH
 typeset -U path PATH fpath FPATH
 
 zsh_set_path

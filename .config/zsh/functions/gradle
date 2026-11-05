@@ -1,0 +1,13 @@
+# Prefer the project's gradlew, found by walking up to settings.gradle[.kts].
+
+local project_dir=$PWD
+while [[ $project_dir != / ]]; do
+  [[ -e $project_dir/settings.gradle || -e $project_dir/settings.gradle.kts ]] && break
+  project_dir=${project_dir:h}
+done
+
+if [[ -e $project_dir/gradlew ]]; then
+  $project_dir/gradlew "$@"
+else
+  command gradle "$@"
+fi

@@ -15,8 +15,6 @@ brew docker-compose
 brew docker-credential-helper
 brew eza
 brew fd
-brew fish
-brew fisher
 brew fontconfig
 brew fpp
 brew freetype

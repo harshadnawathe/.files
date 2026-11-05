@@ -9,12 +9,8 @@
 # glance at rather than act on. A transparent fill keeps that split
 # legible without drawing a rule across the prompt.
 #
-# The padding costs nothing in practice: enable_transience collapses each
-# prompt to a bare "> " once the command runs, so the full-width line only
-# ever exists on the live prompt at the bottom of the screen, never in
-# scrollback. $fill also has to live here rather than in right_format --
-# fish renders the right prompt on the LAST line, which would put this
-# back on the line reserved for typing.
+# The padding persists in scrollback: starship has no transient prompt for zsh.
+# $fill is here rather than right_format for a fish reason worth revisiting.
 #
 # Each segment leads with a coloured glyph cap -- the same grammar as the
 # tmux bar, where the cap is what separates segments so they do not lean
@@ -92,13 +88,13 @@ format = '[󰅚 ](fg:1)[$status](fg:15) '
 [cmd_duration]
 format = '[ ](fg:3)[$duration](fg:15) '
 
-# Silent in fish, so it costs nothing until you are somewhere else.
+# Silent in zsh, so it costs nothing until you are somewhere else.
 [shell]
 disabled = false
 format = '[$indicator](fg:8)'
-fish_indicator = ''
+fish_indicator = 'fish '
 bash_indicator = 'bash '
-zsh_indicator = 'zsh '
+zsh_indicator = ''
 nu_indicator = 'nu '
 
 # threshold = 2: only speaks up once you are actually nested.

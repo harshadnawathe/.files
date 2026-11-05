@@ -5,8 +5,8 @@ vim.g.autoformat = false
 vim.g.trouble_lualine = true
 
 -- `shell` is left at the system default on purpose: it backs :!, :make, system()
--- and plugin job control, much of which emits POSIX-only syntax. fish is set for
--- the interactive terminal instead, in the snacks spec.
+-- and plugin job control, much of which emits POSIX-only syntax. The snacks
+-- spec sets zsh for the interactive terminal instead.
 
 vim.o.winborder = "rounded"
 

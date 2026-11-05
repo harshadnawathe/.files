@@ -40,7 +40,7 @@ return {
         },
       },
       terminal = {
-        shell = "/opt/homebrew/bin/fish",
+        shell = "/bin/zsh",
         win = {
           keys = {
             nav_h = false,

@@ -18,11 +18,14 @@ for brew_bin in /opt/homebrew/bin/brew /usr/local/bin/brew
   end
 end
 
+# zinit's prefix, hardcoded since fish has no $ZPFX: the tools initialised below
+# now come from there, not Homebrew. Temporary -- it goes when .config/fish does.
 fish_add_path -gm \
 ~/bin \
 ~/go/bin \
 ~/.local/bin \
-"~/Library/Application Support/JetBrains/Toolbox/scripts/"
+"~/Library/Application Support/JetBrains/Toolbox/scripts/" \
+~/.local/share/zinit/polaris/bin
 
 if not status is-interactive
   fish_add_path -gm ~/.local/share/mise/shims

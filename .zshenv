@@ -1,57 +1,115 @@
-# Read by EVERY zsh: scripts, `zsh -c`, login shells. fish is the user shell;
-# zsh runs scripts and wraps GUI-launched programs, which inherit launchd's
-# stunted PATH (/usr/bin:/bin:/usr/sbin:/sbin) rather than a shell's. Ghostty
-# routes through `/bin/zsh -l -c` (.config/ghostty/config.ghostty) to get this.
+# No $ZDOTDIR: stow folds a whole directory into one symlink, so state zsh wrote
+# into ~/.config/zsh landed in the repo. Linked file by file, it stays in $HOME.
 
-typeset -U path PATH fpath FPATH   # dedupe, keeping the leftmost entry
-
-# Source $3's output, cached under ~/.cache/zsh and regenerated whenever $2 --
-# the binary that generates it -- is newer. `-nt` is a builtin, so the steady
-# state costs one source and no fork. Empty or failed output is never cached.
-zsh_cached_eval() {
-  local cache=${XDG_CACHE_HOME:-$HOME/.cache}/zsh/activation_scripts/$1.zsh
-  if [[ -s $cache && $cache -nt $2 ]]; then
-    source $cache
-    return
-  fi
-  local out
-  out=$(eval "$3") && [[ -n $out ]] || return
-  mkdir -p ${cache:h}
-  print -r -- "$out" > $cache
-  eval "$out"
-}
-
-zsh_set_path() {
-  local brew
-  for brew in /opt/homebrew/bin/brew /usr/local/bin/brew; do
-    if [[ -x $brew ]]; then
-      zsh_cached_eval brew_shellenv $brew "$brew shellenv zsh"
-      break
-    fi
-  done
-
-  # ~/bin holds the obsidian_* scripts invoked by bare name from fish abbrevs
-  # and nvim's `:!obsidian_ok`. Skipping missing dirs matches config.fish, so one
-  # created later is picked up on its own. Not ~/.cargo/bin: mise already
-  # resolves those, and it would shadow the pinned rust.
-  local dir
-  for dir in $HOME/bin $HOME/.local/bin; do
-    [[ -d $dir ]] && path=($dir $path)
-  done
-}
-
-# Full activation, not shims: shims resolve binaries but export nothing, so
-# `_.python.venv` and mise.toml `[env]` keys would silently never apply. nvim's
-# `:!`, Claude Code's shell and the television $SHELL channels all land here.
 #
-# The sed drops mise's preamble, which -- unlike `brew shellenv` -- is a literal
-# snapshot of PATH at generation time and so must not be cached.
-zsh_activate_mise() {
-  local bin=${HOMEBREW_PREFIX:-/opt/homebrew}/bin/mise
-  [[ -x $bin ]] || return
-  zsh_cached_eval mise_activate $bin \
-    "$bin activate zsh | sed -n '/^export MISE_SHELL=zsh\$/,\$p'"
+# Variables
+#
+
+export EDITOR=nvim
+
+# Here rather than .zshrc because non-interactive shells never read that; zinit
+# honours an already-set ZPFX.
+export ZPFX=${ZPFX:-${XDG_DATA_HOME:-$HOME/.local/share}/zinit/polaris}
+
+# TokyoNight Night. Here because most fzf calls come from non-interactive shells.
+# No --tmux flag: obsidian_notes already runs inside a display-popup.
+export FZF_DEFAULT_OPTS="
+  --highlight-line
+  --info=inline-right
+  --ansi
+  --layout=reverse
+  --border=none
+  --color=bg+:#283457
+  --color=border:#27a1b9
+  --color=fg:#c0caf5
+  --color=gutter:#16161e
+  --color=header:#ff9e64
+  --color=hl:#2ac3de
+  --color=hl+:#2ac3de
+  --color=info:#545c7e
+  --color=marker:#ff007c
+  --color=pointer:#ff007c
+  --color=prompt:#2ac3de
+  --color=query:#c0caf5:regular
+  --color=scrollbar:#27a1b9
+  --color=separator:#ff9e64
+  --color=spinner:#ff007c
+"
+
+#
+# Functions
+#
+
+# Caches `brew shellenv`, which costs 26ms per shell to run live. Its output is
+# prefix-derived, so only brew moving or upgrading can change it.
+#
+#   set      source the cache, creating it first if absent
+#   update   regenerate it
+zsh_brew_env() {
+  local cache=${XDG_CACHE_HOME:-$HOME/.cache}/zsh/brewenv.zsh
+
+  case $1 in
+    set)
+      [[ -s $cache ]] || zsh_brew_env update
+      [[ -r $cache ]] && source $cache
+      ;;
+
+    update)
+      # Absolute path: `brew` is a function once conf.d has run, and the prefix
+      # may not be on $PATH yet on a first run.
+      local brew out
+      for brew in /opt/homebrew/bin/brew /usr/local/bin/brew; do
+        [[ -x $brew ]] || continue
+        # Never leave an empty file: `set` sources it unchecked, so a truncated
+        # cache would quietly drop brew's environment everywhere.
+        out=$($brew shellenv zsh) && [[ -n $out ]] || return
+        command mkdir -p ${cache:h}
+        print -r -- "$out" > $cache
+        return
+      done
+      ;;
+
+    *)
+      print -ru2 -- "zsh_brew_env: expected 'set' or 'update', got '${1:-}'"
+      return 2
+      ;;
+  esac
 }
+
+# Mirrors config.fish's PATH setup. Missing directories are skipped, so one
+# created later is picked up on its own. .zprofile calls this again.
+zsh_set_path() {
+  # Here, not conf.d, so a non-interactive shell can create the cache too.
+  zsh_brew_env set
+
+  local dir
+  local -a dirs
+  for dir in \
+    $HOME/bin \
+    $HOME/go/bin \
+    $HOME/.local/bin \
+    "$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
+  do
+    [[ -d $dir ]] && dirs+=($dir)
+  done
+
+  # .zshrc provides both for interactive shells: zinit prepends $ZPFX/bin, and
+  # `mise activate` supersedes the shims. Shims go first, as in config.fish.
+  if [[ ! -o interactive ]]; then
+    local shims=$HOME/.local/share/mise/shims
+    [[ -d $ZPFX/bin ]] && dirs+=($ZPFX/bin)
+    [[ -d $shims ]] && dirs=($shims $dirs)
+  fi
+
+  path=($dirs $path)
+}
+
+#
+# Settings
+#
+
+# Before zsh_set_path: it prepends to $path and relies on duplicates being
+# dropped, which is what makes .zprofile's second call idempotent.
+typeset -U path PATH fpath FPATH
 
 zsh_set_path
-zsh_activate_mise

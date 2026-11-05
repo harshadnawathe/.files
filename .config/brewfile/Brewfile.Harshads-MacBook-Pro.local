@@ -2,20 +2,39 @@
 # tap repositories and their packages
 
 tap homebrew/core
+brew abseil
+brew antidote
+brew atuin
 brew bdw-gc
+brew c-ares
+brew carapace
+brew catch2
+brew certifi
+brew conan
 brew crystal
+brew gdb
 brew gpgme
 brew gpgmepp
+brew grpc
 brew jemalloc
 brew json-c
+brew libpsl
 brew llvm
 brew llvm@22
+brew ninja
+brew nlohmann-json
 brew nspr
 brew nss
+brew openssl@4
+brew opentelemetry-cpp
 brew pkgconf
 brew poppler
+brew prometheus-cpp
+brew protobuf
+brew re2
 brew reattach-to-user-namespace
 brew z3
+brew zinit
 
 tap homebrew/cask
 cask claude

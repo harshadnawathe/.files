@@ -89,9 +89,8 @@ format = '[$symbol](fg:warn)[$project](fg:warn)  '
 symbol = '󰅟 '
 format = '[$symbol](fg:warn)[$subscription](fg:warn)  '
 
-# A non-default context matters everywhere, not just beside a Dockerfile.
 [docker_context]
-only_with_files = false
+only_with_files = true
 symbol = '󰡨 '
 format = '[$symbol](fg:warn)[$context](fg:warn)  '
 

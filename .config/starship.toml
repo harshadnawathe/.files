@@ -1,42 +1,43 @@
 # Get editor completions based on the config schema
 "$schema" = 'https://starship.rs/config-schema.json'
 
-# Two lines on purpose: line 1 is context, line 2 is yours to type on.
+# Line 1 is context, line 2 is yours to type on.
 #
-# Line 1 splits at $fill by what the information is FOR. Left of the fill
-# is what decides the next command -- where you are, which branch, what
-# the tree looks like. Right of it is what already happened, which you
-# glance at rather than act on. A transparent fill keeps that split
-# legible without drawing a rule across the prompt.
+# Line 1 is ordered by tense: left of $fill is state the next command runs
+# in, outermost scope first; right of it is what the last command did, and
+# is all conditional -- anything appearing there is an anomaly.
 #
-# The padding persists in scrollback: starship has no transient prompt for zsh.
-# $fill is here rather than right_format for a fish reason worth revisiting.
+# A segment is monochrome: cap glyph and value share one hue, so the pair
+# reads as one unit. Yellow left of $directory means "not your laptop".
+# Neutrals rank within a segment: 7 secondary, 8 structure only (1.91:1
+# here, too low to read).
 #
-# Each segment leads with a coloured glyph cap -- the same grammar as the
-# tmux bar, where the cap is what separates segments so they do not lean
-# on whitespace to stay readable. The git cap is literally the glyph from
-# tmux/git-status.sh and the duration cap the one from the clock pill, so
-# both surfaces name the same things the same way.
+# ANSI 0-15 only -- the Ghostty theme remaps these, so the prompt retints
+# with it, as tmux/theme.conf does. Rules out gradients. No backgrounds:
+# this draws into scrollback, where pill bodies would block the wallpaper.
 #
-# Backgrounds are deliberately NOT carried over. The bar draws once, as
-# chrome; this draws once per command into scrollback, where solid pill
-# bodies would punch an opaque block through the terminal wallpaper on
-# every line of history.
+# Glyphs match tmux where both surfaces name the same thing. Caps are never
+# bold -- only a Regular Symbols Nerd Font is installed, so bold would be
+# synthesised. Spacing groups instead: one space inside a segment, two
+# between, trailing on the left and leading on the right so line 1 starts
+# flush and ends at the edge.
 #
-# Colours are ANSI 0-15 only, never the colour16-255 cube -- those indices
-# are remapped by the Ghostty theme, so the prompt retints along with it
-# exactly as the status bar does. Same reasoning as tmux/theme.conf.
-#
-#   4 blue     directory
-#   5 magenta  git
-#   1 red      conflicts, in-progress rebase/merge, failed exit status
-#   3 yellow   modified, behind, slow command
-#   2 green    staged, prompt ready
-#   8 grey     untracked, ahead, stash, shell and nesting
+# zsh/conf.d/transient-prompt.zsh collapses all of this on accept.
+
+palette = 'ansi'
+
 format = """
+$hostname\
+$container\
+$kubernetes\
+$aws\
+$gcloud\
+$azure\
+$docker_context\
 $directory\
 $vcs\
 $fill\
+$jobs\
 $status\
 $cmd_duration\
 $line_break\
@@ -45,65 +46,147 @@ $shlvl\
 $character
 """
 
-# A space, not a rule: the split should be felt, not drawn.
+# Top-level keys must stay above this header: TOML would bind them to it,
+# and starship would silently fall back to its default prompt.
+[palettes.ansi]
+path  = '4'
+vcs   = '5'
+alert = '1'
+warn  = '3'
+ok    = '2'
+muted = '8'
+value = '15'
+dim   = '7'
+
+# A space, not a rule.
 [fill]
 symbol = ' '
+style = 'fg:muted'
 
+[hostname]
+ssh_only = true
+ssh_symbol = '󰒋 '
+format = '[$ssh_symbol](fg:warn)[$hostname](fg:warn)  '
+
+[container]
+format = '[󰆧 ](fg:warn)[$name](fg:warn)  '
+
+# Disabled by default upstream.
+[kubernetes]
+disabled = false
+symbol = '󱃾 '
+format = '[$symbol](fg:warn)[$context](fg:warn)[(:$namespace)](fg:dim)  '
+
+[aws]
+symbol = '󰅟 '
+format = '[$symbol](fg:warn)[$profile](fg:warn)[(:$region)](fg:dim)  '
+
+[gcloud]
+symbol = '󰅟 '
+format = '[$symbol](fg:warn)[$project](fg:warn)  '
+
+[azure]
+symbol = '󰅟 '
+format = '[$symbol](fg:warn)[$subscription](fg:warn)  '
+
+# A non-default context matters everywhere, not just beside a Dockerfile.
+[docker_context]
+only_with_files = false
+symbol = '󰡨 '
+format = '[$symbol](fg:warn)[$context](fg:warn)  '
+
+# repo_root_format is ignored unless repo_root_style is also set.
+# ( $path) is empty at the repo root, so the group and its separating space
+# vanish there -- that is what makes "not at the root" visible.
 [directory]
-format = '[󰉋 ](fg:4)[$path](fg:15) '
+truncation_length = 0
+truncation_symbol = '…/'
+style = 'fg:path'
+before_repo_root_style = 'fg:muted'
+repo_root_style = 'bold fg:path'
+read_only = ' 󰌾'
+read_only_style = 'fg:alert'
+format = '[󰉋 ](fg:path)[$path]($style)[$read_only]($read_only_style)  '
+repo_root_format = '[󰉋 ](fg:path)[$before_root_path]($before_repo_root_style)[$repo_root]($repo_root_style)[($path)]($style)[$read_only]($read_only_style)  '
 
-# $vcs resolves the first matching VCS and expands to
-# $git_branch$git_commit$git_state$git_metrics$git_status, so a detached
-# HEAD and an in-progress rebase or merge show up without extra wiring.
+# $vcs expands to $git_branch$git_commit$git_state$git_metrics$git_status.
 [git_branch]
-format = '[󰘬 ](fg:5)[$branch](fg:15) '
+format = '[󰘬 ](fg:vcs)[$branch](fg:vcs) '
 
 [git_commit]
-format = '[$hash$tag](fg:15) '
+format = '[$hash$tag](fg:warn) '
 
 [git_state]
-format = '[$state( $progress_current/$progress_total)](fg:1) '
+format = '[$state( $progress_current/$progress_total)](bold fg:alert) '
 
-# Counts rather than bare flags: "+2 ?1" says more than "+?" for the same
-# width. Symbols and colours match tmux/git-status.sh.
+# Counts, not flags. Symbols match tmux/git-status.sh; colours do not.
+# Colour answers "how urgent", never "what kind" -- that is the glyph.
+#
+#   alert  cost grows while ignored  conflicted, diverged, $git_state
+#   warn   lost if you walk away     untracked, behind, detached HEAD
+#   ok     git is holding it         staged, modified, deleted, renamed,
+#                                    typechanged, ahead
+#   dim    parked on purpose         stashed
+#
+# alert is bold: red is this theme's dimmest hue (0.347 vs green's 0.525),
+# so weight carries the rank that luminance cannot.
+# behind fast-forwards and costs the same whenever; diverged compounds.
+# Brackets are Monaspace's own angle brackets -- narrow, and clear of the
+# renamed and ahead/behind symbols.
 [git_status]
-format = '([$all_status$ahead_behind](fg:15))'
-conflicted = '[!$count](fg:1) '
-staged     = '[+$count](fg:2) '
-modified   = '[~$count](fg:3) '
-untracked  = '[?$count](fg:8) '
-deleted    = '[✘$count](fg:1) '
-renamed    = '[»$count](fg:8) '
-stashed    = '[≡$count](fg:8) '
-ahead      = '[↑$count](fg:8) '
-behind     = '[↓$count](fg:3) '
-diverged   = '[↕↑${ahead_count}↓${behind_count}](fg:3) '
+ignore_submodules = true
+format = '([⟨ ](fg:muted)[$all_status$ahead_behind](fg:dim)[⟩](fg:muted))'
+conflicted  = '[!$count](bold fg:alert) '
+behind      = '[↓$count](fg:warn) '
+diverged    = '[↕↑${ahead_count}↓${behind_count}](bold fg:alert) '
+staged      = '[+$count](fg:ok) '
+modified    = '[~$count](fg:ok) '
+typechanged = '[±$count](fg:ok) '
+deleted     = '[✘$count](fg:ok) '
+renamed     = '[»$count](fg:ok) '
+untracked   = '[?$count](fg:warn) '
+stashed     = '[≡$count](fg:dim) '
+ahead       = '[↑$count](fg:ok) '
 
-# Disabled by default upstream -- without this line the exit code of a
-# failed command never renders at all.
+[jobs]
+symbol = '󰜎 '
+symbol_threshold = 1
+number_threshold = 1
+format = ' [$symbol](fg:dim)[$number](fg:dim) '
+
+# Disabled by default upstream. $status is the raw code -- the red character
+# already says it failed. ${common_meaning}${signal_name}${maybe_int} would
+# read 130 as INT instead.
 [status]
 disabled = false
-format = '[󰅚 ](fg:1)[$status](fg:15) '
+pipestatus = true
+pipestatus_separator = '[|](fg:muted)'
+pipestatus_segment_format = '[$status](fg:dim)'
+pipestatus_format = ' [󰅚 ](fg:alert)[$pipestatus](fg:dim)[ ⇒ ](fg:muted)[$status](fg:dim) '
+format = ' [󰅚 ](fg:alert)[$status](fg:alert) '
 
 [cmd_duration]
-format = '[ ](fg:3)[$duration](fg:15) '
+min_time = 3000
+format = ' [ ](fg:warn)[$duration](fg:warn) '
 
-# Silent in zsh, so it costs nothing until you are somewhere else.
+# Silent in zsh.
 [shell]
 disabled = false
-format = '[$indicator](fg:8)'
+format = '[$indicator](fg:muted)'
 fish_indicator = 'fish '
 bash_indicator = 'bash '
 zsh_indicator = ''
 nu_indicator = 'nu '
 
-# threshold = 2: only speaks up once you are actually nested.
 [shlvl]
 disabled = false
 threshold = 2
-format = '[↓$shlvl](fg:8) '
+format = '[↓$shlvl](fg:muted) '
 
 [character]
-success_symbol = '[❯](fg:2)'
-error_symbol = '[❯](fg:1)'
-vimcmd_symbol = '[❮](fg:2)'
+success_symbol = '[❯](fg:ok)'
+error_symbol = '[❯](fg:alert)'
+vimcmd_symbol = '[❮](fg:ok)'
+vimcmd_visual_symbol = '[❮](fg:warn)'
+vimcmd_replace_symbol = '[❮](fg:alert)'
+vimcmd_replace_one_symbol = '[❮](fg:alert)'

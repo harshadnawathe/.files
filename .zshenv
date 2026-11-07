@@ -68,13 +68,16 @@ zsh_brew_env() {
 zsh_set_path() {
   zsh_brew_env set
 
-  # local binary paths
+  # local binary paths.
+  # $ZPFX/bin is listed here rather than left to zinit: zinit prepends it only
+  # when absent, so an inherited PATH leaves it stranded behind brew.
   local dir
   local -a dirs
   for dir in \
     $HOME/bin \
     $HOME/go/bin \
     $HOME/.local/bin \
+    $ZPFX/bin \
     "$HOME/Library/Application Support/JetBrains/Toolbox/scripts"
   do
     [[ -d $dir ]] && dirs+=($dir)
@@ -83,7 +86,6 @@ zsh_set_path() {
   # add mise shims for non-interactive
   if [[ ! -o interactive ]]; then
     local shims=$HOME/.local/share/mise/shims
-    [[ -d $ZPFX/bin ]] && dirs+=($ZPFX/bin)
     [[ -d $shims ]] && dirs=($shims $dirs)
   fi
 

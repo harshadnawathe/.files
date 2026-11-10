@@ -8,3 +8,6 @@ ruby = "3"
 usage = "latest"
 maven = "3.9.3"
 go = "1.25"
+
+[settings]
+idiomatic_version_file_enable_tools = ["go", "python"]

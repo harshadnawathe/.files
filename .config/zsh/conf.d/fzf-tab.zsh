@@ -1,3 +1,8 @@
+# carapace returns basenames as display strings but leaves the directory in
+# $PREFIX and never sets compadd -p, so fzf-tab's `input` query seeds fzf with
+# "dir/" and matches nothing. `prefix` derives the query from the displays.
+zstyle ':fzf-tab:*' query-string prefix
+
 # Previews. carapace supplies the candidates for almost every command, and its
 # words carry a trailing space, so strip it before any file test or git lookup.
 

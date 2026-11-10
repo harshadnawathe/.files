@@ -14,6 +14,11 @@ bindkey -M vicmd '\ee' edit-command-line
 bindkey -M viins '\ev' edit-command-line
 bindkey -M vicmd '\ev' edit-command-line
 
+# insert-last-word is an emacs-keymap default; `bindkey -v` leaves ^[. unbound,
+# so Alt-. fell through to vi-cmd-mode + vi-repeat-change.
+bindkey -M viins '\e.' insert-last-word
+bindkey -M vicmd '\e.' insert-last-word
+
 # Expand !! and !$ as you type the space, rather than only on Enter.
 bindkey -M viins ' ' magic-space
 bindkey -M emacs ' ' magic-space

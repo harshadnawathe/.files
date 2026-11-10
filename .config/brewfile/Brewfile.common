@@ -20,7 +20,6 @@ brew fpp
 brew freetype
 brew fribidi
 brew fswatch
-brew fzf
 brew gawk
 brew gettext
 brew gh

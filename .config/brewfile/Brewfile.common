@@ -85,7 +85,6 @@ brew luv
 brew lz4
 brew lzo
 brew m4
-brew mise
 brew mpdecimal
 brew mpfr
 brew ncurses

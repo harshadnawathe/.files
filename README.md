@@ -33,3 +33,27 @@ Run `brew-file` to read your newly symlinked Brewfile and install all your formu
 ```sh
 brew file install
 ```
+
+## Managing Packages
+
+Packages live in `.config/brewfile/`:
+
+- `Brewfile.common` — shared by every machine.
+- `Brewfile.<hostname>` — this machine only: things exclusive to it, plus
+  anything still on trial.
+
+`brew-wrap` rewrites `Brewfile.<hostname>` after every `brew` command, so new
+installs land there automatically. Only packages installed on request are
+recorded (`HOMEBREW_BREWFILE_ON_REQUEST`); dependencies are left to Homebrew.
+
+Once a trial package has earned its place on every machine, promote it:
+
+```sh
+brewfile-promote atuin carapace claude
+```
+
+> [!IMPORTANT]
+> Run `brew file install` immediately after `git pull`, before any other `brew`
+> command. `brew file init` prunes every Brewfile down to what is installed
+> here, so running it on a machine that is behind will delete the packages it
+> is missing from `Brewfile.common`.

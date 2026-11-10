@@ -3,6 +3,7 @@
 #
 
 export EDITOR=nvim
+export HOMEBREW_BREWFILE_ON_REQUEST=1
 export ZPFX=${ZPFX:-${XDG_DATA_HOME:-$HOME/.local/share}/zinit/polaris}
 export FZF_DEFAULT_OPTS="
   --highlight-line

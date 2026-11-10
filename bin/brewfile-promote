@@ -1,0 +1,46 @@
+#!/usr/bin/env bash
+# vi: ft=sh
+
+# Move packages from this machine's Brewfile into Brewfile.common.
+#
+# brew-file rebuilds the machine Brewfile from what is installed and drops
+# anything an included file already lists, so promoting is just "append to
+# Brewfile.common and re-init" -- the machine file loses the line by itself.
+
+set -euo pipefail
+
+dry_run=0
+[[ ${1:-} == -n ]] && { dry_run=1; shift; }
+
+if (( $# == 0 )); then
+  echo "usage: ${0##*/} [-n] <package>..." >&2
+  exit 2
+fi
+
+# get_files lists the main (machine) Brewfile first, then the included ones.
+machine=$(brew file get_files | head -1)
+common=${machine%/*}/Brewfile.common
+
+promoted=()
+for pkg in "$@"; do
+  line=$(grep -E "^(brew|cask|tap) ${pkg}( |$)" "$machine" || true)
+  if [[ -z $line ]]; then
+    if grep -qE "^(brew|cask|tap) ${pkg}( |$)" "$common"; then
+      echo "${pkg}: already in ${common##*/}" >&2
+    else
+      echo "${pkg}: not found in ${machine##*/}" >&2
+    fi
+    continue
+  fi
+  promoted+=("$line")
+done
+
+(( ${#promoted[@]} )) || exit 1
+
+printf 'promote: %s\n' "${promoted[@]}"
+if (( dry_run )); then
+  exit 0
+fi
+
+printf '%s\n' "${promoted[@]}" >> "$common"
+brew file init -y

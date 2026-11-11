@@ -8,5 +8,13 @@
     "prefix": "iferr",
     "body": "if err != nil {\n\treturn ${1:err}\n}$0",
     "description": "Guard on err"
+  },
+  "Update max": {
+    "prefix": "updateMax",
+    "body": "if ${1:maxSoFar} < ${2:curr} {\n\t$1 = $2\n}$0"
+  },
+  "Update min": {
+    "prefix": "updateMin",
+    "body": "if ${1:curr} < ${2:minSoFar} {\n\t$2 = $1\n}$0"
   }
 }

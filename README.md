@@ -34,6 +34,18 @@ Run `brew-file` to read your newly symlinked Brewfile and install all your formu
 brew file install
 ```
 
+### 5. Seed Rectangle
+Rectangle cannot be stowed: it treats `~/Library/Application Support/Rectangle/`
+as a one-shot inbox, and it refuses to load a config that is a symlink. Copy the
+config in by hand, then launch Rectangle and accept the prompt.
+```sh
+mkdir -p ~/Library/Application\ Support/Rectangle
+cp assets/rectangle/RectangleConfig.json ~/Library/Application\ Support/Rectangle/
+```
+Rectangle applies it, then renames it to `RectangleConfig<timestamp>.json` so it
+is not applied again. To capture new settings, export from Rectangle and
+overwrite `assets/rectangle/RectangleConfig.json`.
+
 ## Managing Packages
 
 Packages live in `.config/brewfile/`:

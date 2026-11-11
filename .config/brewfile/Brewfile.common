@@ -33,7 +33,6 @@ brew pngpaste
 brew pre-commit
 brew ripgrep
 brew sesh
-brew starship
 brew stow
 brew tlrc
 brew tmux

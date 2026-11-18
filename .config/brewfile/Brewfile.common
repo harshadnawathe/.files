@@ -41,7 +41,6 @@ brew websocat
 brew wget
 brew workmux
 brew yq
-brew zoxide
 
 tap homebrew/cask
 cask caffeine

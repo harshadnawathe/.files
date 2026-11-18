@@ -1,6 +1,4 @@
-setopt auto_cd
-setopt auto_pushd
-setopt pushd_ignore_dups
+# auto_cd, auto_pushd and pushd_ignore_dups come from OMZL::directories.zsh.
 setopt pushd_silent
 setopt interactive_comments
 setopt extended_glob

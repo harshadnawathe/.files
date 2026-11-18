@@ -14,8 +14,10 @@
   local text_label='[ Search files by text ]'
   local text_command="rg --hidden -g '!.git/' --column --line-number --no-heading --color=always --smart-case "
 
-  local filter_off="rebind(change)+change-prompt($text_prompt)+disable-search+transform-query:echo {q} > /tmp/rg-fzf-f; cat /tmp/rg-fzf-r"
-  local filter_on="unbind(change)+change-prompt($text_filter_prompt)+enable-search+transform-query:echo {q} > /tmp/rg-fzf-r; cat /tmp/rg-fzf-f"
+  # Per-shell files, so concurrent sessions don't swap each other's queries.
+  local tmp=${TMPDIR:-/tmp/}
+  local filter_off="rebind(change)+change-prompt($text_prompt)+disable-search+transform-query:echo {q} > ${tmp}rg-fzf-f-$$; cat ${tmp}rg-fzf-r-$$"
+  local filter_on="unbind(change)+change-prompt($text_filter_prompt)+enable-search+transform-query:echo {q} > ${tmp}rg-fzf-r-$$; cat ${tmp}rg-fzf-f-$$"
 
   # One element per argument, so the nested quoting in --bind stays readable.
   local -a opts=(

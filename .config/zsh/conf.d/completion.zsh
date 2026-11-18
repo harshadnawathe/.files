@@ -2,6 +2,9 @@
 # there are no groups, and switch-group's < > have nothing to cycle.
 zstyle ':completion:*:descriptions' format '[%d]'
 
+# fzf-tab replaces the menu; zsh's own menu would otherwise appear first.
+zstyle ':completion:*' menu no
+
 # Case-insensitive first, then complete from a partial word, then from a substring.
 zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'r:|=*' 'l:|=* r:|=*'
 

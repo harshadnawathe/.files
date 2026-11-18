@@ -55,10 +55,7 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=#545c7e'
 
 zinit wait"0a" lucid light-mode for \
   atinit"zicompinit; zicdreplay" \
-    Aloxaf/fzf-tab \
-  zdharma-continuum/fast-syntax-highlighting \
-  atload"_zsh_autosuggest_start" \
-    zsh-users/zsh-autosuggestions
+    Aloxaf/fzf-tab
 
 zinit wait"0b" lucid from"gh-r" as"null" sbin"zoxide" \
   atclone"./zoxide init zsh > zoxide_init.zsh; zinit creinstall -q ajeetdsouza/zoxide" \
@@ -82,10 +79,16 @@ zstyle ':omz:plugins:eza' 'git-status' yes
 zstyle ':omz:plugins:eza' 'icons' yes
 
 zinit wait"0b" lucid light-mode for \
+  OMZL::history.zsh \
+  OMZL::directories.zsh \
   OMZP::eza \
   OMZP::vi-mode \
+  OMZL::git.zsh \
   OMZP::git \
-  OMZP::brew
+  OMZP::brew \
+  OMZP::gradle \
+  OMZP::mvn \
+  MichaelAquilina/zsh-you-should-use
 
 zinit wait"0c" lucid from"gh-r" as"null" bpick"*darwin_arm64*" sbin"carapace" \
   atclone"./carapace _carapace zsh > carapace_init.zsh" \
@@ -95,7 +98,7 @@ zinit wait"0c" lucid from"gh-r" as"null" bpick"*darwin_arm64*" sbin"carapace" \
 
 zinit wait"0c" lucid from"gh-r" as"null" \
   bpick"*aarch64-apple-darwin.tar.gz" sbin"**/tv -> tv" \
-  atclone"./*/tv init zsh > tv_init.zsh" \
+  atclone"./*/tv init zsh > tv_init.zsh; ./*/tv update-channels" \
   atpull"%atclone" src"tv_init.zsh" nocompile'!' \
   atload"zicdreplay" \
   for @alexpasmantier/television
@@ -105,6 +108,13 @@ zinit wait"0c" lucid from"gh-r" as"null" \
   atclone"./*/atuin init zsh --disable-up-arrow > atuin_init.zsh; ./*/atuin gen-completions --shell zsh > _atuin; zinit creinstall -q atuinsh/atuin" \
   atpull"%atclone" src"atuin_init.zsh" nocompile'!' \
   for @atuinsh/atuin
+
+# Load zsh-autosuggestions after all tools
+zinit wait"0c" lucid light-mode for \
+  atload'[[ $FAST_WORK_DIR/current_theme.zsh -nt ${XDG_CONFIG_HOME:-$HOME/.config}/fsh/tokyonight.ini ]] || fast-theme -q XDG:tokyonight' \
+    zdharma-continuum/fast-syntax-highlighting \
+  atload"_zsh_autosuggest_start" \
+    zsh-users/zsh-autosuggestions
 
 #
 # My ZSH configuration.

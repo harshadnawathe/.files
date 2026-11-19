@@ -15,6 +15,7 @@ cask claude-code
 cask excalidrawz
 cask google-drive
 cask jetbrains-toolbox
+cask logitech-camera-settings
 cask microsoft-teams
 cask rancher
 cask slack

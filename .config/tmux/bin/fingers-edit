@@ -1,0 +1,12 @@
+#!/bin/sh
+# tmux-fingers action: open the picked match in $EDITOR in a new window.
+# Accepts path, path:line and path:line:col (compiler and grep output).
+# Relative paths resolve against the pane fingers was started on.
+
+IFS= read -r match || exit 0
+file=${match%%:*}
+line=$(printf '%s' "${match#"$file"}" | cut -d: -f2)
+case $line in '' | *[!0-9]*) line= ;; esac
+
+dir=$(tmux display -p '#{pane_current_path}')
+exec tmux new-window -c "$dir" -- "${EDITOR:-nvim}" ${line:+"+$line"} "$file"

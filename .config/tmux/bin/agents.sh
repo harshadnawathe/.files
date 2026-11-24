@@ -9,10 +9,13 @@
 # the old per-status blocks did -- foreground colour alone reads too
 # quietly for something meant to interrupt you.
 
-# Pull the @sb_* palette in one tmux call rather than one per colour, so
-# these scripts and theme.conf share a single source of truth. Defaults
-# keep the pill readable if the palette block ever goes missing.
-eval "$(tmux show -g 2>/dev/null | sed -n 's/^@sb_\([a-z]*\) \(.*\)$/SB_\1=\2/p')"
+# Pull the @sb_* palette and the @agent_icon_* glyphs in one tmux call, so
+# theme.conf and workmux/config.yaml stay the single sources of truth.
+# Defaults keep the pill readable if either goes missing; a missing glyph
+# falls back to the status name.
+eval "$(tmux show -g 2>/dev/null | sed -n \
+  -e 's/^@sb_\([a-z_]*\) \(.*\)$/SB_\1=\2/p' \
+  -e 's/^@agent_icon_\([a-z_]*\) \(.*\)$/AI_\1=\2/p')"
 : "${SB_dark:=colour0}"  ; : "${SB_body:=colour0}" ; : "${SB_alert:=colour1}"
 : "${SB_ok:=colour2}"    ; : "${SB_busy:=colour3}" ; : "${SB_git:=colour5}"
 : "${SB_mute:=colour8}"  ; : "${SB_text:=colour15}"
@@ -44,10 +47,10 @@ fi
 # colour9/10/11 this used to carry rendered identically to colour1/2/3.
 seg=""
 add() { [ "$1" -gt 0 ] && seg="$seg#[fg=$2]$3 $1$BODY  "; }
-add "$n_waiting" "$SB_alert" '󰭹'
-add "$n_done"    "$SB_ok"    '󰄬'
-add "$n_working" "$SB_busy"  '󰑮'
-add "$n_stale"   "$SB_mute"  '󰅖'
+add "$n_waiting" "$SB_alert" "${AI_waiting:-waiting}"
+add "$n_done"    "$SB_ok"    "${AI_done:-done}"
+add "$n_working" "$SB_busy"  "${AI_working:-working}"
+add "$n_stale"   "$SB_mute"  "${AI_stale:-stale}"
 
 seg="${seg%%  }"  # drop the trailing pad from the last add
 

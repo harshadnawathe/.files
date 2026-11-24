@@ -1,0 +1,19 @@
+#!/bin/sh
+# Attach to a persistent helper session from inside a popup, creating it on
+# first use. Closing the popup (prefix d) keeps the session; exiting the
+# command ends it.
+#
+# Usage: hidden-session NAME [command [args...]]
+#
+# status off: the popup must not carry a second status bar.
+# detach-on-destroy on: when the command exits, close the popup instead of
+# switching it to another session, which the global "off" would do.
+
+name=$1
+shift
+
+tmux has-session -t "=$name" 2>/dev/null ||
+  tmux new-session -d -s "$name" -c "$PWD" "$@"
+tmux set -t "=$name" status off
+tmux set -t "=$name" detach-on-destroy on
+TMUX= exec tmux attach -t "=$name"

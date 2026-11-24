@@ -1,0 +1,18 @@
+#!/bin/sh
+# Copy workmux's status_icons into tmux options @agent_icon_<status>, so the
+# glyphs are defined only in workmux/config.yaml.
+
+config=${XDG_CONFIG_HOME:-$HOME/.config}/workmux/config.yaml
+[ -r "$config" ] || exit 0
+
+awk '
+  /^status_icons:/                        { f = 1; next }
+  f && /^[^[:space:]#]/                   { f = 0 }
+  f && /^[[:space:]]+[a-z_]+:[[:space:]]/ {
+    k = $1; sub(/:$/, "", k)
+    v = $0; sub(/^[^:]*:[[:space:]]*/, "", v); gsub(/["\047]/, "", v)
+    print k, v
+  }' "$config" |
+  while read -r key glyph; do
+    tmux set -g "@agent_icon_$key" "$glyph"
+  done

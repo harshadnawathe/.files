@@ -12,7 +12,18 @@ window_prefix: " {project}/"
 # those windows keep rendering whatever theme was current at creation and
 # never pick up later edits. theme.conf owns the format instead.
 #
-# status_icons is deliberately absent: it only styles the @workmux_status
-# variable rendered in tmux window names, and theme.conf no longer renders
-# it -- the agent pill in status-right reports agent state instead.
 status_format: false
+
+# Single source of the agent glyphs. workmux writes the icon into
+# @workmux_pane_status; tmux (bin/agent-icons, run from 50-agents.conf)
+# copies this block into @agent_icon_<status> for the status-right pill and
+# the pane pill. Reload tmux (prefix R) after editing.
+#
+# stale is not a workmux icon -- it ignores the key. An agent is stale when
+# its status has not changed for stale_after (default 1h); only
+# `workmux status --json` reports it, so only the status-right pill uses it.
+status_icons:
+  working: "󰑮"
+  waiting: "󰭹"
+  done: "󰄬"
+  stale: "󰅖"

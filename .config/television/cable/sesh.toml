@@ -14,7 +14,10 @@ command = [
   { name = "Tmux",        run = "sesh list -t --icons" },
   { name = "Configs",     run = "sesh list -c --icons" },
   { name = "Zoxide",      run = "sesh list -z --icons" },
-  { name = "Directories", run = "fd -H -d 2 -t d -E .Trash . ~" },
+  # Git repos under ~/code (a .git dir, or a .git file in a worktree).
+  # -I because a global ignore hides .git; the icon prefix is needed since
+  # `output` drops the first field, which is the icon on sesh's lines.
+  { name = "Projects",    run = "fd -HI -d 8 --prune -g .git ~/code --format '{//}' | sort -u | sed 's/^/ /'" },
 ]
 ansi = true
 frecency = false # handled by sesh

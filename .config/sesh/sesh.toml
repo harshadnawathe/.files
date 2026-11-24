@@ -3,10 +3,9 @@
 
 cache = false
 
-blacklist = ["_cheat", "_notes"]
+blacklist = ["_cheat", "_notes", "_scratch"]
 
 sort_order = [
-    "tmuxinator",
     "tmux",
     "zoxide",
     "config",

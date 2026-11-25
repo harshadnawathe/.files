@@ -11,6 +11,12 @@ return {
     },
   },
   {
+    "folke/tokyonight.nvim",
+    opts = {
+      dim_inactive = true,
+    },
+  },
+  {
     "zenbones-theme/zenbones.nvim",
     dependencies = "rktjmp/lush.nvim",
     -- Loaded on demand: lazy.nvim's ColorSchemePre handler pulls this in when

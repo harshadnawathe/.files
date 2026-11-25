@@ -30,6 +30,8 @@ return {
       },
       picker = {
         sources = {
+          files = { hidden = true },
+          grep = { hidden = true },
           explorer = {
             layout = {
               layout = {

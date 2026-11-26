@@ -3,7 +3,6 @@
 
 tap homebrew/core
 brew bdw-gc
-brew pkgconf
 brew poppler
 
 tap homebrew/cask

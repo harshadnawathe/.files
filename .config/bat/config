@@ -33,7 +33,5 @@
 --map-syntax "*.ghostty:INI"
 
 # tmux's config language is closest to shell. Scoped to the tmux directory on
-# purpose -- a blanket `*.conf:INI` would mis-highlight theme.conf and
-# plugins.conf, which are tmux script, not INI.
---map-syntax "**/tmux/*.conf:Bourne Again Shell (bash)"
---map-syntax "*.tmux:Bourne Again Shell (bash)"
+# purpose -- a blanket `*.conf` mapping would catch unrelated files.
+--map-syntax "**/tmux/**/*.conf:Bourne Again Shell (bash)"

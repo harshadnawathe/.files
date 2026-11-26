@@ -3,9 +3,6 @@
 
 tap homebrew/core
 brew bdw-gc
-brew fish
-brew fisher
-brew lsd
 brew pkgconf
 brew poppler
 

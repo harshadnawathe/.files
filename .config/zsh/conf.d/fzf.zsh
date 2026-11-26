@@ -1,4 +1,4 @@
-# Ported from fish's fzf-options.fish; only the variable names differ.
+# File picker: search by name, ctrl-w switches to searching contents with rg.
 # --tmux stays out of FZF_DEFAULT_OPTS: obsidian_notes already runs in a popup.
 
 () {
@@ -44,7 +44,7 @@
     '--bind=enter:become(printf "%s\n" {+1})'
   )
 
-  # Ctrl-F rather than fzf's default Ctrl-T, matching _fzf_search_directory in fish.
+  # Ctrl-F rather than fzf's default Ctrl-T.
   bindkey '^F' fzf-file-widget
   bindkey -M viins '^F' fzf-file-widget
 

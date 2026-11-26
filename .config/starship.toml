@@ -172,7 +172,6 @@ format = ' [ ](fg:warn)[$duration](fg:warn) '
 [shell]
 disabled = false
 format = '[$indicator](fg:muted)'
-fish_indicator = 'fish '
 bash_indicator = 'bash '
 zsh_indicator = ''
 nu_indicator = 'nu '
